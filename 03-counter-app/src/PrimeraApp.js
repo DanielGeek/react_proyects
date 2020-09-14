@@ -2,9 +2,7 @@ import React from 'react';
 // import React, { Fragment } from 'react';
 
 // Funtional component
-const PrimeraApp = () => {
-    
-    const saludo = 'Hola Mundo';
+const PrimeraApp = ({ saludo = 'Hola Mundo' }) => {
 
     return (
         <>
