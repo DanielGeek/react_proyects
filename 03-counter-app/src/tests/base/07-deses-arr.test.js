@@ -5,8 +5,6 @@ describe('Pruebas en desestructuración', () => {
     test('debe de retornar un string y un número', () => {
         const [ letras, numeros ] = retornaArreglo(); //['ABC', 123];
 
-        console.log( typeof numeros );
-
         expect( letras ).toBe( 'ABC' );
         expect( typeof letras ).toBe( 'string' );
 
