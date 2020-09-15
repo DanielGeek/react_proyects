@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-// import React, { Fragment } from 'react';
-// comando para crear un functional component rafcp
-// Funtional component
-const CounterApp = ({ value }) => {
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-    const [ counter, setCounter ] = useState(0);
+const CounterApp = ({ value = 10 }) => {
+
+    const [ counter, setCounter ] = useState( value ); // []
+    
 
     // handleAdd
     const handleAdd = () => {
         setCounter( counter + 1);
-        // setCounter( (c) => c + 1);
+        // setCounter( (c) => c + 1 );
     }
 
     const handleSubtract = () => setCounter( counter - 1);
+    
+    const handleReset = () => setCounter( value );
 
-    const handleReset = () => setCounter ( value );
 
     return (
         <>
@@ -26,11 +26,13 @@ const CounterApp = ({ value }) => {
             <button onClick={ handleReset }>Reset</button>
             <button onClick={ handleSubtract }>-1</button>
         </>
-    );
+    )
 }
 
 CounterApp.propTypes = {
-    value: PropTypes.number.isRequired
+    value: PropTypes.number
 }
 
 export default CounterApp;
+
+
