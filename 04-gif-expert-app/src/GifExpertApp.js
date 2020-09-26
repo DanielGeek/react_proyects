@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { AddCategory } from './components/AddCategory';
 import { GifGrid } from './components/GifGrid';
 
-export const GitExpertApp = () => {
 
-    const [categories, setCategories] = useState(['One Punch']);
+export const GifExpertApp = ({ defaultCategories = [] }) => {
+
+    // const [categories, setCategories] = useState(['One Punch']);
+    const [categories, setCategories] = useState(defaultCategories);
 
     // const handleAdd = () => {
 
@@ -14,17 +16,17 @@ export const GitExpertApp = () => {
 
     return (
         <>
-            <h2>GitExpertApp</h2>
-            <AddCategory setCategories={ setCategories } />
+            <h2>GifExpertApp</h2>
+            <AddCategory setCategories={setCategories} />
             <hr />
 
-           
+
             <ol>
                 {
                     categories.map(category => (
-                        <GifGrid 
-                            key={ category }
-                            category={ category } />
+                        <GifGrid
+                            key={category}
+                            category={category} />
                     ))
                 }
             </ol>
