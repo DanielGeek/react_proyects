@@ -5,7 +5,7 @@ export const HomeScreen = () => {
 
     const { user } = useContext(UserContext)
 
-    console.log(user);
+    // console.log(user);
 
     return (
         <div>
@@ -13,7 +13,7 @@ export const HomeScreen = () => {
             <hr />
 
             <pre>
-                { JSON.stringify(user, null, 3)}
+                {JSON.stringify(user, null, 3)}
             </pre>
         </div>
     )
