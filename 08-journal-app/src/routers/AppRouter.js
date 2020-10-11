@@ -4,7 +4,7 @@ import {
     Switch,
     Route,
     Redirect
-  } from "react-router-dom";
+} from "react-router-dom";
 
 import { useDispatch } from 'react-redux';
 
@@ -23,11 +23,11 @@ export const AppRouter = () => {
 
     useEffect(() => {
         // observa si el user esta auth
-        firebase.auth().onAuthStateChanged(( user ) => {
-            
+        firebase.auth().onAuthStateChanged((user) => {
+
             // if(user?.uid) {
-            if (typeof user.uid !== 'undefined') {
-                dispatch( login(user.uid, user.displayName ));
+            if (user) {
+                dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
             } else {
                 setIsLoggedIn(false);
@@ -39,7 +39,7 @@ export const AppRouter = () => {
 
     }, [dispatch, setCheking, setIsLoggedIn])
 
-    if( checking ) {
+    if (checking) {
         return (
             <h1>Espere...</h1>
         )
@@ -49,7 +49,7 @@ export const AppRouter = () => {
         <Router>
             <div>
                 <Switch>
-                    <Route 
+                    <Route
                         path="/auth"
                         component={AuthRouter}
                     />
