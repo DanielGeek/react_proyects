@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { NotesAppBar } from './NotesAppBar';
@@ -8,9 +8,22 @@ export const NoteScreen = () => {
 
     // selecciono del store el state de nota activa
     const { active:note } = useSelector(state => state.notes);
-    const [ formValues, handleInputChange ] = useForm( note );
-
+    // uso mi hook personalizado para el formulario y agregar al estado la nota
+    const [ formValues, handleInputChange, reset ] = useForm( note );
+    // desestructuro para obtener el body y title
     const { body, title } = formValues;
+
+    // almaceno el id actual para comparar si cambia
+    const activeId = useRef( note.id );
+
+    // se ejecuta cada vez que cambien los datos del formulario
+    useEffect(() => {
+        if( note.id !== activeId.current ) {
+            //si cambio el id, obtengo la nueva nota en mi hook
+            reset( note );
+            activeId.current = note.id;
+        }
+    }, [note, reset])
 
     return (
         <div className="notes__main-content">
