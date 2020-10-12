@@ -14,8 +14,7 @@ import { PublicRoute } from './PublicRoute';
 
 import { JournalScreen } from '../components/journal/JournalScreen';
 import { login } from '../actions/auth';
-import { loadNotes } from '../helpers/loadNotes';
-import { setNotes } from '../actions/notes';
+import { startLoadingNotes } from '../actions/notes';
 
 export const AppRouter = () => {
 
@@ -32,10 +31,7 @@ export const AppRouter = () => {
             if (user) {
                 dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
-
-                const notes = await loadNotes(user.uid);
-                // guardar en el state de Redux las notas del user
-                dispatch(setNotes(notes));
+                dispatch(startLoadingNotes( user.uid ));
 
             } else {
                 setIsLoggedIn(false);

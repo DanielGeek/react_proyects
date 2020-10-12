@@ -1,5 +1,6 @@
 import { db } from "../firebase/firebase-config";
 import { types } from '../types/types';
+import { loadNotes } from "../helpers/loadNotes";
 
 export const startNewNote = () => {
     return async (dispatch, getState) => {
@@ -26,6 +27,16 @@ export const activeNote = (id, note ) => ({
         ...note
     }
 });
+
+export const startLoadingNotes = ( uid ) => {
+    return async ( dispatch ) => {
+
+        const notes = await loadNotes( uid );
+        // guardar en el state de Redux las notas del user
+        dispatch(setNotes(notes));
+
+    }
+}
 
 export const setNotes = ( notes ) => ({
     type: types.notesLoad,
