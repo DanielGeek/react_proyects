@@ -17,7 +17,6 @@ export const startLoginEmailPassword = (email, password) => {
                 dispatch(FinishLoading() );
             })
             .catch(e => {
-                console.log(e);
                 dispatch(FinishLoading() );
                 Swal.fire('Error', e.message, 'error');
             })
@@ -32,13 +31,11 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
 
                 await user.updateProfile({ displayName: name });
 
-                console.log(user);
                 dispatch(
                     login(user.uid, user.displayName)
                 )
             })
             .catch(e => {
-                console.log(e);
                 Swal.fire('Error', e.message, 'error');
             })
     }
