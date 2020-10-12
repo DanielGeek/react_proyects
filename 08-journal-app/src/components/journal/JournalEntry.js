@@ -1,12 +1,27 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { activeNote } from '../../actions/notes';
 
 export const JournalEntry = ({ id, date, title, body, url }) => {
 
     const noteDate = moment(date);
+    const dispatch = useDispatch();
+
+    const handleEntreyClick = () => {
+
+        dispatch(
+            activeNote(id, {
+                date, title, body, url
+            })
+        );
+    }
 
     return (
-        <div className="journal__entry pointer">
+        <div 
+            className="journal__entry pointer" 
+            onClick={handleEntreyClick}
+        >
 
             {
                 // si existe la url, muestra el div
