@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { NotesAppBar } from './NotesAppBar';
 import { useForm } from '../../hooks/useForm';
-import { activeNote } from '../../actions/notes';
+import { activeNote, startDeleting } from '../../actions/notes';
 
 export const NoteScreen = () => {
 
@@ -14,7 +14,7 @@ export const NoteScreen = () => {
     // uso mi hook personalizado para el formulario y agregar al estado la nota
     const [formValues, handleInputChange, reset] = useForm(note);
     // desestructuro para obtener el body y title
-    const { body, title } = formValues;
+    const { body, title, id } = formValues;
 
     // almaceno el id actual para comparar si cambia
     const activeId = useRef(note.id);
@@ -34,6 +34,10 @@ export const NoteScreen = () => {
         dispatch(activeNote(formValues.id, { ...formValues }))
 
     }, [formValues, dispatch])
+
+    const handleDelete = () => {
+        dispatch(startDeleting(id));
+    }
 
 
     return (
@@ -74,6 +78,13 @@ export const NoteScreen = () => {
                 }
 
             </div>
+
+            <button
+                className="btn btn-danger"
+                onClick={ handleDelete }
+            >
+                Delete
+            </button>
 
         </div>
     )

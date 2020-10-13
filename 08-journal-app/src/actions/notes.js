@@ -104,3 +104,19 @@ export const startUploading = ( file ) => {
         Swal.close();
     }
 }
+
+export const startDeleting = ( id ) => {
+    return async (dispatch, getState) => {
+        // obtengo el id del usuario
+        const uid = getState().auth.uid;
+        // borro el registro de la bd en firebase
+        await db.doc(`${ uid }/journal/notes/${ id }`).delete();
+        // borro la nota del state
+        dispatch(deleteNote(id));
+    }
+}
+// elimina la nota del state
+export const deleteNote = (id) => ({
+    type: types.notesDelete,
+    payload: id
+})
