@@ -86,8 +86,21 @@ export const startUploading = ( file ) => {
 
         const { active:activeNote } = getState().notes;
 
+        Swal.fire({
+            title: 'Uploading...',
+            text: 'Please wait...',
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        // sube la img a cloudinary y obtengo su url
         const fileUrl = await fileUpload(file);
+        // asigno la url a la nota activa
+        activeNote.url = fileUrl;
+        // actualizo la nota activa en firebase
+        dispatch( startSaveNote(activeNote));
 
-        console.log(fileUrl);
+        Swal.close();
     }
 }
