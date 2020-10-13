@@ -22,6 +22,8 @@ export const startNewNote = () => {
         const doc = await db.collection(`${uid}/journal/notes`).add(newNote);
 
         dispatch(activeNote(doc.id, newNote));
+        // agrega la nueva nota al state y se pueda ver en el panel izquierdo
+        dispatch(addNewNote(doc.id, newNote));
     }
 }
 
@@ -32,6 +34,13 @@ export const activeNote = (id, note) => ({
         ...note
     }
 });
+
+export const addNewNote = (id, note) => ({
+    type: types.notesAddNew,
+    payload: {
+        id, ...note
+    }
+})
 
 export const startLoadingNotes = (uid) => {
     return async (dispatch) => {
@@ -119,4 +128,9 @@ export const startDeleting = ( id ) => {
 export const deleteNote = (id) => ({
     type: types.notesDelete,
     payload: id
-})
+});
+
+// eliminar las notas del state al salir de la app
+export const noteLogout = () => ({
+    type: types.notesLogoutCleaning
+});
