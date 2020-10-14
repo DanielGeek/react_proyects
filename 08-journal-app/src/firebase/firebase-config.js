@@ -2,8 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-// variable de entorno para desarrollo y testing configuradas en .env.development y .env.test
-console.log(process.env);
+// variables de entorno para desarrollo y testing configuradas en .env.development y .env.test
+// console.log(process.env);
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
