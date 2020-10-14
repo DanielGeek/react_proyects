@@ -18,12 +18,19 @@ export const startNewNote = () => {
             body: '',
             date: new Date().getTime()
         }
-        // creo una nueva nota en la bd de firebase
-        const doc = await db.collection(`${uid}/journal/notes`).add(newNote);
 
-        dispatch(activeNote(doc.id, newNote));
-        // agrega la nueva nota al state y se pueda ver en el panel izquierdo
-        dispatch(addNewNote(doc.id, newNote));
+        try {
+            
+            // creo una nueva nota en la bd de firebase
+            const doc = await db.collection(`${uid}/journal/notes`).add(newNote);
+    
+            dispatch(activeNote(doc.id, newNote));
+            // agrega la nueva nota al state y se pueda ver en el panel izquierdo
+            dispatch(addNewNote(doc.id, newNote));
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
