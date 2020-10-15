@@ -21,11 +21,28 @@ const now = moment().minutes(0).seconds(0).add(1,'hours');
 const nowPlus1 = now.clone().add(1, 'hours');
 
 export const CalendarModal = () => {
+
     // asigna la fecha/hora en fecha inicio
     const [ dateStart, setDateStart ] = useState(now.toDate());
     // asigna la fecha/hora en fecha fin
     const [ dateEnd, setDateEnd ] = useState(nowPlus1.toDate());
     
+    const [formValues, setFormValues] = useState({
+        title: 'Evento',
+        notes: '',
+        start: now.toDate(),
+        end: nowPlus1.toDate()
+    });
+    // estraigo los atributos para asignarlos a los inputs del form
+    const { notes, title } = formValues;
+    
+    // asigna el nuevo valor al input que coincida con el target.name
+    const handleInputChange = ({ target }) => {
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value
+        });
+    }
 
     const closeModal = () => {
 
@@ -33,12 +50,24 @@ export const CalendarModal = () => {
     // asigna la nueva fecha seleccionada    
     const handleStartDateChange = (e) => {
         setDateStart(e);
-        console.log(e);
+        // para asignar al state del form el nuevo valor al atributo start
+        setFormValues({
+            ...formValues,
+            start: e
+        })
     }
     // asigna la nueva fecha seleccionada
     const handleEndDateChange = (e) => {
         setDateEnd(e);
-        console.log(e);
+        setFormValues({
+            ...formValues,
+            end: e
+        });
+    }
+
+    const handleSubmitForm = (e) => {
+        e.preventDefault();
+        console.log(formValues);
     }
 
     return (
@@ -52,7 +81,10 @@ export const CalendarModal = () => {
         >
             <h1> Nuevo evento </h1>
             <hr />
-            <form className="container">
+            <form 
+                className="container"
+                onSubmit={ handleSubmitForm }
+            >
 
                 <div className="form-group">
                     <label>Fecha y hora inicio</label>
@@ -82,6 +114,8 @@ export const CalendarModal = () => {
                         placeholder="Título del evento"
                         name="title"
                         autoComplete="off"
+                        value={ title }
+                        onChange={ handleInputChange }
                     />
                     <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
                 </div>
@@ -93,6 +127,8 @@ export const CalendarModal = () => {
                         placeholder="Notas"
                         rows="5"
                         name="notes"
+                        value={ notes }
+                        onChange={ handleInputChange }
                     ></textarea>
                     <small id="emailHelp" className="form-text text-muted">Información adicional</small>
                 </div>
