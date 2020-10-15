@@ -34,6 +34,9 @@ export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
 
+    // selecciono del store el atributo calendar.eventSetActive para asignarlo al seleccionar un evento
+    const { eventSetActive } = useSelector(state => state.calendar)
+
     // obtener del localStorge la ultima vista si existe, en caso contrario envia a la vista mes
     const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
     
@@ -46,6 +49,7 @@ export const CalendarScreen = () => {
 
     const onSelectEvent = (e) => {
         console.log(e);
+        dispatch(eventSetActive);
     }
     // cuando cambie entre vista guarda en el estado y localStorage el evento
     const onViewChange = (e) => {
