@@ -1,23 +1,15 @@
-import React from 'react'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect
-} from "react-router-dom";
-import { LoginScreen } from './components/auth/LoginScreen';
-import { CalendarScreen } from './components/calendar/CalendarScreen';
+import React from 'react';
+import { Provider } from 'react-redux';
+
+// store almacena todos mis estados
+import { store } from './store/store';
+import { AppRouter } from './router/AppRouter';
 
 export const CalendarApp = () => {
     return (
-        <Router>
-            <div>
-                <Switch>
-                    <Route exact path="/login" component={LoginScreen} />
-                    <Route exact path="/" component={CalendarScreen} />
-                    <Redirect to="/" />
-                </Switch>
-            </div>
-        </Router>
+        // Provider provee a los componentes hijos la info del store
+        <Provider store={ store }>
+            <AppRouter />            
+        </Provider>
     )
 }
