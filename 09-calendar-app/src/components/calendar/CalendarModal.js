@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // seleccionar atributos del store
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew } from '../../actions/events';
+import { eventAddNew, eventClearActiveEvent } from '../../actions/events';
 
 // posiciona el modal en el medio
 const customStyles = {
@@ -26,11 +26,19 @@ Modal.setAppElement('#root');
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const nowPlus1 = now.clone().add(1, 'hours');
 
+const initEvent = {
+    title: '',
+    notes: '',
+    start: now.toDate(),
+    end: nowPlus1.toDate()
+}
+
 export const CalendarModal = () => {
 
+    const { modalOpen } = useSelector(state => state.ui);
+    const { activeEvent } = useSelector(state => state.calendar);
     const dispatch = useDispatch();
     // selecciono del store el atributo ui.modalOpen para asignarlo al componente modal y inciar con ese valor
-    const { modalOpen } = useSelector(state => state.ui)
 
     // asigna la fecha/hora en fecha inicio
     const [dateStart, setDateStart] = useState(now.toDate());
@@ -39,14 +47,16 @@ export const CalendarModal = () => {
     // cambia el state para validar que el titulo es valido
     const [titleValid, setTitleValid] = useState(true);
 
-    const [formValues, setFormValues] = useState({
-        title: 'Evento',
-        notes: '',
-        start: now.toDate(),
-        end: nowPlus1.toDate()
-    });
+    const [formValues, setFormValues] = useState(initEvent);
     // extraigo los atributos para asignarlos a los inputs del form o validarlos
     const { notes, title, start, end } = formValues;
+
+    useEffect(() => {
+        // si no es null asigno los valores al form del evento seleccionado
+        if (activeEvent) {
+            setFormValues(activeEvent);
+        }
+    }, [activeEvent, setFormValues])
 
     // asigna el nuevo valor al input que coincida con el target.name
     const handleInputChange = ({ target }) => {
@@ -55,10 +65,13 @@ export const CalendarModal = () => {
             [target.name]: target.value
         });
     }
-    // asigna false al state en uiReducer para cerrar el modal
     const closeModal = () => {
         // TODO: cerrar el modal
+        // asigna false al state en uiReducer para cerrar el modal
         dispatch(uiCloseModal());
+        // asigna null al activeEvent en el store
+        dispatch(eventClearActiveEvent());
+        setFormValues(initEvent);
     }
     // asigna la nueva fecha seleccionada    
     const handleStartDateChange = (e) => {
