@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { types } from '../types/types';
 
 const initialState = {
     events: [{
@@ -22,7 +23,7 @@ export const calendarReducer = ( state = initialState, action ) => {
         case types.eventSetActive:
             return {
                 ...state,
-                activeEvent: true
+                activeEvent: action.payload
             }
         default:
             return state;
