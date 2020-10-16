@@ -47,6 +47,7 @@ export const CalendarScreen = () => {
     }
     // envia al calendarReducer el evento seleccionado como activo
     const onSelectEvent = (e) => {
+        console.log(e)
         dispatch(eventSetActive(e));
         dispatch(uiOpenModal());
     }
