@@ -19,8 +19,7 @@ app.use(express.static('public'));
 //     })
 // });
 
-app.set('PORT', 4000 || process.env.PORT);
 // Escuchar peticiones
-app.listen(app.get('PORT'), () => {
-    console.log(`Servidor corriendo en puerto ${app.get('PORT')}`);
-})
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
+});
