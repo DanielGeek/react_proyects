@@ -52,9 +52,11 @@ export const CalendarModal = () => {
     const { notes, title, start, end } = formValues;
 
     useEffect(() => {
-        // si no es null asigno los valores al form del evento seleccionado
+        // si no es null el evento activo asigno los valores al form del evento seleccionado
         if (activeEvent) {
             setFormValues(activeEvent);
+        } else {
+            setFormValues(initEvent);
         }
     }, [activeEvent, setFormValues])
 
@@ -134,7 +136,7 @@ export const CalendarModal = () => {
             className="modal"
             overlayClassName="modal-fondo"
         >
-            <h1> Nuevo evento </h1>
+            <h1> { (activeEvent) ? 'Editar evento': 'Nuevo evento' } </h1>
             <hr />
             <form
                 className="container"

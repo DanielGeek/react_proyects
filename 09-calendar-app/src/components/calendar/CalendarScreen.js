@@ -14,7 +14,8 @@ import { uiOpenModal } from '../../actions/ui';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/es'
 import { AddNewFab } from '../ui/AddNewFab';
-import { eventSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventSetActive } from '../../actions/events';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 moment.locale('es');
 
@@ -24,7 +25,7 @@ export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
     // asigno todos los eventos del store
-    const { events } = useSelector(state => state.calendar)
+    const { events, activeEvent } = useSelector(state => state.calendar);
 
     // obtener del localStorge la ultima vista si existe, en caso contrario envia a la vista mes
     const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
@@ -45,6 +46,11 @@ export const CalendarScreen = () => {
     const onViewChange = (e) => {
         setLastView(e);
         localStorage.setItem('lastView', e);
+    }
+    // limpio el evento activo al seleccionar fuera del evento
+    const onSelectSlot = (e) => {
+        // console.log(e);
+        dispatch(eventClearActiveEvent());
     }
 
     // asigna estilos a los eventos creados en el calendario
@@ -77,6 +83,8 @@ export const CalendarScreen = () => {
                 onDoubleClickEvent={onDoubleClick}
                 onSelectEvent={onSelectEvent}
                 onView={onViewChange}
+                onSelectSlot={onSelectSlot}
+                selectable={true}
                 // posiciono en la vista almacenada
                 view={lastView}
                 components={{
@@ -84,6 +92,10 @@ export const CalendarScreen = () => {
                 }}
             />
             <AddNewFab />
+            {
+                (activeEvent) && <DeleteEventFab />
+
+            }
             <CalendarModal />
         </div>
     )

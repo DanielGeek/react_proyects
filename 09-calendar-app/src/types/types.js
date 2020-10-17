@@ -1,4 +1,4 @@
-// tipos para usar en las acciones
+// tipos para usar en las acciones de los reducers
 export const types = {
 
     uiOpenModal: '[ui] Open modal',
@@ -8,5 +8,6 @@ export const types = {
     eventAddNew: '[event] Add new',
     eventClearActiveEvent: '[event] Clear active event',
     eventUpdated: '[event] Event updated',
+    eventDeleted: '[event] Event deleted',
     
 }
