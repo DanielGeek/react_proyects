@@ -1,4 +1,6 @@
 const express = require('express');
+require('dotenv').config();
+
 
 
 
@@ -6,16 +8,19 @@ const express = require('express');
 const app = express();
 
 
+// Directorio Público
+app.use(express.static('public'));
+
 // Rutas
-app.get('/', (req, res) => {
+// app.get('/', (req, res) => {
 
-    res.json({
-        ok: true
-    })
-});
+//     res.json({
+//         ok: true
+//     })
+// });
 
-
+app.set('PORT', 4000 || process.env.PORT);
 // Escuchar peticiones
-app.listen(4000, () => {
-    console.log(`Servidor corriendo en puerto ${4000}`);
+app.listen(app.get('PORT'), () => {
+    console.log(`Servidor corriendo en puerto ${app.get('PORT')}`);
 })
