@@ -25,7 +25,7 @@ const crearUsuario = async (req, res = response ) => {
         usuario.password = bcrypt.hashSync( password, salt );
 
         await usuario.save();
-        
+
         res.status(201).json({
             ok: true,
             uid: usuario.id,
@@ -41,16 +41,45 @@ const crearUsuario = async (req, res = response ) => {
     }
 }
 
-const loginusuario = (req, res = response ) => {
+const loginusuario = async (req, res = response ) => {
 
     const { email, password } = req.body;
 
-    res.status(201).json({
-        ok: true,
-        msg: 'login',
-        email,
-        password
-    })
+    try {
+
+        const usuario = await Usuario.findOne({ email });
+        
+        if ( !usuario ) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El usuario no existe con ese email'
+            });
+        }
+
+        // Confirmar los passwords, return true si son iguales
+        const validPassword = bcrypt.compareSync( password, usuario.password );
+
+        if( !validPassword ) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Password incorrecto'
+            });
+        }
+
+        // Generar nuestro JWT
+        res.json({
+            ok: true,
+            uid: usuario.id,
+            name: usuario.name
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el administrador'
+        });
+    }
 };
 
 const revalidarToken = (req, res = response ) => {
