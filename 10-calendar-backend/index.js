@@ -12,13 +12,9 @@ const app = express();
 app.use(express.static('public'));
 
 // Rutas
-// app.get('/', (req, res) => {
 
-//     res.json({
-//         ok: true
-//     })
-// });
-
+// TODO: CRUD: Eventos
+app.use('/api/auth', require('./routes/auth'));
 // Escuchar peticiones
 app.listen(process.env.PORT, () => {
     console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
