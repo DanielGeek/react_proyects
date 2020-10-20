@@ -1,7 +1,16 @@
+/*
+    Event Routes
+    /api/events
+*/
 
-// Todas tienen que pasar por la validación
+const { Router } = require('express');
+const { validarJWT } = require('../middlewares/validar-jwt');
+const { getEventos, crearEvento, actualizarEvento, eliminarEvento } = require('../controllers/events');
 
-const router = require("./auth");
+const router = Router();
+
+// Todas tienen que pasar por la validación del JWT
+router.use( validarJWT );
 
 // Obtener eventos
 router.get('/', getEventos );
@@ -14,3 +23,5 @@ router.put('/:id', actualizarEvento );
 
 // Borrar evento
 router.delete('/:id', eliminarEvento );
+
+module.exports = router;

@@ -1,21 +1,36 @@
-// {
-//     ok: true,
-//     msg: 'getEventos'
-// }
+const { response } = require('express');
 
-// {
-//     ok: true,
-//     msg: 'crearEventos'
-// }
+const getEventos = ( req, res = response ) => {
+    res.json({
+        ok: true,
+        msg: 'getEventos'
+    })
+}
 
-// {
-//     /1234567
-//     ok:
-//     msg: 'actualizarEvento'
-// }
+const crearEvento = ( req, res = response ) => {
+    res.json({
+        ok: true,
+        msg: 'crearEvento'
+    })
+}
 
-// {
-//     /1234567
-//     ok: true,
-//     msg: 'eliminarEvento'
-// }
+const actualizarEvento = ( req, res = response ) => {
+    res.json({
+        ok: true,
+        msg: 'actualizarEvento'
+    })
+}
+
+const eliminarEvento = ( req, res = response ) => {
+    res.json({
+        ok: true,
+        msg: 'eliminarEvento'
+    })
+}
+
+module.exports = {
+    getEventos,
+    crearEvento,
+    actualizarEvento,
+    eliminarEvento
+}
