@@ -15,8 +15,8 @@ const UsuarioSchema = Schema({
         require: true
     },
 },
-{
-    timestamps: true
-});
+    {
+        timestamps: true
+    });
 
-module.exports = model('Usuario', UsuarioSchema );
+module.exports = model('Usuario', UsuarioSchema);
