@@ -1,10 +1,16 @@
 const { response } = require('express');
 const Evento = require('../models/Evento');
 
-const getEventos = (req, res = response) => {
+const getEventos = async (req, res = response) => {
+
+    // traer los eventos y el usuario que lo creo, y del usuario solo su atributo name
+    const eventos = await Evento.find()
+        .populate('user', 'name');
+
+
     res.json({
         ok: true,
-        msg: 'getEventos'
+        eventos
     })
 }
 
