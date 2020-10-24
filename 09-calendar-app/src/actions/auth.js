@@ -72,4 +72,17 @@ const checkingFinish = () => ({ type: types.authCheckingFinish });
 const login = (user) => ({
     type: types.authLogin,
     payload: user
-})
+});
+
+export const startLogout = () => {
+    // retorno una tarea asincrona
+    return (dispatch) => {
+
+        // limpio todo del localStorage
+        localStorage.clear();
+        // despacho y limpio el state de mi redux
+        dispatch(logout());
+    }
+}
+
+const logout = () => ({ type: types.authLogout })
