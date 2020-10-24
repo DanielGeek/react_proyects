@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 // useDispatch para despachar acciones en los reducers
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,7 @@ import { uiOpenModal } from '../../actions/ui';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'moment/locale/es'
 import { AddNewFab } from '../ui/AddNewFab';
-import { eventClearActiveEvent, eventSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventSetActive, eventStartLoading } from '../../actions/events';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 moment.locale('es');
@@ -29,6 +29,12 @@ export const CalendarScreen = () => {
 
     // obtener del localStorge la ultima vista si existe, en caso contrario envia a la vista mes
     const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
+    // obtener los eventos siempre que renderise el componente y cuando se dispare el dispatch
+    useEffect(() => {
+
+        dispatch(eventStartLoading());
+
+    }, [dispatch])
 
     // abrir modal al hacer doble click sobre un evento
     const onDoubleClick = (e) => {

@@ -49,3 +49,25 @@ export const eventUpdated = (event) => ({
 });
 
 export const eventDeleted = () => ({ type: types.eventDeleted });
+
+// obtener eventos de la bd
+export const eventStartLoading = () => {
+    return async (dispatch) => {
+        try {
+            const resp = await fetchConToken('events');
+            const body = await resp.json();
+
+            const events = body.eventos;
+
+            dispatch(eventLoaded(events));
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+// agregar al state de redux los eventos obtinos de la bd
+const eventLoaded = (events) => ({
+    type: types.eventLoaded,
+    payload: events
+})

@@ -1,20 +1,22 @@
-import moment from 'moment';
+
 import { types } from '../types/types';
 
-const initialState = {
-    events: [{
-        id: new Date().getTime(),
-        title: 'Cumpleaños del jefe',
-        start: moment().toDate(),
-        end: moment().add(2, 'hours').toDate(),
-        bgcolor: '#fafafa',
-        notes: 'Comprar el pastel',
-        user: {
-            _id: '123',
-            name: 'Daniel'
-        }
+// referencia de los parametros necesarios para crear un evento
+// {
+//     id: 'asasasasasasasas',
+//     title: 'Cumpleaños del jefe',
+//     start: moment().toDate(),
+//     end: moment().add(2, 'hours').toDate(),
+//     notes: 'Comprar el pastel',
+//     user: {
+//         _id: '123',
+//         name: 'Daniel'
+//     }
 
-    }],
+// }
+
+const initialState = {
+    events: [],
     activeEvent: null
 };
 
@@ -58,6 +60,12 @@ export const calendarReducer = (state = initialState, action) => {
                     e => (e.id !== state.activeEvent.id)
                 ),
                 activeEvent: null
+            }
+        // agregar al state en redux todos los eventos obtenidos de la bd
+        case types.eventLoaded:
+            return {
+                ...state,
+                events: [...action.payload]
             }
 
         default:
