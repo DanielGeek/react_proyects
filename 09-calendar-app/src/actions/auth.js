@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { fetchSinToken } from "../helpers/fetch"
+import { fetchConToken, fetchSinToken } from "../helpers/fetch"
 import { types } from "../types/types";
 
 
@@ -44,6 +44,31 @@ export const startRegister = (email, password, name) => {
 
     }
 }
+// renovar token
+export const startChecking = () => {
+    return async (dispatch) => {
+
+        const resp = await fetchConToken('auth/renew');
+        const body = await resp.json();
+
+
+        if (body.ok) {
+            localStorage.setItem('token', body.token);
+            localStorage.setItem('token-init-date', new Date().getTime());
+            // agrega al state en mi storage de mi reducer el uid y name
+            dispatch(login({
+                uid: body.uid,
+                name: body.name
+            }))
+        } else {
+
+            dispatch(checkingFinish());
+        }
+
+    }
+}
+
+const checkingFinish = () => ({ type: types.authCheckingFinish });
 
 const login = (user) => ({
     type: types.authLogin,
