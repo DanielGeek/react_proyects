@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../actions/events';
 
 // posiciona el modal en el medio
 const customStyles = {
@@ -107,19 +107,12 @@ export const CalendarModal = () => {
             return setTitleValid(false);
         }
         // si esta activo el activeEvent significa que quiere editar el evento
-        if( activeEvent ) {
-            dispatch( eventUpdated( formValues ) )
+        if (activeEvent) {
+            dispatch(eventUpdated(formValues))
         } else {
 
-            // envio los datos en el form y un id de ejemplo para guardarlos en el state del nuevo evento
-            dispatch(eventAddNew({
-                ...formValues,
-                id: new Date().getTime(),
-                user: {
-                    _id: '123',
-                    name: 'Daniel'
-                }
-            }));
+            // envio los datos del form para guardarlos en la bd
+            dispatch(eventStartAddNew(formValues));
         }
 
         setTitleValid(true);
@@ -136,7 +129,7 @@ export const CalendarModal = () => {
             className="modal"
             overlayClassName="modal-fondo"
         >
-            <h1> { (activeEvent) ? 'Editar evento': 'Nuevo evento' } </h1>
+            <h1> {(activeEvent) ? 'Editar evento' : 'Nuevo evento'} </h1>
             <hr />
             <form
                 className="container"
