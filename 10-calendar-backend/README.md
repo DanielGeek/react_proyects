@@ -1,3 +1,6 @@
+# url app en producción
+https://mern-calendar-dangel.herokuapp.com/login
+
 # Backend MERN - Calendar
 `Este es un proyecto para crear eventos de calendario, con login y registro de usuarios, validación con json web token`
 
