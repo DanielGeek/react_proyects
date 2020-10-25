@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+MERN-Calendar-Front-4.0.0
 
 # testing
 /coverage
