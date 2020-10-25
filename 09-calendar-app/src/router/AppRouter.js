@@ -19,7 +19,7 @@ export const AppRouter = () => {
     // selecciono de mi store el checking
     const { checking, uid } = useSelector(state => state.auth);
 
-    // renovar token, buscandolo del localStora siempre que navegue y no tenga expirado el token
+    // renovar token siempre que se ejecute un dispatch
     useEffect(() => {
 
         dispatch(startChecking());
