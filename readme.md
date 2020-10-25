@@ -1,7 +1,7 @@
-Proyecto MERN Calendar App
-`https://mern-calendar-dangel.herokuapp.com/login`
+Proyecto MERN Calendar App <br>
+https://mern-calendar-dangel.herokuapp.com/login
 
-Proyecto GifExpertApp
+Proyecto GifExpertApp <br>
 https://danielgeek.github.io/react_proyectos/
 
 crear app inicial de react
