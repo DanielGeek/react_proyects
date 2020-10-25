@@ -4,8 +4,9 @@ import Swal from 'sweetalert2';
 
 import '@testing-library/jest-dom';
 
-import { startLogin } from '../../actions/auth';
+import { startLogin, startRegister } from '../../actions/auth';
 import { types } from '../../types/types';
+import * as fetchModule from '../../helpers/fetch';
 
 
 jest.mock('sweetalert2', () => ({
@@ -63,6 +64,39 @@ describe('Pruebas en las acciones Auth', () => {
         actions = store.getActions();
 
         expect(Swal.fire).toHaveBeenCalledWith('Error', 'El usuario no existe con ese email', 'error');
+
+    });
+
+    test('startRegister correcto', async () => {
+
+        // simula que se registra un usuario en la bd sin hacer el registro en la bd
+        fetchModule.fetchSinToken = jest.fn(() => ({
+            json() {
+                return {
+                    ok: true,
+                    uid: '123',
+                    name: 'carlos',
+                    token: 'ABC123ABC123'
+                }
+            }
+        }));
+
+        await store.dispatch(startRegister('test2@test.com', '123456', 'test'));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual({
+            type: types.authLogin,
+            payload: {
+                uid: '123',
+                name: 'carlos'
+            }
+        })
+
+        expect(localStorage.setItem).toHaveBeenCalledWith('token', 'ABC123ABC123');
+        expect(localStorage.setItem).toHaveBeenCalledWith('token-init-date', expect.any(Number));
+
+
 
     });
 
