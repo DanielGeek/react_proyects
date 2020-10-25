@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 import { uiCloseModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../actions/events';
 
 // posiciona el modal en el medio
 const customStyles = {
@@ -108,7 +108,7 @@ export const CalendarModal = () => {
         }
         // si esta activo el activeEvent significa que quiere editar el evento
         if (activeEvent) {
-            dispatch(eventUpdated(formValues))
+            dispatch(eventStartUpdate(formValues))
         } else {
 
             // envio los datos del form para guardarlos en la bd
