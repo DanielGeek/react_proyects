@@ -1,5 +1,5 @@
 Proyecto MERN Calendar App <br>
-https://mern-calendar-dangel.herokuapp.com/login
+https://mern-calendar-dangel.herokuapp.com
 
 Proyecto GifExpertApp <br>
 https://danielgeek.github.io/react_proyectos/
