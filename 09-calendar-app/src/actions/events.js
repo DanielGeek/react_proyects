@@ -72,7 +72,31 @@ const eventUpdated = (event) => ({
     payload: event
 });
 
-export const eventDeleted = () => ({ type: types.eventDeleted });
+// eliminar un evento en la bd
+export const eventStartDelete = () => {
+    return async (dispatch, getState) => {
+
+        //obtengo el id del evento activo a eliminar
+        const { id } = getState().calendar.activeEvent;
+
+        try {
+            const resp = await fetchConToken(`events/${id}`, {}, 'DELETE');
+            const body = await resp.json();
+
+            if (body.ok) {
+                // si todo sale bien elimino el evento en el state de redux
+                dispatch(eventDeleted());
+            } else {
+                Swal.fire('Error', body.msg, 'error');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+// eliminar un evento del state en redux
+const eventDeleted = () => ({ type: types.eventDeleted });
 
 // obtener eventos de la bd
 export const eventStartLoading = () => {
@@ -94,4 +118,6 @@ export const eventStartLoading = () => {
 const eventLoaded = (events) => ({
     type: types.eventLoaded,
     payload: events
-})
+});
+
+export const eventLogout = () => ({ type: types.eventLogout })

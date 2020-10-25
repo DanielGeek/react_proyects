@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { fetchConToken, fetchSinToken } from "../helpers/fetch"
 import { types } from "../types/types";
+import { eventLogout } from "./events";
 
 
 export const startLogin = (email, password) => {
@@ -80,6 +81,8 @@ export const startLogout = () => {
 
         // limpio todo del localStorage
         localStorage.clear();
+        // eliminar del state en redux los eventos
+        dispatch(eventLogout());
         // despacho y limpio el state de mi redux
         dispatch(logout());
     }

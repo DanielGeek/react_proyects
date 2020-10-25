@@ -10,6 +10,7 @@ export const Navbar = () => {
 
     // despacho la accion startLogout a mi state para eliminar el uid y name del usuario
     const handleLogout = () => {
+        // eliminar del state en redux el user
         dispatch(startLogout());
     }
 
