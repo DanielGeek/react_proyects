@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import '@testing-library/jest-dom';
 
 import { DeleteEventFab } from '../../../components/ui/DeleteEventFab';
+import { eventStartDelete } from '../../../actions/events';
 
 jest.mock('../../../actions/events', () => ({
     eventStartDelete: jest.fn()
@@ -37,6 +38,15 @@ describe('Pruebas en <DeleteEventFab />', () => {
     test('debe de mostrarse correctamente', () => {
 
         expect(wrapper).toMatchSnapshot();
+    });
+
+    test('debe de llamar el eventStartDelete al hacer click', () => {
+
+        wrapper.find('button').prop('onClick')();
+
+
+        expect(eventStartDelete).toHaveBeenCalled();
+
     });
 
 })
