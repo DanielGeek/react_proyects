@@ -20,7 +20,11 @@ const customStyles = {
         transform: 'translate(-50%, -50%)'
     }
 };
-Modal.setAppElement('#root');
+
+// para que pase la prueba del componente AppRouter
+if (process.env.NODE_ENV !== 'test') {
+    Modal.setAppElement('#root');
+}
 
 // momento actual + 1 hora
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
