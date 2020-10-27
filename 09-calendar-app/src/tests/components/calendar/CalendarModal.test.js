@@ -92,5 +92,78 @@ describe('Pruebas en <CalendarModal />', () => {
 
     })
 
+    test('debe de crear un nuevo evento', () => {
+
+        const initState = {
+            calendar: {
+                events: [],
+                activeEvent: null
+            },
+            auth: {
+                uid: '123',
+                name: 'Daniel'
+            },
+            ui: {
+                modalOpen: true
+            }
+        };
+
+        const store = mockStore(initState);
+        store.dispatch = jest.fn();
+
+        const wrapper = mount(
+            <Provider store={store} >
+                <CalendarModal />
+            </Provider>
+        );
+
+        wrapper.find('input[name="title"]').simulate('change', {
+            target: {
+                name: 'title',
+                value: 'Hola pruebas'
+            }
+        });
+
+        wrapper.find('form').simulate('submit', {
+            preventDefault() { }
+        });
+
+        expect(eventStartAddNew).toHaveBeenCalledWith({
+            end: expect.anything(),
+            start: expect.anything(),
+            title: 'Hola pruebas',
+            notes: ''
+        });
+
+        expect(eventClearActiveEvent).toHaveBeenCalled();
+
+    })
+
+
+    test('debe de validar las fechas', () => {
+
+        wrapper.find('input[name="title"]').simulate('change', {
+            target: {
+                name: 'title',
+                value: 'Hola pruebas'
+            }
+        });
+
+        const hoy = new Date();
+
+        act(() => {
+            wrapper.find('DateTimePicker').at(1).prop('onChange')(hoy);
+        })
+
+        wrapper.find('form').simulate('submit', {
+            preventDefault() { }
+        });
+
+
+        expect(Swal.fire).toHaveBeenCalledWith("Error", "La fecha fin debe de ser mayor a la fecha de inicio", "error");
+
+    })
+
+
 
 })
