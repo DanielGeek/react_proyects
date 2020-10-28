@@ -1,34 +1,55 @@
-// Métodos en arreglos
+// Promises
 
-const personas = [
-    { nombre: 'Juan', edad: 23, aprendiendo: 'Javascript' },
-    { nombre: 'Pablo', edad: 18, aprendiendo: 'PHP' },
-    { nombre: 'Alejandra', edad: 21, aprendiendo: 'AdobeXD' },
-    { nombre: 'Caren', edad: 30, aprendiendo: 'Python' },
-    { nombre: 'Miguel', edad: 35, aprendiendo: 'ReactJS' }
-]
+const aplicarDescuento = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        let descuento = true;
 
-console.log(personas);
+        if (descuento) {
+            resolve('Descuento aplicado!');
+        } else {
+            reject('No se pudo aplicar el descuento')
+        }
+    }, 3000);
+});
 
-// mayores de 28 años
-const mayores = personas.filter(persona => {
-    return persona.edad > 28;
+aplicarDescuento.then(resultado => {
+    console.log(resultado);
+}).catch(error => {
+    console.log(error);
 })
 
-// console.log(mayores);
 
-// que aprende alejandra y su edad
-const alejandra = personas.find(persona => {
-    return persona.nombre === 'Alejandra';
-});
+// // Métodos en arreglos
+
+// const personas = [
+//     { nombre: 'Juan', edad: 23, aprendiendo: 'Javascript' },
+//     { nombre: 'Pablo', edad: 18, aprendiendo: 'PHP' },
+//     { nombre: 'Alejandra', edad: 21, aprendiendo: 'AdobeXD' },
+//     { nombre: 'Caren', edad: 30, aprendiendo: 'Python' },
+//     { nombre: 'Miguel', edad: 35, aprendiendo: 'ReactJS' }
+// ]
+
+// console.log(personas);
+
+// // mayores de 28 años
+// const mayores = personas.filter(persona => {
+//     return persona.edad > 28;
+// })
+
+// // console.log(mayores);
+
+// // que aprende alejandra y su edad
+// const alejandra = personas.find(persona => {
+//     return persona.nombre === 'Alejandra';
+// });
 
 // console.log(alejandra);
 
-let total = personas.reduce((edadTotal, persona) => {
-    return edadTotal + persona.edad;
-}, 0);
+// let total = personas.reduce((edadTotal, persona) => {
+//     return edadTotal + persona.edad;
+// }, 0);
 
-console.log(total / personas.length);
+// console.log(total / personas.length);
 
 // Sprear operator
 
