@@ -4,16 +4,18 @@ function Tarea(nombre, urgencia) {
     this.urgencia = urgencia;
 }
 
-// Crear una nueva tarea:
+// Agregar un prototype a tarea:
+Tarea.prototype.mostrarInformacionTarea = function () {
+    return `La tarea ${this.nombre} tiene un prioridad de ${this.urgencia}`;
+}
+
+// // Crear una nueva tarea:
 const tarea1 = new Tarea('Aprender JavaScript y React', 'Urgente');
 const tarea2 = new Tarea('Preparar café', 'Urgente');
-const tarea3 = new Tarea('Pasear al perro', 'Media');
-const tarea4 = new Tarea('COnocer a mis suegros', 'Baja');
-
 console.log(tarea1);
+console.log(tarea2.mostrarInformacionTarea());
 console.log(tarea2);
-console.log(tarea3);
-console.log(tarea4);
+console.log(tarea2.mostrarInformacionTarea());
 
 // Objetos
 
