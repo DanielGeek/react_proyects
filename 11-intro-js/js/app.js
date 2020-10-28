@@ -1,11 +1,29 @@
+// Object literal enhancement
+
+const banda = 'Metalica';
+const genero = 'Heavy Metal';
+const canciones = ['Master Of Puppets', 'Seek & Destroy', 'Enter Sandman'];
+
+// form anterior
+// const metallica = {
+//     banda: banda,
+//     genero: genero,
+//     canciones: canciones
+// }
+
+// forma nueva
+const metallica = { banda, genero, canciones };
+
+console.log(metallica);
+
 // Destructuring de objetos
-const aprendiendoJS = {
-    version: {
-        nueva: 'ES6',
-        anterior: 'ES5'
-    },
-    frameworks: ['React', 'VueJS', 'AngularJS']
-}
+// const aprendiendoJS = {
+//     version: {
+//         nueva: 'ES6',
+//         anterior: 'ES5'
+//     },
+//     frameworks: ['React', 'VueJS', 'AngularJS']
+// }
 
 // Destructuring es extraer valores de un objeto
 
@@ -16,8 +34,8 @@ const aprendiendoJS = {
 // let frameworks = aprendiendoJS.frameworks[1];
 
 // Destructuring froma nueva
-let { frameworks } = aprendiendoJS;
-console.log(frameworks[0]);
+// let { frameworks } = aprendiendoJS;
+// console.log(frameworks[0]);
 
 
 // // Object Constructor
