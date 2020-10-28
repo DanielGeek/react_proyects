@@ -1,12 +1,30 @@
+// Objetos
+
+// Object Literal
+const persona = {
+    nombre: 'Daniel',
+    profesion: 'Desarrollador Web',
+    edad: 30
+}
+
+const persona2 = {
+    nombre: 'Elias',
+    profesion: 'Desarrollador MERN',
+    edad: 30
+}
+
+console.log(persona);
+console.log(persona2);
+
 // arrow functions
 
-let viajando = destino => `Viajando a la ciudad de: ${destino}`;
+// let viajando = destino => `Viajando a la ciudad de: ${destino}`;
 
-let viaje;
-viaje = viajando('Paris');
-viaje = viajando('Londres');
+// let viaje;
+// viaje = viajando('Paris');
+// viaje = viajando('Londres');
 
-console.log(viaje);
+// console.log(viaje);
 
 
 // parametros por default en las funciones
