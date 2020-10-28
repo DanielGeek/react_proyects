@@ -1,16 +1,42 @@
-// metodo o funciones en un objeto
-
 const persona = {
     nombre: 'Daniel',
-    trabajo: 'Desarrollador web',
-    edad: 30,
-    musicaRock: true,
-    mostrarInformacion() {
-        console.log(`${this.nombre} es ${this.trabajo} y su edad es ${this.edad}`)
-    }
+    profesion: 'Desarrollador web',
+    edad: 500
 }
 
-persona.mostrarInformacion();
+console.log(Object.keys(persona));
+
+// const carrito = ['Producto 1', 'Producto 2', 'Producto 3'];
+
+// carrito.map(producto => {
+//     return `El producto es ${producto}`;
+// });
+
+// console.log(carrito);
+
+// const appContenedor = document.querySelector('#app');
+
+// let html = '';
+// carrito.forEach(producto => {
+//     html += `<li>${producto}</li>`;
+// })
+
+// appContenedor.innerHTML = html;
+
+
+// metodo o funciones en un objeto
+
+// const persona = {
+//     nombre: 'Daniel',
+//     trabajo: 'Desarrollador web',
+//     edad: 30,
+//     musicaRock: true,
+//     mostrarInformacion() {
+//         console.log(`${this.nombre} es ${this.trabajo} y su edad es ${this.edad}`)
+//     }
+// }
+
+// persona.mostrarInformacion();
 
 // Object literal enhancement
 
