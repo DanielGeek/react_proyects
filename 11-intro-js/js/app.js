@@ -1,8 +1,22 @@
+// metodo o funciones en un objeto
+
+const persona = {
+    nombre: 'Daniel',
+    trabajo: 'Desarrollador web',
+    edad: 30,
+    musicaRock: true,
+    mostrarInformacion() {
+        console.log(`${this.nombre} es ${this.trabajo} y su edad es ${this.edad}`)
+    }
+}
+
+persona.mostrarInformacion();
+
 // Object literal enhancement
 
-const banda = 'Metalica';
-const genero = 'Heavy Metal';
-const canciones = ['Master Of Puppets', 'Seek & Destroy', 'Enter Sandman'];
+// const banda = 'Metalica';
+// const genero = 'Heavy Metal';
+// const canciones = ['Master Of Puppets', 'Seek & Destroy', 'Enter Sandman'];
 
 // form anterior
 // const metallica = {
@@ -12,9 +26,9 @@ const canciones = ['Master Of Puppets', 'Seek & Destroy', 'Enter Sandman'];
 // }
 
 // forma nueva
-const metallica = { banda, genero, canciones };
+// const metallica = { banda, genero, canciones };
 
-console.log(metallica);
+// console.log(metallica);
 
 // Destructuring de objetos
 // const aprendiendoJS = {
