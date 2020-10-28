@@ -1,10 +1,20 @@
-const persona = {
-    nombre: 'Daniel',
-    profesion: 'Desarrollador web',
-    edad: 500
+// Sprear operator
+
+function suma(a, b, c) {
+    console.log(a + b + c);
 }
 
-console.log(Object.keys(persona));
+const numero = [1, 2, 3];
+
+suma(...numero);
+
+// const persona = {
+//     nombre: 'Daniel',
+//     profesion: 'Desarrollador web',
+//     edad: 500
+// }
+
+// console.log(Object.keys(persona));
 
 // const carrito = ['Producto 1', 'Producto 2', 'Producto 3'];
 
