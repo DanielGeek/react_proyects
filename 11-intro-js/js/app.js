@@ -1,16 +1,27 @@
+// parametros por default en las funciones
+const actividad = function (nombre = 'Walter White', actividad = 'Enseñar Quimica') {
+    console.log(`La persona ${nombre}, esta realizando la actividad ${actividad}`);
+}
+
+actividad('Daniel', 'Aprender JavaScript');
+actividad('Pedro', 'Creando un sitio web');
+actividad('Antonio');
+
+
+
 // Function Declaretion
-function saludar(nombre) {
+// function saludar(nombre) {
 
-    console.log('Bienvenido ' + nombre);
-}
-saludar('Daniel');
+//     console.log('Bienvenido ' + nombre);
+// }
+// saludar('Daniel');
 
-// Function Expresion
+// // Function Expresion
 
-const cliente = function (nombreCliente) {
-    console.log(`Mostrando datos del cliente: ${nombreCliente}`);
-}
-cliente('Daniel');
+// const cliente = function (nombreCliente) {
+//     console.log(`Mostrando datos del cliente: ${nombreCliente}`);
+// }
+// cliente('Daniel');
 
 // Template Strings
 // const nombre = 'Daniel';
