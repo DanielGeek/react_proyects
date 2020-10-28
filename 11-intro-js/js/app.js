@@ -1,21 +1,43 @@
-// Object Constructor
-function Tarea(nombre, urgencia) {
-    this.nombre = nombre;
-    this.urgencia = urgencia;
+// Destructuring de objetos
+const aprendiendoJS = {
+    version: {
+        nueva: 'ES6',
+        anterior: 'ES5'
+    },
+    frameworks: ['React', 'VueJS', 'AngularJS']
 }
 
-// Agregar un prototype a tarea:
-Tarea.prototype.mostrarInformacionTarea = function () {
-    return `La tarea ${this.nombre} tiene un prioridad de ${this.urgencia}`;
-}
+// Destructuring es extraer valores de un objeto
+
+// console.log(aprendiendoJS);
+
+// version anterior
+// let version = aprendiendoJS.version.nueva;;
+// let frameworks = aprendiendoJS.frameworks[1];
+
+// Destructuring froma nueva
+let { frameworks } = aprendiendoJS;
+console.log(frameworks[0]);
+
+
+// // Object Constructor
+// function Tarea(nombre, urgencia) {
+//     this.nombre = nombre;
+//     this.urgencia = urgencia;
+// }
+
+// // Agregar un prototype a tarea:
+// Tarea.prototype.mostrarInformacionTarea = function () {
+//     return `La tarea ${this.nombre} tiene un prioridad de ${this.urgencia}`;
+// }
 
 // // Crear una nueva tarea:
-const tarea1 = new Tarea('Aprender JavaScript y React', 'Urgente');
-const tarea2 = new Tarea('Preparar café', 'Urgente');
-console.log(tarea1);
-console.log(tarea2.mostrarInformacionTarea());
-console.log(tarea2);
-console.log(tarea2.mostrarInformacionTarea());
+// const tarea1 = new Tarea('Aprender JavaScript y React', 'Urgente');
+// const tarea2 = new Tarea('Preparar café', 'Urgente');
+// console.log(tarea1);
+// console.log(tarea2.mostrarInformacionTarea());
+// console.log(tarea2);
+// console.log(tarea2.mostrarInformacionTarea());
 
 // Objetos
 
