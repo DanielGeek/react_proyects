@@ -12,7 +12,7 @@ export const tareaCompletada = () => {
 
 // Escribir clases
 
-class Tarea {
+export default class Tarea {
     constructor(nombre, prioridad) {
         this.nombre = nombre;
         this.prioridad = prioridad
@@ -25,22 +25,13 @@ class Tarea {
     }
 }
 
-class ComprasPendientes extends Tarea {
-    constructor(nombre, prioridad, cantidad) {
-        super(nombre, prioridad);
-        this.cantidad = cantidad;
-    }
-    mostrar() {
-        super.mostrar();
-        console.log(`y la cantidad de ${this.cantidad}`);
-    }
-}
+
 
 // instancias del objeto
-let tarea1 = new Tarea('Aprender JS', 'Alta');
-let tarea2 = new Tarea('Aprender React', 'Alta');
-let tarea3 = new Tarea('Aprender Mongo', 'Alta');
-let tarea4 = new Tarea('Aprender Css', 'Baja');
+// let tarea1 = new Tarea('Aprender JS', 'Alta');
+// let tarea2 = new Tarea('Aprender React', 'Alta');
+// let tarea3 = new Tarea('Aprender Mongo', 'Alta');
+// let tarea4 = new Tarea('Aprender Css', 'Baja');
 
 // console.log(tarea1.mostrar());
 // console.log(tarea2.mostrar());
@@ -48,6 +39,6 @@ let tarea4 = new Tarea('Aprender Css', 'Baja');
 // console.log(tarea4.mostrar());
 
 
-let compra1 = new ComprasPendientes('Arroz', 'Media', 3);
+// let compra1 = new ComprasPendientes('Arroz', 'Media', 3);
 // compra1.mostrar();
 // console.log(compra1.hola());
