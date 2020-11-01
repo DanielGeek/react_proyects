@@ -1,5 +1,14 @@
 export const nombreTarea = 'Pasear al perro';
 
+// exportar una función
+export const crearTarea = (tarea, urgencia) => {
+    return `La tarea ${tarea} tiene una urgencia de ${urgencia}`;
+}
+
+export const tareaCompletada = () => {
+    console.log('La tarea se completó');
+}
+
 
 // Escribir clases
 
@@ -40,5 +49,5 @@ let tarea4 = new Tarea('Aprender Css', 'Baja');
 
 
 let compra1 = new ComprasPendientes('Arroz', 'Media', 3);
-compra1.mostrar();
-console.log(compra1.hola());
+// compra1.mostrar();
+// console.log(compra1.hola());
