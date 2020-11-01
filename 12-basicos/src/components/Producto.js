@@ -1,11 +1,14 @@
 import React from 'react';
 
-const Producto = ({ producto }) => {
+const Producto = ({ producto, productos, carrito, agregarProducto }) => {
 
     const { id, nombre, precio } = producto;
 
     const seleccionarProducto = id => {
-        console.log('comprando... ', id);
+        // busca el producto con el id pasado y retorna un nuevo array con ese obj
+        // id[0] para retornar el obj
+        const producto = productos.filter(producto => producto.id === id)[0];
+        console.log(producto);
     }
     return (
         <div>
