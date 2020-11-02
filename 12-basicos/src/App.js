@@ -37,7 +37,10 @@ function App(props) {
         />
       ))}
 
-      <Carrito carrito={carrito} />
+      <Carrito
+        carrito={carrito}
+        agregarProducto={agregarProducto}
+      />
 
       <Footer
         fecha={fecha}

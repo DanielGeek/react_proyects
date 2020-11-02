@@ -14,14 +14,37 @@ const Producto = ({ producto, productos, carrito, agregarProducto }) => {
             producto
         ]);
     }
+
+    // ELimina un producto del carrito
+    const eliminarProducto = id => {
+        // busco todos los productos distintos a ese id y lo retorno en nuevo array de obj
+        const productos = carrito.filter(producto => producto.id !== id);
+
+        // cambio el state del carrito con el nuevo
+        agregarProducto(productos)
+    }
+
     return (
         <div>
             <h2>{nombre}</h2>
             <p>${precio}</p>
-            <button
-                type="button"
-                onClick={() => seleccionarProducto(id)}
-            >Comprar</button>
+            { productos
+                // si existe la propiedad productos es porque no estamos en el componente de Carrito
+                ?
+                (
+                    <button
+                        type="button"
+                        onClick={() => seleccionarProducto(id)}
+                    >Comprar</button>
+                )
+                :
+                (
+                    <button
+                        type="button"
+                        onClick={() => eliminarProducto(id)}
+                    >Eliminar</button>
+                )
+            }
         </div>);
 }
 export default Producto;
