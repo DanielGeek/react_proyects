@@ -8,7 +8,11 @@ const Producto = ({ producto, productos, carrito, agregarProducto }) => {
         // busca el producto con el id pasado y retorna un nuevo array con ese obj
         // id[0] para retornar el obj
         const producto = productos.filter(producto => producto.id === id)[0];
-        console.log(producto);
+        // agrego al state del carrito el nuevo producto
+        agregarProducto([
+            ...carrito,
+            producto
+        ]);
     }
     return (
         <div>
