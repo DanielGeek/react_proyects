@@ -26,6 +26,7 @@ export const AddCategory = ({ setCategories }) => {
             <p>{inputValue}</p>
             <input
                 type="text"
+                placeholder="Escribe algo y presiona enter"
                 value={inputValue}
                 onChange={handleInputChange}
             />
