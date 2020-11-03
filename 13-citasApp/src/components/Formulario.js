@@ -11,6 +11,8 @@ const Formulario = () => {
         sintomas: ''
     });
 
+    const [error, actualizarError] = useState(false);
+
     const actualizarState = e => {
         // hago una copia del state actual y lo actualizo con el valor que corresponda
         actualizarCita({
@@ -27,6 +29,10 @@ const Formulario = () => {
         e.preventDefault();
 
         // Validar
+        if (mascota.trim() === '' || propietario.trim() === '' || fecha.trim() === '' || hora.trim() === '' || sintomas.trim() === '') {
+            actualizarError(true);
+            return;
+        }
 
         // Asignar un ID
 
@@ -38,7 +44,8 @@ const Formulario = () => {
     return (
         <>
             <h2>Crear Cita</h2>
-
+            { error ? <p className="alerta-error">Todos los campos son obligatorios</p>
+                : null}
             <form
                 onSubmit={submitCita}
             >
