@@ -11,9 +11,16 @@ const Formulario = () => {
         sintomas: ''
     });
 
-    const actualizarState = () => {
-        console.log('escribio...')
+    const actualizarState = e => {
+        // hago una copia del state actual y lo actualizo con el valor que corresponda
+        actualizarCita({
+            ...cita,
+            [e.target.name]: e.target.value
+        })
     }
+
+    // Extraer los valores para asinarlos al value de cada input
+    const { mascota, propietario, fecha, hora, sintomas } = cita;
 
     return (
         <>
@@ -27,6 +34,7 @@ const Formulario = () => {
                     className="u-full-width"
                     placeholder="Nombre Mascota"
                     onChange={actualizarState}
+                    value={mascota}
                 />
                 <label>Nombre Dueño</label>
                 <input
@@ -35,6 +43,7 @@ const Formulario = () => {
                     className="u-full-width"
                     placeholder="Nombre Dueño de la Mascota"
                     onChange={actualizarState}
+                    value={propietario}
                 />
 
                 <label>Fecha</label>
@@ -43,6 +52,7 @@ const Formulario = () => {
                     name="fecha"
                     className="u-full-width"
                     onChange={actualizarState}
+                    value={fecha}
                 />
                 <label>Hora</label>
                 <input
@@ -50,12 +60,14 @@ const Formulario = () => {
                     name="hora"
                     className="u-full-width"
                     onChange={actualizarState}
+                    value={hora}
                 />
                 <label>Síntomas</label>
                 <textarea
                     className="u-full-width"
                     name="sintomas"
                     onChange={actualizarState}
+                    value={sintomas}
                 ></textarea>
                 <button
                     type="submit"
