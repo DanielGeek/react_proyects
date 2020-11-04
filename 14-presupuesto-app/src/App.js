@@ -16,23 +16,23 @@ function App() {
                 <div className="contenido-principal contenido">
                     {/* carga condicional del componente */}
                     {mostrarpregunta ?
-                        (
-                            <Pregunta
-                                guardarPresupuesto={guardarPresupuesto}
-                                guardarRestante={guardarRestante}
-                                actualizarPregunta={actualizarPregunta}
-                            />
-                        ) :
-                        (
-                            <div className="row">
-                                <div className="one-half column">
-                                    <Formulario />
-                                </div>
-                                <div className="one-half column">
-                                    2
-                                </div>
+
+                        <Pregunta
+                            guardarPresupuesto={guardarPresupuesto}
+                            guardarRestante={guardarRestante}
+                            actualizarPregunta={actualizarPregunta}
+                        />
+                        :
+
+                        <div className="row">
+                            <div className="one-half column">
+                                <Formulario />
                             </div>
-                        )
+                            <div className="one-half column">
+                                2
+                                </div>
+                        </div>
+
                     }
                 </div>
             </header>
