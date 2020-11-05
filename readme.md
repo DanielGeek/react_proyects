@@ -1,17 +1,20 @@
-Citas App con React y localStorage <br>
+
+# Control de presupuesto App usando hooks useState y useEffect
+https://happy-beaver-685800.netlify.app/
+
+# Citas App hooks useState, useEffect y localStorage <br>
 https://mystifying-pare-42efc4.netlify.app/
 
-Proyecto MERN Calendar App <br>
+# Proyecto MERN Calendar App <br>
 https://mern-calendar-dangel.herokuapp.com
 
-Proyecto GifExpertApp <br>
+# Proyecto GifExpertApp <br>
 https://danielgeek.github.io/react_proyectos/
 
-crear app inicial de react
-`npx create-react-app my-app` 
+# uso local
 ir al directorio
 `cd my-app`
+instalar modulos node
+`npm i`
 levantar el proyecto
 `npm start`
-link referencia
-`https://create-react-app.dev/docs/getting-started/`
