@@ -1,5 +1,5 @@
 
-# Proyecto MERN Calendar App <br>
+# Proyecto MERN Calendar App
 https://mern-calendar-dangel.herokuapp.com
 
 
