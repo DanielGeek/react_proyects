@@ -51,7 +51,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-export const Formulario = () => {
+export const Formulario = ({ guardarResumen }) => {
 
     const [datos, guardarDatos] = useState({
         marca: '',
@@ -105,6 +105,10 @@ export const Formulario = () => {
 
         console.log(resultado);
 
+        guardarResumen({
+            cotizacion: resultado,
+            datos
+        })
         // Total
     }
 
