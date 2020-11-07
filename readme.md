@@ -1,6 +1,6 @@
 
 # Proyecto MERN Calendar App
-<p>App para guardar eventos en el calendario, con el stack MERN, uso de json web token, hooks useReduce, Router y deploy en herokuapp </p>
+<p>App para guardar eventos en el calendario, con el stack MERN, uso de json web token, hooks useReduce, Router y deploy en heroku </p>
 https://mern-calendar-dangel.herokuapp.com
 
 
