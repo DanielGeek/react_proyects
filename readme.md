@@ -31,10 +31,10 @@ https://mystifying-pare-42efc4.netlify.app/
 https://danielgeek.github.io/react_proyectos/
 
 
-# uso local de los proyectos
-ir al directorio
+# Uso local de los proyectos
+Ir al directorio
 `cd my-app`
-instalar modulos node
+Instalar modulos node
 `npm i`
-levantar el proyecto
+Levantar el proyecto
 `npm start`
