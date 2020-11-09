@@ -24,7 +24,7 @@ const localizer = momentLocalizer(moment);
 export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
-    // asigno todos los eventos del store
+    // obtengo todos los eventos del store
     const { events, activeEvent } = useSelector(state => state.calendar);
     const { uid } = useSelector(state => state.auth);
 
