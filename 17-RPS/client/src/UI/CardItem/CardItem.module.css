@@ -1,0 +1,51 @@
+.CardItem {
+    border: 1px solid #cfcfcf;
+    padding: 10px;
+    margin: 0px 20px;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.8);
+    /* max-height: 120px; */
+    max-width: 150px;
+    transition: all .3s ease-out;
+    background-color: white;
+}
+
+
+
+.cardOption {
+    display: flex;
+    flex-direction: column;
+}
+
+.CardSelected {
+    transform: rotateY(360deg);
+}
+
+.cardOverlay {
+    background-color: #bdbdbd;
+    position: absolute;
+    width: 135px;
+    height: 137px;
+    margin-left: 21px;
+    opacity: .5;
+    z-index: 10;
+    transition: all .2s ease-out;
+}
+
+@media only screen and (max-width: 768px) {
+    .cardOverlay {
+        width: 120px;
+        height: 120px;
+        margin-left: 20px;
+    }
+}
+
+@media only screen and (max-width: 411px) {
+    .cardOverlay {
+        width: 77px;
+        height: 77px;
+    }
+}
+
+.activeOverlay {
+    transform: rotateY(360deg);
+}

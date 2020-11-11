@@ -1,0 +1,7 @@
+body, html, div#root {
+    background: #f93e17;
+    font-family: sans-serif, 'Roboto Condensed';
+}
+.container {
+    margin-top: 40px;
+}
