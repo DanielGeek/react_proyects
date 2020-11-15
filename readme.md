@@ -27,6 +27,10 @@ https://jovial-tereshkova-ada93c.netlify.app/
 
 https://wonderful-hoover-24ce9b.netlify.app/
 
+# Clima App
+<p>App para obtener clima de ciudades por medio de la API de https://openweathermap.org/ usando react con hooks useState</p>
+https://inspiring-borg-ea8a0a.netlify.app/
+
 # Cotizador de seguros App <br>
 <p>Pequeña app para cotizar seguro de autos usando hooks, prop-types, Styled Components y deploy en netlify </p>
 https://stupefied-wescoff-0a599f.netlify.app/
