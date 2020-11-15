@@ -12,17 +12,29 @@ function App() {
 
   const [consult, saveConsult] = useState(false);
 
-  // const { city, country } = search;
+  const { city, country } = search;
 
   // cuando consult pase a true sera ejecutado lo que esta dentro de useEffect
   useEffect(() => {
 
-    // const fetchAPI = async () => {
-    //   https://openweathermap.org/data/2.5/find?q=Puerto%20Varas&appid=439d4b804bc8187953eb36d2a8c26a02&units=metric
-    // }
+    if (consult) {
 
-    // fetchAPI();
-  }, [consult])
+      const fetchAPI = async () => {
+        const appId = '222cf87daab352594fbac11284c15353';
+        const encodeCity = encodeURI(city);
+
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeCity},${country}&appid=${appId}`;
+
+        const resp = await fetch(url);
+        const result = await resp.json();
+
+        console.log(result);
+      }
+
+      fetchAPI();
+      saveConsult(false);
+    }
+  }, [consult, city, country])
 
   return (
     <Fragment>

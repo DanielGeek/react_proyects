@@ -59,7 +59,7 @@ export const Formulario = ({ search, setSearch, saveConsult }) => {
                 >
                     <option value="">-- Select Country --</option>
                     <option value="AR">Argentina</option>
-                    <option value="CH">Chile</option>
+                    <option value="CL">Chile</option>
                     <option value="CO">Colombia</option>
                     <option value="CR">Costa Rica</option>
                     <option value="ES">España</option>
