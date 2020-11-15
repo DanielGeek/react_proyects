@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Formulario } from './components/Formulario';
+import { Error } from './components/Error';
 import { Clima } from './components/Clima';
 
 function App() {
@@ -15,6 +16,13 @@ function App() {
   const [consult, saveConsult] = useState(false);
   // crear estado con los datos obtenidos de la api
   const [resultAPI, saveResultAPI] = useState({});
+  // manejar el code devuelto de la respuesta de la api
+  const [errorCode, saveErrorCode] = useState({
+    codeError: null,
+    message: null,
+  });
+
+  const { codeError, message } = errorCode;
 
   const { city, country } = search;
 
@@ -32,12 +40,33 @@ function App() {
         const resp = await fetch(url);
         const result = await resp.json();
         saveResultAPI(result);
+        saveConsult(false);
+
+        // detecta si hubo resultado con los datos de la consulta
+        if (result.cod === "404") {
+          saveErrorCode({
+            codeError: result.cod,
+            message: result.message
+          });
+        } else {
+          saveErrorCode({
+            codeError: null,
+            message: null
+          });
+        }
       }
 
       fetchAPI();
-      saveConsult(false);
     }
-  }, [consult, city, country, resultAPI])
+  }, [consult, city, country, resultAPI, saveErrorCode])
+
+  // carga condicional de Componente
+  let ComponentCondicional;
+  if (codeError) {
+    ComponentCondicional = <Error mensaje={message} />
+  } else {
+    ComponentCondicional = <Clima resultAPI={resultAPI} />
+  }
 
   return (
     <Fragment>
@@ -55,7 +84,7 @@ function App() {
               />
             </div>
             <div className="col m6 s12">
-              <Clima resultAPI={resultAPI} />
+              {ComponentCondicional}
             </div>
           </div>
         </div>
