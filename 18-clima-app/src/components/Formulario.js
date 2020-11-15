@@ -7,6 +7,8 @@ export const Formulario = () => {
         country: ''
     });
 
+    const [error, saveError] = useState(false);
+
     // extract city and country
     const { city, country } = search;
 
@@ -17,9 +19,30 @@ export const Formulario = () => {
             [e.target.name]: e.target.value
         });
     }
+    // user submit form
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        // validator
+        if (city.trim() === '' || country.trim() === ' ') {
+            saveError(true);
+            return;
+        }
+
+        saveError(false);
+
+
+    }
 
     return (
-        <form>
+        <form
+            onSubmit={handleSubmit}
+        >
+            {
+                error ?
+                    <p className="red darken-4 error">All fields are required</p>
+                    : null
+            }
             <div className="input-field col s12">
                 <input
                     type="text"
@@ -50,7 +73,14 @@ export const Formulario = () => {
                     <option value="VE">Venezuela</option>
 
                 </select>
-                <label htmlFor="country">País: </label>
+                <label htmlFor="country">Country: </label>
+            </div>
+            <div className="input-field col s12">
+                <button
+                    type="submit"
+                    className="waves-effect waves-light btn-large btn-block yellow accent-4 col s12"
+                >look for weather
+                </button>
             </div>
         </form>
     )
