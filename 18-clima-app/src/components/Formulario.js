@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export const Formulario = () => {
-
-    const [search, setSearch] = useState({
-        city: '',
-        country: ''
-    });
+export const Formulario = ({ search, setSearch, saveConsult }) => {
 
     const [error, saveError] = useState(false);
 
@@ -31,7 +27,7 @@ export const Formulario = () => {
 
         saveError(false);
 
-
+        saveConsult(true);
     }
 
     return (
@@ -84,4 +80,10 @@ export const Formulario = () => {
             </div>
         </form>
     )
+}
+
+Formulario.propTypes = {
+    search: PropTypes.object.isRequired,
+    setSearch: PropTypes.func.isRequired,
+    saveConsult: PropTypes.func
 }
