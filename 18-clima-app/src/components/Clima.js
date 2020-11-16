@@ -21,7 +21,7 @@ export const Clima = ({ resultAPI }) => {
                 <p>Maximum temperature:
                     {parseFloat(main.temp_max - kelvin, 10).toFixed(2)} <span> &#x2103; </span>
                 </p>
-                <p>minimum temperature:
+                <p>Minimum temperature:
                     {parseFloat(main.temp_min - kelvin, 10).toFixed(2)} <span> &#x2103; </span>
                 </p>
             </div>

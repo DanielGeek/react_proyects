@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Error } from './Error';
+import { CountrysComponent } from './CountrysComponent';
 
-export const Formulario = ({ search, setSearch, saveConsult }) => {
+export const Formulario = ({ search, setSearch, saveConsult, countrysAPI }) => {
 
     const [error, saveError] = useState(false);
 
@@ -31,11 +32,21 @@ export const Formulario = ({ search, setSearch, saveConsult }) => {
         saveConsult(true);
     }
 
+
+    console.log(countrysAPI.length);
+
+    useEffect(() => {
+        // para que funcione el select con los paises obtenidos por api
+        // imitialize dropdown
+        var elems = document.getElementById("country");
+        window.M.FormSelect.init(elems, {});
+    }, []);
+
     return (
         <form
             onSubmit={handleSubmit}
         >
-            {error ? <Error mensaje="Ambos campos son obligatorios" /> : null}
+            {error ? <Error mensaje="All fields are required" /> : null}
             <div className="input-field col s12">
                 <input
                     type="text"
@@ -49,12 +60,23 @@ export const Formulario = ({ search, setSearch, saveConsult }) => {
 
             <div className="input-field col s12">
                 <select
+                    className="browser-default"
                     name="country"
                     id="country"
                     value={country}
                     onChange={handleChange}
                 >
-                    <option value="">-- Select Country --</option>
+
+                    {
+                        !countrysAPI.length ?
+                            null
+                            :
+                            countrysAPI.map((countryAPI) => {
+                                return <CountrysComponent key={countryAPI.alpha2Code} countryAPI={countryAPI} />
+                            })
+                    }
+
+                    {/* <option value="">-- Select Country --</option>
                     <option value="AR">Argentina</option>
                     <option value="CL">Chile</option>
                     <option value="CO">Colombia</option>
@@ -63,24 +85,25 @@ export const Formulario = ({ search, setSearch, saveConsult }) => {
                     <option value="US">Estados Unidos</option>
                     <option value="MX">México</option>
                     <option value="PE">Perú</option>
-                    <option value="VE">Venezuela</option>
+                    <option value="VE">Venezuela</option> */}
 
                 </select>
-                <label htmlFor="country">Country: </label>
+                {/* <label htmlFor="country">Country: </label> */}
             </div>
             <div className="input-field col s12">
                 <button
                     type="submit"
                     className="waves-effect waves-light btn-large btn-block yellow accent-4 col s12"
-                >look for weather
+                >Look for weather
                 </button>
             </div>
-        </form>
+        </form >
     )
 }
 
 Formulario.propTypes = {
     search: PropTypes.object.isRequired,
     setSearch: PropTypes.func.isRequired,
-    saveConsult: PropTypes.func
+    saveConsult: PropTypes.func,
+    countrysAPI: PropTypes.array
 }

@@ -68,6 +68,21 @@ function App() {
     ComponentCondicional = <Clima resultAPI={resultAPI} />
   }
 
+  const [countrysAPI, setCountrysAPI] = useState([]);
+
+  // obtener paises por medio de una api
+  useEffect(() => {
+
+    const getCountrys = async () => {
+      const fetchCountrys = await fetch(`https://restcountries.eu/rest/v2/`);
+      const resp = await fetchCountrys.json();
+
+      setCountrysAPI(resp);
+    }
+
+    getCountrys();
+  }, [])
+
   return (
     <Fragment>
       <Header
@@ -81,6 +96,7 @@ function App() {
                 search={search}
                 setSearch={setSearch}
                 saveConsult={saveConsult}
+                countrysAPI={countrysAPI}
               />
             </div>
             <div className="col m6 s12">
