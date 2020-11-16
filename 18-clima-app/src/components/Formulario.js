@@ -22,7 +22,7 @@ export const Formulario = ({ search, setSearch, saveConsult, countrysAPI }) => {
         e.preventDefault();
 
         // validator
-        if (city.trim() === '' || country.trim() === ' ') {
+        if (city.trim() === '' || country.trim() === '') {
             saveError(true);
             return;
         }
@@ -66,7 +66,7 @@ export const Formulario = ({ search, setSearch, saveConsult, countrysAPI }) => {
                     value={country}
                     onChange={handleChange}
                 >
-
+                    <option>-- Select option --</option>
                     {
                         !countrysAPI.length ?
                             null
