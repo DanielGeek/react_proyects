@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import imagen from './cryptomonedas.png';
 import { Formulario } from './components/Formulario';
 import Axios from 'axios';
+import { Cotizacion } from './components/Cotizacion';
 
 const Contenedor = styled.div`
   max-width: 900px;
@@ -42,6 +43,7 @@ const App = () => {
   // estado que cambiaran cuando el usuario envie el formulario con los datos
   const [moneda, guardarMoneda] = useState('');
   const [criptomoneda, guardarCriptomoneda] = useState('');
+  const [resultado, guardarResultado] = useState({});
 
   useEffect(() => {
 
@@ -54,7 +56,7 @@ const App = () => {
 
       const resultado = await Axios.get(url);
 
-      console.log(resultado.data.DISPLAY[criptomoneda][moneda]);
+      guardarResultado(resultado.data.DISPLAY[criptomoneda][moneda]);
     }
 
     cotizarCriptomoneda();
@@ -75,6 +77,8 @@ const App = () => {
           guardarMoneda={guardarMoneda}
           guardarCriptomoneda={guardarCriptomoneda}
         />
+        {/* paso el resultado obtenido de la api */}
+        <Cotizacion resultado={resultado} />
       </div>
     </Contenedor>
   );
