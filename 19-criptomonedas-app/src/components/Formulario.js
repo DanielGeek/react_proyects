@@ -4,6 +4,7 @@ import { useMoneda } from '../hooks/useMoneda';
 import { useCriptomoneda } from '../hooks/useCriptomoneda';
 import axios from 'axios';
 import { Error } from './Error';
+import PropTypes from 'prop-types';
 
 const Boton = styled.input`
     margin-top: 20px;
@@ -23,7 +24,7 @@ const Boton = styled.input`
     }
 `;
 
-export const Formulario = () => {
+export const Formulario = ({ guardarMoneda, guardarCriptomoneda }) => {
 
     // state del listado de criptomonedas
     const [listacripto, guardarCriptomonedas] = useState([]);
@@ -65,6 +66,8 @@ export const Formulario = () => {
 
         // pasar los datos al componente principal
         guardarError(false);
+        guardarMoneda(moneda);
+        guardarCriptomoneda(criptomoneda);
     }
 
     return (
@@ -81,3 +84,9 @@ export const Formulario = () => {
         </form>
     );
 }
+
+Formulario.propTypes = {
+    guardarMoneda: PropTypes.func.isRequired,
+    guardarCriptomoneda: PropTypes.func.isRequired
+}
+
