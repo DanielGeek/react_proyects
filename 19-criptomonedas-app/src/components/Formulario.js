@@ -26,7 +26,7 @@ export const Formulario = () => {
 
     // state del listado de criptomonedas
     const [listacripto, guardarCriptomonedas] = useState([]);
-
+    const [error, guardarError] = useState(false);
 
     const MONEDAS = [
         { codigo: 'USD', nombre: 'Dolar de Estados Unidos' },
@@ -36,9 +36,9 @@ export const Formulario = () => {
         { codigo: 'COD', nombre: 'Peso Colombiano' }
     ]
     // utilizar useMoneda
-    const [, SelectMonedas] = useMoneda('Elige tu Moneda', '', MONEDAS);
+    const [moneda, SelectMonedas] = useMoneda('Elige tu Moneda', '', MONEDAS);
 
-    const [, SelectCripto] = useCriptomoneda('Elige tu Criptomoneda', '', listacripto);
+    const [criptomoneda, SelectCripto] = useCriptomoneda('Elige tu Criptomoneda', '', listacripto);
 
     // Ejecutamos llamado a la API luego que cargue el componente
     useEffect(() => {
@@ -52,9 +52,25 @@ export const Formulario = () => {
         consultarAPI();
     }, []);
 
-    return (
-        <form>
+    // cuando el usuario hace submit
+    const cotizarMoneda = e => {
+        e.preventDefault();
 
+        // validar si ambos campos estan llenos retornados de mis custon hooks
+        if (moneda === '' || criptomoneda === '') {
+            guardarError(true);
+            return;
+        }
+
+        // pasar los datos al componente principal
+        guardarError(false);
+    }
+
+    return (
+        <form
+            onSubmit={cotizarMoneda}
+        >
+            {error ? 'Hay un error' : null}
             <SelectMonedas />
             <SelectCripto />
             <Boton
