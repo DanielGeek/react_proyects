@@ -4,6 +4,7 @@ import imagen from './cryptomonedas.png';
 import { Formulario } from './components/Formulario';
 import Axios from 'axios';
 import { Cotizacion } from './components/Cotizacion';
+import { Spinner } from './components/Spinner';
 
 const Contenedor = styled.div`
   max-width: 900px;
@@ -44,6 +45,8 @@ const App = () => {
   const [moneda, guardarMoneda] = useState('');
   const [criptomoneda, guardarCriptomoneda] = useState('');
   const [resultado, guardarResultado] = useState({});
+  // manejar el estado para el Spinner
+  const [cargando, guardarCargando] = useState(false);
 
   useEffect(() => {
 
@@ -56,12 +59,26 @@ const App = () => {
 
       const resultado = await Axios.get(url);
 
-      guardarResultado(resultado.data.DISPLAY[criptomoneda][moneda]);
+      // mostrar el spinner
+      guardarCargando(true);
+
+      // ocultar el spinner y mostrar el resultado
+      setTimeout(() => {
+        // cambiar el estado de cargando
+        guardarCargando(false);
+
+        guardarResultado(resultado.data.DISPLAY[criptomoneda][moneda]);
+
+      }, 3000);
+
     }
 
     cotizarCriptomoneda();
 
   }, [moneda, criptomoneda]);
+
+  // Mostrar spinner o resultado con componente condicional
+  const componente = (cargando) ? <Spinner /> : <Cotizacion resultado={resultado} />
 
   return (
     <Contenedor>
@@ -78,7 +95,7 @@ const App = () => {
           guardarCriptomoneda={guardarCriptomoneda}
         />
         {/* paso el resultado obtenido de la api */}
-        <Cotizacion resultado={resultado} />
+        {componente}
       </div>
     </Contenedor>
   );
