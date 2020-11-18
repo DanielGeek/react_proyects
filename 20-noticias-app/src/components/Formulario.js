@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelect } from '../hooks/useSelect';
 import styles from './Formulario.module.css';
+import PropTypes from 'prop-types';
 
-export const Formulario = () => {
+export const Formulario = ({ guardarCategoria }) => {
 
     const OPCIONES = [
         { value: 'general', label: 'General' },
@@ -16,12 +17,20 @@ export const Formulario = () => {
 
     // utilizar custom hook para retornar un select personalizado y el state con el select que escoja
     const [categoria, SelectNoticias] = useSelect('general', OPCIONES);
-    console.log(categoria)
+
+    // submit del form, pasar categoria a app.js
+    const buscarNoticias = e => {
+        e.preventDefault();
+
+        guardarCategoria(categoria);
+    }
 
     return (
         <div className={`${styles.buscador} row`}>
             <div className="col s12 m8 offset-m2">
-                <form>
+                <form
+                    onSubmit={buscarNoticias}
+                >
                     <h2 className={styles.heading}>Encuentra Noticias por Categorías</h2>
 
                     <SelectNoticias />
@@ -36,4 +45,8 @@ export const Formulario = () => {
             </div>
         </div>
     )
+}
+
+Formulario.propTypes = {
+    guardarCategoria: PropTypes.func.isRequired
 }
