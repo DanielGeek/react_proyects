@@ -4,8 +4,18 @@ import styles from './Formulario.module.css';
 
 export const Formulario = () => {
 
-    // utilizar custom hook
-    const [categoria, SelectNoticias] = useSelect();
+    const OPCIONES = [
+        { value: 'general', label: 'General' },
+        { value: 'business', label: 'Negocios' },
+        { value: 'entertainment', label: 'Entretenimiento' },
+        { value: 'health', label: 'Negocios' },
+        { value: 'science', label: 'Ciencia' },
+        { value: 'sports', label: 'Deportes' },
+        { value: 'technology', label: 'Tecnología' },
+    ]
+
+    // utilizar custom hook para retornar un select personalizado y el state con el select que escoja
+    const [categoria, SelectNoticias] = useSelect('general', OPCIONES);
     console.log(categoria)
 
     return (
