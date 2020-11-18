@@ -27,6 +27,10 @@ https://jovial-tereshkova-ada93c.netlify.app/
 
 https://wonderful-hoover-24ce9b.netlify.app/
 
+# Criptomonedas App
+<p>App para obtener el precio de criptomonedas en diferetes divisas todo obtenido por medio de una API, construida en React con custom hooks, useState, useEffect, styled component
+https://gracious-jennings-411e5c.netlify.app/
+
 # Clima App
 <p>App para obtener clima de ciudades por medio de la API de https://openweathermap.org/ usando react con hooks useState</p>
 https://inspiring-borg-ea8a0a.netlify.app/

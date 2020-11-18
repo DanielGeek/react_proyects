@@ -1,5 +1,6 @@
 import React from 'react';
 import './Spinner.css';
+// url spinner https://tobiasahlin.com/spinkit/
 
 export const Spinner = () => {
     return (
