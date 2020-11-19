@@ -12,7 +12,7 @@ const App = () => {
   // siempre que cambie categoria hago la consulta a la api con las noticias de esa categoria
   useEffect(() => {
     const consultarAPI = async () => {
-      const url = `http://newsapi.org/v2/top-headlines?country=ve&category=${categoria}&apiKey=b82a3cb041f6486fa88ffc698454acfa`
+      const url = `https://newsapi.org/v2/top-headlines?country=ve&category=${categoria}&apiKey=b82a3cb041f6486fa88ffc698454acfa`
 
       const respuesta = await fetch(url);
       const { articles } = await respuesta.json();
