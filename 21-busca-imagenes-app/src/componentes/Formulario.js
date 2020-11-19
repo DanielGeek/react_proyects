@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Error } from './Error';
 
 export const Formulario = () => {
+
+    const [termino, guardarTermino] = useState('');
+    const [error, guardarError] = useState(false);
+    console.log(termino, error)
+
+    const buscarImagenes = e => {
+        e.preventDefault();
+
+        // validar
+        if (termino.trim() === '') {
+            return guardarError(true);
+        }
+        guardarError(false);
+
+        // enviar el termino de búsqueda hacia el componente principal
+    }
+
     return (
-        <form>
+        <form
+            onSubmit={buscarImagenes}
+        >
             <div className="row">
                 <div className="form-group col-md-8">
                     <input
                         type="text"
                         className="form-control form-control-lg"
                         placeholder="Buscar una imagen, ejemplo: futbol o café"
+                        onChange={e => guardarTermino(e.target.value)}
                     >
                     </input>
                 </div>
@@ -21,6 +42,7 @@ export const Formulario = () => {
                     </input>
                 </div>
             </div>
+            { error ? <Error mensaje="Agrega un término de búsqueda" /> : null}
         </form>
     )
 }
