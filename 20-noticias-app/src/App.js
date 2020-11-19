@@ -17,7 +17,7 @@ const App = () => {
       const respuesta = await fetch(url);
       const { articles } = await respuesta.json();
       guardarNoticias(articles);
-      console.log(noticias);
+
     }
     consultarAPI();
   }, [categoria])
