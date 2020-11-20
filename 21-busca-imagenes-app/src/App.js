@@ -10,8 +10,6 @@ function App() {
   const [paginaactual, guardarPaginaActual] = useState(1);
   const [totalpaginas, guardarTotalPaginas] = useState(1);
 
-  console.log(paginaactual, totalpaginas, guardarPaginaActual)
-
   useEffect(() => {
     // para que no se ejecute la primera vez que cargue
     const consultarAPI = async () => {

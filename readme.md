@@ -52,6 +52,10 @@ https://mystifying-pare-42efc4.netlify.app/
 <p>Uso de hooks, conexión a api proveedora de imagenes gif</p>
 https://danielgeek.github.io/react_proyectos/
 
+# Imagenes App
+<p>Buscador de imagenes por medio de la API de pixabay con react hooks useState, useEffect, bootstrap</p>
+https://boring-jennings-b0c2df.netlify.app/
+
 
 # Breaking bad App
 <p>Proyecto para obtener frases de breaking bad por medio de una API, y uso de hooks useState, useEffect y styled component para el css</p>
