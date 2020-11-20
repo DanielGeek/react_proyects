@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Formulario } from './componentes/Formulario';
+import { ListadoImagenes } from './componentes/ListadoImagenes';
 
 function App() {
 
   // state de la app
   const [busqueda, guardarBusqueda] = useState('');
+  const [imagenes, guardarImagenes] = useState([]);
+  console.log(imagenes);
 
   useEffect(() => {
     // para que no se ejecute la primera vez que cargue
@@ -22,7 +25,7 @@ function App() {
       const resultado = await respuesta.json();
 
       const { hits } = resultado;
-      guardarBusqueda(hits);
+      guardarImagenes(hits);
     }
     consultarAPI();
   }, [busqueda])
@@ -34,6 +37,12 @@ function App() {
 
         <Formulario
           guardarBusqueda={guardarBusqueda}
+        />
+      </div>
+
+      <div className="row justify-content-center">
+        <ListadoImagenes
+          imagenes={imagenes}
         />
       </div>
     </div>
