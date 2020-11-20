@@ -7,7 +7,6 @@ function App() {
   // state de la app
   const [busqueda, guardarBusqueda] = useState('');
   const [imagenes, guardarImagenes] = useState([]);
-  console.log(imagenes);
 
   useEffect(() => {
     // para que no se ejecute la primera vez que cargue
