@@ -7,6 +7,10 @@ function App() {
   // state de la app
   const [busqueda, guardarBusqueda] = useState('');
   const [imagenes, guardarImagenes] = useState([]);
+  const [paginaactual, guardarPaginaActual] = useState(1);
+  const [totalpaginas, guardarTotalPaginas] = useState(1);
+
+  console.log(paginaactual, totalpaginas, guardarPaginaActual)
 
   useEffect(() => {
     // para que no se ejecute la primera vez que cargue
@@ -23,7 +27,11 @@ function App() {
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
 
-      const { hits } = resultado;
+      const { hits, totalHits } = resultado;
+
+      // calcular el total de paginas
+      const calcularTotalPaginas = Math.ceil(totalHits / imagenesPorPagina);
+      guardarTotalPaginas(calcularTotalPaginas);
       guardarImagenes(hits);
     }
     consultarAPI();
