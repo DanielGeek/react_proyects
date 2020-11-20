@@ -22,20 +22,25 @@ function App() {
 
       const imagenesPorPagina = 30;
       const key = '7266055-828ec0333b465c750bdc5c8c9';
-      const url = `https://pixabay.com/api/?key=${key}&q=${encodeBusqueda}&per_page=${imagenesPorPagina}`;
+      const url = `https://pixabay.com/api/?key=${key}&q=${encodeBusqueda}&per_page=${imagenesPorPagina}&page=${paginaactual}`;
 
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
 
       const { hits, totalHits } = resultado;
 
+      guardarImagenes(hits);
+
       // calcular el total de paginas
       const calcularTotalPaginas = Math.ceil(totalHits / imagenesPorPagina);
       guardarTotalPaginas(calcularTotalPaginas);
-      guardarImagenes(hits);
+
+      // Mover la pantalla hacia arriba
+      const jumbotron = document.querySelector('.jumbotron');
+      jumbotron.scrollIntoView({ behavior: 'smooth' })
     }
     consultarAPI();
-  }, [busqueda])
+  }, [busqueda, paginaactual])
 
   // definir la pagina anterior
   const paginaAnterior = () => {
@@ -65,24 +70,28 @@ function App() {
         />
       </div>
 
-      <div className="row justify-content-center">
+      <div className="row justify-content-center mb-4">
         <ListadoImagenes
           imagenes={imagenes}
         />
+        {/* Muestra el boton anterior solo si esta en pagina > 1 */}
+        {(paginaactual === 1) ? null : (
+          <button
+            type="button"
+            className="btn btn-info mr-1"
+            onClick={paginaAnterior}
+          >&laquo; Anterior
+          </button>
+        )}
 
-        <button
-          type="button"
-          className="btn btn-info mr-1"
-          onClick={paginaAnterior}
-        >&laquo; Anterior
-        </button>
-
-        <button
-          type="button"
-          className="btn btn-info"
-          onClick={paginaSiguiente}
-        >Siguiente &raquo;
-        </button>
+        {(paginaactual === totalpaginas) ? null : (
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={paginaSiguiente}
+          >Siguiente &raquo;
+          </button>
+        )}
       </div>
     </div>
   );
