@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export const Formulario = () => {
+export const Formulario = ({ guardarBusquedaLetra }) => {
 
     const [busqueda, guardarBusqueda] = useState({
         artista: '',
@@ -9,7 +10,7 @@ export const Formulario = () => {
     const { artista, cancion } = busqueda;
 
     const [error, guardarError] = useState(false);
-    console.log(error);
+
     // funcion a cada input para leer su contenido
     const actualizarState = e => {
         guardarBusqueda({
@@ -27,10 +28,16 @@ export const Formulario = () => {
         }
         guardarError(false);
         // Todo bien, pasar al componente principal
+
+        guardarBusquedaLetra(busqueda);
     }
 
     return (
         <div className="bg-info">
+            {error ?
+                <p className="alert alert-danger text-center p-2">Todos los campos son obligatorios</p>
+                : null
+            }
             <div className="container">
                 <div className="row">
                     <form
@@ -79,4 +86,8 @@ export const Formulario = () => {
             </div>
         </div>
     )
+}
+
+Formulario.propTypes = {
+    guardarBusquedaLetra: PropTypes.func.isRequired
 }
