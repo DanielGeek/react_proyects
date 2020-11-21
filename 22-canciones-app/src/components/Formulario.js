@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 export const Formulario = ({ guardarBusquedaLetra }) => {
 
     const [busqueda, guardarBusqueda] = useState({
-        artista: '',
-        cancion: ''
+        artista: 'Metallica',
+        cancion: 'One'
     });
     const { artista, cancion } = busqueda;
 

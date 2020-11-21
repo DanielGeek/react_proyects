@@ -3,6 +3,7 @@ import { Formulario } from './components/Formulario';
 
 import axios from 'axios';
 import { Cancion } from './components/Cancion';
+import { Info } from './components/Info';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
   const [letra, guardarLetra] = useState('');
   // guardar info del artista en el state
   const [info, guardarInfo] = useState({});
+  const [error, guardarError] = useState(false);
 
   // cuando cambie el state de busqueda letra y tenga algo el obj ejecuta la consulta a la api
   useEffect(() => {
@@ -22,19 +24,26 @@ function App() {
       const url = `https://api.lyrics.ovh/v1/${artista}/${cancion}`;
       const url2 = `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artista}`;
 
-      const [letra, info] = await Promise.all([axios(url), axios(url2)]).catch(
-        (error) => {
+      axios.all([
+        axios.get(url),
+        axios.get(url2)
+      ]).then(axios.spread((letra, informacion) => {
+        if (letra.data.lyrics)
+          guardarLetra(letra.data.lyrics);
+        guardarInfo(informacion.data.artists[0]);
+      })).catch(error => {
+        console.log(error);
+        guardarError(true);
+      });
+      guardarError(false);
 
-        }
-      );
-
-      guardarLetra(letra.data.lyrics);
-      guardarInfo(info.data.artistss[0]);
+      // CON ESTA LINEA EVITAMOS LOOP
+      guardarBusquedaLetra({});
     }
 
     consultarApiLetra();
 
-  }, [busquedaletra]);
+  }, [busquedaletra, info]);
 
   return (
     <Fragment>
@@ -42,18 +51,25 @@ function App() {
         guardarBusquedaLetra={guardarBusquedaLetra}
       />
 
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-md-6">
-
-          </div>
-          <div className="col-md-6">
-            <Cancion
-              letra={letra}
-            />
+      {error ?
+        <p className="alert alert-danger text-center p-2">Algo salio mal</p>
+        :
+        <div className="container mt-5">
+          <div className="row">
+            <div className="col-md-6">
+              <Info
+                info={info}
+              />
+            </div>
+            <div className="col-md-6">
+              <Cancion
+                letra={letra}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      }
+
     </Fragment>
   );
 }
