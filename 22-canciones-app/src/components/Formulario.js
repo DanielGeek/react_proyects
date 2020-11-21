@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export const Formulario = () => {
+
+    const [busqueda, guardarBusqueda] = useState({
+        artista: '',
+        cancion: ''
+    });
+    const { artista, cancion } = busqueda;
+
+    const [error, guardarError] = useState(false);
+    console.log(error);
+    // funcion a cada input para leer su contenido
+    const actualizarState = e => {
+        guardarBusqueda({
+            ...busqueda,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    // consultar las apis
+    const buscarInformacion = e => {
+        e.preventDefault();
+
+        if (artista.trim() === '' || cancion.trim() === '') {
+            return guardarError(true);
+        }
+        guardarError(false);
+        // Todo bien, pasar al componente principal
+    }
+
     return (
         <div className="bg-info">
             <div className="container">
                 <div className="row">
                     <form
+                        onSubmit={buscarInformacion}
                         className="col card text-white bg-transparent mb-5 pt-5 pb-2"
                     >
                         <fieldset>
@@ -21,6 +50,8 @@ export const Formulario = () => {
                                             className="form-control"
                                             name="artista"
                                             placeholder="Nombre Artista"
+                                            onChange={actualizarState}
+                                            value={artista}
                                         />
                                     </div>
                                 </div>
@@ -32,6 +63,8 @@ export const Formulario = () => {
                                             className="form-control"
                                             name="cancion"
                                             placeholder="Nombre Canción"
+                                            onChange={actualizarState}
+                                            value={cancion}
                                         />
                                     </div>
                                 </div>
