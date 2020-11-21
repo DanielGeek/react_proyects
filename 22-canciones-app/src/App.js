@@ -10,6 +10,8 @@ function App() {
   const [busquedaletra, guardarBusquedaLetra] = useState({});
   // almacena la latra obtenida de la api
   const [letra, guardarLetra] = useState('');
+  // guardar info del artista en el state
+  const [info, guardarInfo] = useState({});
 
   // cuando cambie el state de busqueda letra y tenga algo el obj ejecuta la consulta a la api
   useEffect(() => {
@@ -18,10 +20,16 @@ function App() {
     const consultarApiLetra = async () => {
       const { artista, cancion } = busquedaletra;
       const url = `https://api.lyrics.ovh/v1/${artista}/${cancion}`;
+      const url2 = `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artista}`;
 
-      const resultado = await axios(url);
+      const [letra, info] = await Promise.all([axios(url), axios(url2)]).catch(
+        (error) => {
 
-      guardarLetra(resultado.data.lyrics);
+        }
+      );
+
+      guardarLetra(letra.data.lyrics);
+      guardarInfo(info.data.artistss[0]);
     }
 
     consultarApiLetra();
