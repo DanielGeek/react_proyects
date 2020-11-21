@@ -24,8 +24,11 @@ https://jovial-tereshkova-ada93c.netlify.app/
 
 # Heroes SPA <br>
 <p>Uso de Router, history push / replace, useMemo, QueryString, Protecció de rutas, authReducer y deploy en netlify </p>
-
 https://wonderful-hoover-24ce9b.netlify.app/
+
+# Canciones App
+<p>App para obtener información artista y letra canción consumiendo dos apis simultaneamente, uso de axios, hooks useState, useEffect, PropTypes, Bootstrap </p>
+https://nostalgic-einstein-ce1bfa.netlify.app/
 
 # Criptomonedas App
 <p>App para obtener el precio de criptomonedas en diferetes divisas todo obtenido por medio de una API, construida en React con custom hooks, useState, useEffect, styled component
