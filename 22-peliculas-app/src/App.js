@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import FormaSaludo from './FormaSaludo';
+import MensajeSaludo from './MensajeSaludo';
 
 export class App extends Component {
     state = {
@@ -32,6 +34,8 @@ export class App extends Component {
                         <Button type="submit">Saludar</Button>
                     </FormGroup>
                 </form>
+                <MensajeSaludo />
+                <FormaSaludo />
             </Grid>
         );
     }

@@ -1,1 +1,1 @@
-#App para obtener peliculas por medio de una app en React con clases
+#Ejercicios y App para obtener peliculas por medio de una app en React con clases
