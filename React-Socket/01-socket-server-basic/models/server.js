@@ -15,10 +15,16 @@ class Server {
         this.server = http.createServer(this.app);
 
         // Configuración de sockets
-        this.io = socketio(this.server, { /* configuraciones */ });
+        this.io = socketio(this.server, {
+            cors: {
+                origin: "*",
+                methods: ["GET", "POST"]
+            }
+        });
     }
 
     middlewares() {
+
         // Desplegar el directorio público
         this.app.use(express.static(path.resolve(__dirname, '../public')));
     }
