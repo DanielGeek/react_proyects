@@ -6,6 +6,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 
 ReactDOM.render(
-  <App nombre="Daniel" />,
+  <App nombre="Daniel" mensaje="Este es un mensaje" />,
   document.getElementById("root")
 );
