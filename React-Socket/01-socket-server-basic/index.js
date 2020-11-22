@@ -18,6 +18,11 @@ io.on('connection', (socket) => {
         msg: 'Bienvenido al server',
         fecha: new Date()
     });
+
+    // obtener la data del cliente
+    socket.on('mensaje-cliente', (data) => {
+        console.log(data);
+    });
 });
 
 server.listen(8080, () => {

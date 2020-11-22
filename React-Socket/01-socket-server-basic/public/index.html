@@ -20,6 +20,15 @@
         socket.on('mensaje-bienvenida', (data) => {
             console.log(data);
         });
+
+        setTimeout(() => {
+            // emitir un evento al servidor
+            // mensaje-cliente
+            socket.emit('mensaje-cliente', {
+                msg: 'cliente',
+                nombre: 'Daniel'
+            });
+        }, 2000)
     </script>
 </body>
 
