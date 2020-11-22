@@ -15,7 +15,11 @@
 
     <script>
         // Establecer conexión con el server
-        io('http://localhost:8080');
+        const socket = io('http://localhost:8080');
+        // obtener la data del servidor
+        socket.on('mensaje-bienvenida', (data) => {
+            console.log(data);
+        });
     </script>
 </body>
 

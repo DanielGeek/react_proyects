@@ -11,8 +11,13 @@ const io = require('socket.io')(server);
 // Desplegar el directorio público
 app.use(express.static(__dirname + '/public'));
 
-io.on('connection', () => {
-    console.log('Cliente conectado!');
+// socket pasado en el callback equivale al cliente conectado
+io.on('connection', (socket) => {
+    // emitir data al cliente
+    socket.emit('mensaje-bienvenida', {
+        msg: 'Bienvenido al server',
+        fecha: new Date()
+    });
 });
 
 server.listen(8080, () => {
