@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import Saludo from './Saludo';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Saludo } from './Saludo';
 
 export class App extends Component {
     render() {
-
         return (
-            <Saludo />
+            <Router>
+                <Switch>
+                    <Route path="/" component={Saludo} />
+                </Switch>
+            </Router>
         );
     }
 }
