@@ -4,10 +4,9 @@ import BuscarPelicula from "./BuscarPelicula";
 // import PeliculasEncontradas from "./PeliculasEncontradas";
 
 export class Pelicula extends Component {
-  // state = {
-  //   peliculas: [],
-  //   estaCargando: false
-  // };
+  state = {
+    peliculas: []
+  };
 
   // componentDidMount = () => {
   //   const json = localStorage.getItem("peliculas");
@@ -30,9 +29,8 @@ export class Pelicula extends Component {
     // this.setState({ estaCargando: true });
 
     const peliculas = await api_fetch.json();
-    // this.setState({ peliculas: peliculas.results, estaCargando: false });
-    // console.log(this.state.peliculas);
-    console.log(peliculas.results);
+    this.setState({ peliculas: peliculas.results });
+    console.log(this.state.peliculas[0].longDescription);
   };
 
   render() {
@@ -45,6 +43,9 @@ export class Pelicula extends Component {
         <Row>
           <PageHeader>Lista de Películas</PageHeader>
           <BuscarPelicula peliculaPorBuscar={this.peliculaPorBuscar} />
+          {this.state.peliculas.map(pelicula => {
+            return <p key={pelicula.trackId}>{pelicula.trackName}</p>;
+          })}
         </Row>
         {/* <Row>
           <br />
