@@ -68,7 +68,7 @@ https://danielgeek.github.io/react_proyectos/
 # Proyecto para obtener peliculas de una api de apple
 
 <p>Uso de react con class components, prop-types, react-router, bootstrap</p>
-https://nostalgic-bartik-a577b7.netlify.app/peliculas
+https://nostalgic-bartik-a577b7.netlify.app
 
 # Imagenes App
 
