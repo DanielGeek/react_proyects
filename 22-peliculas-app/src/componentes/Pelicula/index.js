@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Grid, Row, PageHeader } from "react-bootstrap";
+import Spinner from "../Spinner/Spinner";
 import BuscarPelicula from "./BuscarPelicula";
 import PeliculasEncontradas from "./PeliculasEncontradas";
 // import PeliculasEncontradas from "./PeliculasEncontradas";
 
 export class Pelicula extends Component {
   state = {
-    peliculas: []
+    peliculas: [],
+    estaCargando: false
   };
 
   // componentDidMount = () => {
@@ -27,16 +29,16 @@ export class Pelicula extends Component {
       `https://itunes.apple.com/search?term=${peliculaPorBuscar}&media=movie&country=MX`
     );
 
-    // this.setState({ estaCargando: true });
+    this.setState({ estaCargando: true });
 
     const peliculas = await apiFetch.json();
-    this.setState({ peliculas: peliculas.results });
+    this.setState({ peliculas: peliculas.results, estaCargando: false });
   };
 
   render() {
-    // if (this.state.estaCargando) {
-    //   return <p>Cargando...</p>;
-    // }
+    if (this.state.estaCargando) {
+      return <Spinner />;
+    }
     const { peliculas } = this.state;
     return (
       <Grid>
