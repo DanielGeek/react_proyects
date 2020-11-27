@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "react-bootstrap";
+import PropTypes from "prop-types";
 import { MensajeSaludo } from "./MensajeSaludo";
 import { FormaSaludo } from "./FormaSaludo";
 
@@ -27,6 +28,11 @@ export class Saludo extends Component {
 Saludo.defaultProps = {
   nombre: "React",
   mensaje: "Mensaje por default"
+};
+
+Saludo.propTypes = {
+  nombre: PropTypes.string,
+  mensaje: PropTypes.string
 };
 
 export default Saludo;

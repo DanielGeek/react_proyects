@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { FormGroup, ControlLabel, FormControl, Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 export class FormaSaludo extends Component {
   alEnviarForma = e => {
+    const { alObtenerNuevoSaludo } = this.props;
+
     const datos = {};
     const nombre = e.target.nombre.value;
     const mensaje = e.target.mensaje.value;
@@ -18,8 +21,7 @@ export class FormaSaludo extends Component {
       datos.mensaje = mensaje;
       e.target.mensaje.value = "";
     }
-
-    this.props.alObtenerNuevoSaludo(datos);
+    alObtenerNuevoSaludo(datos);
   };
 
   render() {
@@ -38,5 +40,9 @@ export class FormaSaludo extends Component {
     );
   }
 }
+
+FormaSaludo.propTypes = {
+  alObtenerNuevoSaludo: PropTypes.func.isRequired
+};
 
 export default FormaSaludo;
