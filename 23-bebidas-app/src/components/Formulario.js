@@ -3,9 +3,9 @@ import { CategoriasContext } from "../context/CategoriasContext";
 
 export const Formulario = () => {
   // obtengo el state de mi context creado
-  const { hola } = useContext(CategoriasContext);
+  const { categorias } = useContext(CategoriasContext);
 
-  alert(hola);
+  console.log(categorias);
 
   return (
     <form className="col-12">
