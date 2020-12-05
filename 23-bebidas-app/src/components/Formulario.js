@@ -5,7 +5,7 @@ import { RecetasContext } from "../context/RecetasContext";
 export const Formulario = () => {
   // obtengo el state global de mi context creado
   const { categorias } = useContext(CategoriasContext);
-  const { buscarRecetas } = useContext(RecetasContext);
+  const { buscarRecetas, guardarConsultar } = useContext(RecetasContext);
 
   const [busqueda, guardarBusqueda] = useState({
     nombre: "",
@@ -26,6 +26,7 @@ export const Formulario = () => {
       onSubmit={e => {
         e.preventDefault();
         buscarRecetas(busqueda);
+        guardarConsultar(true);
       }}
     >
       <fieldset className="text-center">
