@@ -30,6 +30,11 @@ https://jovial-tereshkova-ada93c.netlify.app/
 <p>Uso de Router, history push / replace, useMemo, QueryString, Protecció de rutas, authReducer y deploy en netlify </p>
 https://wonderful-hoover-24ce9b.netlify.app/
 
+# Bebidas app
+
+<p>Proyecto para obtener bebidas por medio de una api, usando hooks useState, Context, material-ui, bootstrap</p>
+https://gifted-albattani-80d16b.netlify.app/
+
 # Canciones App
 
 <p>App para obtener información artista y letra canción consumiendo dos apis simultaneamente, uso de axios, hooks useState, useEffect, PropTypes, Bootstrap </p>
