@@ -7,7 +7,7 @@ export const ModalContext = createContext();
 export const ModalProvider = props => {
   // state del provider
   const [idreceta, guardarIdReceta] = useState(null);
-  const [receta, guardarReceta] = useState({});
+  const [infoReceta, guardarInfoReceta] = useState({});
 
   // una vez que tenemos una receta, llamar la api
   useEffect(() => {
@@ -19,7 +19,7 @@ export const ModalProvider = props => {
 
       const resultado = await Axios.get(url);
 
-      guardarReceta(resultado.data.drinks[0]);
+      guardarInfoReceta(resultado.data.drinks[0]);
     };
     obtenerReceta();
   }, [idreceta]);
@@ -27,7 +27,9 @@ export const ModalProvider = props => {
   return (
     <ModalContext.Provider
       value={{
-        guardarIdReceta
+        infoReceta,
+        guardarIdReceta,
+        guardarInfoReceta
       }}
     >
       {props.children}
