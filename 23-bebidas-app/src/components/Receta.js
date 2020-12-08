@@ -18,10 +18,22 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: 600,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+    padding: theme.spacing(2, 4, 3),
+    overflow: "scroll",
+    height: "100%",
+    maxHeight: 500,
+    display: "block"
+  },
+  header: {
+    padding: "12px 0",
+    borderBottom: "1px solid darkgrey"
+  },
+  content: {
+    padding: "12px 0",
+    overflow: "scroll"
   }
 }));
 
@@ -44,6 +56,21 @@ export const Receta = ({ receta }) => {
   const { infoReceta, guardarIdReceta, guardarInfoReceta } = useContext(
     ModalContext
   );
+
+  // Muestra y formatea los ingredientes
+  const mostrarIngredientes = infoReceta => {
+    let ingredientes = [];
+    for (let i = 1; i < 16; i++) {
+      if (infoReceta[`strIngredient${i}`]) {
+        ingredientes.push(
+          <li>
+            {infoReceta[`strIngredient${i}`]} {infoReceta[`strMeasure${i}`]}
+          </li>
+        );
+      }
+    }
+    return ingredientes;
+  };
 
   return (
     <div className="col-md-4 mb-3">
@@ -84,6 +111,8 @@ export const Receta = ({ receta }) => {
                 src={infoReceta.strDrinkThumb}
                 alt={infoReceta.strDrink}
               />
+              <h3>Ingredientes y cantidades</h3>
+              <ul>{mostrarIngredientes(infoReceta)}</ul>
             </div>
           </Modal>
         </div>
