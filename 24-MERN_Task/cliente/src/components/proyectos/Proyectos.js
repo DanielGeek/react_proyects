@@ -1,4 +1,5 @@
 import React from "react";
+import { Barra } from "../layout/Barra";
 import { Sidebar } from "../layout/Sidebar";
 
 export const Proyectos = () => {
@@ -7,7 +8,10 @@ export const Proyectos = () => {
       <Sidebar />
 
       <div className="seccion-principal">
-        <main></main>
+        <Barra />
+        <main>
+          <div className="contenedor-tareas"></div>
+        </main>
       </div>
     </div>
   );
