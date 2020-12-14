@@ -66,6 +66,12 @@ a {
 .btn:hover {
   cursor: pointer;
 }
+.btn-eliminar {
+  background-color: var(--blanco);
+}
+.btn-eliminar:hover {
+  background-color: var(--gris2);
+}
 .btn-primario {
   background-color: var(--gris2);
   color: var(--blanco);
