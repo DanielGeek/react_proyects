@@ -10,7 +10,7 @@ export const ListadoProyectos = () => {
   // Obtener proyectos cuando carga el componente
   useEffect(() => {
     obtenerProyectos();
-  }, [obtenerProyectos]);
+  }, []);
 
   // revisar si proyectos tiene contenido
   if (proyectos.length === 0) return null;

@@ -2,9 +2,9 @@ import React, { Fragment, useContext, useState } from "react";
 import proyectoContext from "../../context/proyectos/proyectoContext";
 
 export const NuevoProyecto = () => {
-  // Obtener el state del formulario
+  // Obtener el state del formulario del context
   const proyectosContext = useContext(proyectoContext);
-  const { formulario, mostrarFormulario } = proyectosContext;
+  const { formulario, mostrarFormulario, agregarProyecto } = proyectosContext;
 
   // State para Proyecto
   const [proyecto, guardarProyecto] = useState({
@@ -27,10 +27,17 @@ export const NuevoProyecto = () => {
     e.preventDefault();
 
     // Validar el proyecto
+    if (nombre === "") {
+      return;
+    }
 
     // Agregar al state
+    agregarProyecto(proyecto);
 
     // Reiniciar el form
+    guardarProyecto({
+      nombre: ""
+    });
   };
 
   // Mostrar el formulario
