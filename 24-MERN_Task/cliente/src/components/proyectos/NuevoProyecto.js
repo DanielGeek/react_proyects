@@ -4,7 +4,13 @@ import proyectoContext from "../../context/proyectos/proyectoContext";
 export const NuevoProyecto = () => {
   // Obtener el state del formulario del context
   const proyectosContext = useContext(proyectoContext);
-  const { formulario, mostrarFormulario, agregarProyecto } = proyectosContext;
+  const {
+    formulario,
+    errorFormulario,
+    mostrarFormulario,
+    agregarProyecto,
+    mostrarError
+  } = proyectosContext;
 
   // State para Proyecto
   const [proyecto, guardarProyecto] = useState({
@@ -28,6 +34,7 @@ export const NuevoProyecto = () => {
 
     // Validar el proyecto
     if (nombre === "") {
+      mostrarError();
       return;
     }
 
@@ -72,6 +79,10 @@ export const NuevoProyecto = () => {
             value="Agregar Proyecto"
           />
         </form>
+      ) : null}
+
+      {errorFormulario ? (
+        <p className="mensaje error">El nombre del proyecto es obligatorio</p>
       ) : null}
     </Fragment>
   );

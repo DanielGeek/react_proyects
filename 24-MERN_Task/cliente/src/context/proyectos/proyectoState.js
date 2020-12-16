@@ -5,7 +5,8 @@ import proyectoReducer from "./proyectoReducer";
 import {
   AGREGAR_PROYECTO,
   FORMULARIO_PROYECTO,
-  OBTENER_PROYECTOS
+  OBTENER_PROYECTOS,
+  VALIDAR_FORMULARIO
 } from "../../types";
 
 export const ProyectoState = props => {
@@ -18,7 +19,8 @@ export const ProyectoState = props => {
 
   const initialState = {
     proyectos: [],
-    formulario: false
+    formulario: false,
+    errorFormulario: false
   };
 
   // Dispatch para ejecutar las acciones
@@ -50,14 +52,23 @@ export const ProyectoState = props => {
     });
   };
 
+  // Valida el formulario por errores
+  const mostrarError = () => {
+    dispatch({
+      type: VALIDAR_FORMULARIO
+    });
+  };
+
   return (
     <proyectoContext.Provider
       value={{
         proyectos: state.proyectos,
         formulario: state.formulario,
+        errorFormulario: state.errorFormulario,
         mostrarFormulario,
         obtenerProyectos,
-        agregarProyecto
+        agregarProyecto,
+        mostrarError
       }}
     >
       {props.children}
