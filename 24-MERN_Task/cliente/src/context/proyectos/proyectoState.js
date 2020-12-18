@@ -6,6 +6,7 @@ import {
   AGREGAR_PROYECTO,
   FORMULARIO_PROYECTO,
   OBTENER_PROYECTOS,
+  PROYECTO_ACTUAL,
   VALIDAR_FORMULARIO
 } from "../../types";
 
@@ -20,7 +21,8 @@ export const ProyectoState = props => {
   const initialState = {
     proyectos: [],
     formulario: false,
-    errorFormulario: false
+    errorFormulario: false,
+    proyecto: null
   };
 
   // Dispatch para ejecutar las acciones
@@ -59,16 +61,26 @@ export const ProyectoState = props => {
     });
   };
 
+  // Selecciona el Proyecto que el usuario dio click
+  const proyectoActual = proyectoId => {
+    dispatch({
+      type: PROYECTO_ACTUAL,
+      payload: proyectoId
+    });
+  };
+
   return (
     <proyectoContext.Provider
       value={{
         proyectos: state.proyectos,
         formulario: state.formulario,
         errorFormulario: state.errorFormulario,
+        proyecto: state.proyecto,
         mostrarFormulario,
         obtenerProyectos,
         agregarProyecto,
-        mostrarError
+        mostrarError,
+        proyectoActual
       }}
     >
       {props.children}

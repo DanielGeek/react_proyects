@@ -2,7 +2,8 @@ import {
   AGREGAR_PROYECTO,
   FORMULARIO_PROYECTO,
   OBTENER_PROYECTOS,
-  VALIDAR_FORMULARIO
+  VALIDAR_FORMULARIO,
+  PROYECTO_ACTUAL
 } from "../../types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -29,6 +30,13 @@ export default (state, action) => {
       return {
         ...state,
         errorFormulario: true
+      };
+    case PROYECTO_ACTUAL:
+      return {
+        ...state,
+        proyecto: state.proyectos.filter(
+          proyecto => proyecto.id === action.payload
+        )
       };
     default:
       return state;
