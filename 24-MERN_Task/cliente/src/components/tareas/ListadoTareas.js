@@ -14,12 +14,7 @@ export const ListadoTareas = () => {
   const [proyectoActual] = proyecto;
   // console.log(proyecto[0])
 
-  const tareasProyecto = [
-    { id:1 ,nombre: "Elegir Plataforma", estado: true },
-    { id:2 ,nombre: "Elegir Colores", estado: false },
-    { id:3 ,nombre: "Elegir Plataformas de pago", estado: false },
-    { id:4 ,nombre: "Elegir Hosting", estado: true }
-  ];
+  const tareasProyecto = [];
 
   // Elimina un proyecto
   const onClickEliminar = () => {
