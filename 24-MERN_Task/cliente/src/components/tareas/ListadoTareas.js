@@ -5,7 +5,7 @@ import { Tarea } from "./Tarea";
 export const ListadoTareas = () => {
   // Extraer proyectos del state inicial
   const proyectosContext = useContext(proyectoContext);
-  const { proyecto } = proyectosContext;
+  const { proyecto, eliminarProyecto } = proyectosContext;
 
   // Si no hay proyecto seleccionado
   if (!proyecto) return <h2>Selecciona un proyecto</h2>;
@@ -15,11 +15,16 @@ export const ListadoTareas = () => {
   // console.log(proyecto[0])
 
   const tareasProyecto = [
-    { nombre: "Elegir Plataforma", estado: true },
-    { nombre: "Elegir Colores", estado: false },
-    { nombre: "Elegir Plataformas de pago", estado: false },
-    { nombre: "Elegir Hosting", estado: true }
+    { id:1 ,nombre: "Elegir Plataforma", estado: true },
+    { id:2 ,nombre: "Elegir Colores", estado: false },
+    { id:3 ,nombre: "Elegir Plataformas de pago", estado: false },
+    { id:4 ,nombre: "Elegir Hosting", estado: true }
   ];
+
+  // Elimina un proyecto
+  const onClickEliminar = () => {
+    eliminarProyecto(proyectoActual.id)
+  }
 
   return (
     <Fragment>
@@ -31,11 +36,15 @@ export const ListadoTareas = () => {
             <p>No hay tareas</p>
           </li>
         ) : (
-          tareasProyecto.map(tarea => <Tarea tarea={tarea} />)
+          tareasProyecto.map(tarea => <Tarea key={tarea.id} tarea={tarea} />)
         )}
       </ul>
 
-      <button type="button" className="btn btn-eliminar">
+      <button 
+        type="button"
+        className="btn btn-eliminar"
+          onClick={onClickEliminar}
+      >
         Eliminar Proyecto &times;
       </button>
     </Fragment>
