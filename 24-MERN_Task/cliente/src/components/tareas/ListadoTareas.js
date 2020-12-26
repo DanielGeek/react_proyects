@@ -1,5 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import proyectoContext from "../../context/proyectos/proyectoContext";
+import tareaContext from "../../context/tareas/tareaContext";
 import { Tarea } from "./Tarea";
 
 export const ListadoTareas = () => {
@@ -7,14 +8,16 @@ export const ListadoTareas = () => {
   const proyectosContext = useContext(proyectoContext);
   const { proyecto, eliminarProyecto } = proyectosContext;
 
+  // Obtener las tareas del context de tarea
+  const tareasContext = useContext(tareaContext);
+  const { tareasproyecto } = tareasContext;
+
   // Si no hay proyecto seleccionado
   if (!proyecto) return <h2>Selecciona un proyecto</h2>;
 
   // Array destructuring para extraer el proyecto actual
   const [proyectoActual] = proyecto;
   // console.log(proyecto[0])
-
-  const tareasProyecto = [];
 
   // Elimina un proyecto
   const onClickEliminar = () => {
@@ -26,19 +29,19 @@ export const ListadoTareas = () => {
       <h2>Proyecto: {proyectoActual.nombre}</h2>
 
       <ul className="listado-tareas">
-        {tareasProyecto.length === 0 ? (
+        {tareasproyecto.length === 0 ? (
           <li className="tarea">
             <p>No hay tareas</p>
           </li>
         ) : (
-          tareasProyecto.map(tarea => <Tarea key={tarea.id} tarea={tarea} />)
-        )}
+            tareasproyecto.map(tarea => <Tarea key={tarea.id} tarea={tarea} />)
+          )}
       </ul>
 
-      <button 
+      <button
         type="button"
         className="btn btn-eliminar"
-          onClick={onClickEliminar}
+        onClick={onClickEliminar}
       >
         Eliminar Proyecto &times;
       </button>
