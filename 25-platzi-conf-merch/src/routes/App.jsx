@@ -15,7 +15,7 @@ const App = () => {
   // custom hook
   const initialState = useInitialState();
   return (
-    <AppContext.Provider value={initialState} >
+    <AppContext.Provider value={initialState}>
       <BrowserRouter>
         <Layout>
           <Switch>
