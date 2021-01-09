@@ -58,8 +58,8 @@ const Information = () => {
       </div>
       <div className="Information-sidebar">
         <h3>Pedido:</h3>
-        {cart.map((item) => (
-          <div className="Information-item" key={item.title}>
+        {cart.map((item, i) => (
+          <div className="Information-item" key={i}>
             <div className="Information-element">
               <h4>{item.title}</h4>
               <span>$ {item.price}</span>
