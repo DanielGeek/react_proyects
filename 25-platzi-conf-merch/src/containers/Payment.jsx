@@ -11,7 +11,7 @@ const Payments = () => {
   const history = useHistory();
 
   const paypalOptions = {
-    clientId: 'tu id de sanbox',
+    clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID,
     intent: 'capture',
     currency: 'USD',
   };
