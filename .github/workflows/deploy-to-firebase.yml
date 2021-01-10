@@ -25,8 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        # working-directory: ./25-platzi-conf-merch
-      run: ls
+        working-directory: ./25-platzi-conf-merch
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -37,6 +36,7 @@ jobs:
           path: ./25-platzi-conf-merch/dist
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
+      - run: ls
         with:
           args: deploy --only hosting
         env:
