@@ -25,8 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-          ls
-        # working-directory: ./25-platzi-conf-merch
+        working-directory: ./25-platzi-conf-merch
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
