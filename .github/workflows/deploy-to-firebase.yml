@@ -35,11 +35,13 @@ jobs:
           name: dist
           path: ./25-platzi-conf-merch/dist
       - name: Deploy to Firebase
-        defaults:
-        run:
-          working-directory: ./25-platzi-conf-merch
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: ls
