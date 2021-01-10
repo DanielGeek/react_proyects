@@ -37,8 +37,8 @@ jobs:
       - name: Deploy to Firebase
         
         uses: w9jds/firebase-action@master
+        run: ls
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_PATH: "react_proyectos/25-platzi-conf-merch/"
