@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "25-platzi-conf-merch/dist",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
