@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@master/25-platzi-conf-merch
+        uses: actions/checkout@master
       - name: Install Dependencies
         run: npm install
       - name: Build
@@ -15,7 +15,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: dist
+          path: 25-platzi-conf-merch/dist
   deploy:
     name: Deploy
     needs: build
