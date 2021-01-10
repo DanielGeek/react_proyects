@@ -42,7 +42,6 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   verificar:
     name: Verificar
-    needs: 
     runs-on: ubuntu-latest
     steps:
         - name: Ver directorio
