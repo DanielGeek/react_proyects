@@ -35,6 +35,7 @@ jobs:
           name: dist
           path: ./25-platzi-conf-merch/dist
       - name: Deploy to Firebase
+        run: ls
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
