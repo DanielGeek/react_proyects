@@ -12,7 +12,7 @@ const Characters = () => {
     return (
         <div className="characteres">
             {characters.map(character => (
-                <h2>{character.name}</h2>
+                <h2 key={character.id}>{character.name}</h2>
             ))}
         </div>
     );
