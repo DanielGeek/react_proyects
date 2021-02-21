@@ -5,13 +5,16 @@ import { TimerPadre } from './components/TimerPadre';
 import { ContadorRed } from './components/ContadorRed';
 import { Formulario } from './components/Formulario';
 import { Formulario2 } from './components/Formulario2';
-
+import { ButtonSvgGarden } from './components/ButtonSvgGarden';
 
 
 function App() {
   return (
     <>
       <h1>React + TypeScript</h1>
+      <hr />
+      <h2>Zendesk garden svg</h2>
+      <ButtonSvgGarden />
       <hr />
       <h2>useState</h2>
       <Counter />
