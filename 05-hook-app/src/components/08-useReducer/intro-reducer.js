@@ -8,7 +8,8 @@ const initialState = [{
 
 
 const todoReducer = (state = initialState, action) => {
-
+    // TODO: cambiar a 
+    // if ( action?.type === 'agregar' ) {
     if (action) {
         if (action.type === 'agregar') {
             return [...state, action.payload];
