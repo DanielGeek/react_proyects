@@ -1,7 +1,15 @@
-const Server = require('./models/server');
-// para poder leer las variables de entorno .env
-require('dotenv').config();
+// Servidor de Express
+const app = require('express')();
 
-const server = new Server();
+// Servidor de sockets
+const server = require('http').createServer(app);
 
-server.execute();
+// Configuración del socket server
+const io = require('socket.io')(server);
+
+io.on('connection', () => { /* … */ });
+
+
+server.listen(8080, () => {
+  console.log('Server corriendo en puerto :8081')
+});
