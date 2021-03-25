@@ -7,7 +7,9 @@ const server = require('http').createServer(app);
 // Configuración del socket server
 const io = require('socket.io')(server);
 
-io.on('connection', () => { /* … */ });
+io.on('connection', () => { 
+  console.log('Cliente conectado');
+});
 
 
 server.listen(8080, () => {
