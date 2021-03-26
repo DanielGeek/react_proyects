@@ -16,6 +16,13 @@
     socket.on('mensaje-bienvenida', (data) => {
       console.log(data);
     });
+
+    setTimeout(() => {
+      socket.emit('mensaje-cliente', {
+        msg: 'cliente',
+        nombre: 'Daniel'
+      });
+    }, 2000);
   </script>
 </body>
 </html>

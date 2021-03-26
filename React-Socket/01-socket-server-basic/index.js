@@ -12,11 +12,19 @@ const io = require('socket.io')(server);
 app.use( express.static(__dirname + '/public') );
 
 io.on('connection', (socket) => {
+
   socket.emit('mensaje-bienvenida', {
     msg: 'Bienvenido al server',
     fecha: new Date()
   });
+
+  // Escuchar el evento cliente
+  socket.on('mensaje-cliente', (data) => {
+    console.log(data);
+  });
 });
+
+
 
 
 server.listen(8080, () => {
