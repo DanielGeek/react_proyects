@@ -13,14 +13,17 @@ app.use( express.static(__dirname + '/public') );
 
 io.on('connection', (socket) => {
 
-  socket.emit('mensaje-bienvenida', {
-    msg: 'Bienvenido al server',
-    fecha: new Date()
-  });
+  // socket.emit('mensaje-bienvenida', {
+  //   msg: 'Bienvenido al server',
+  //   fecha: new Date()
+  // });
 
-  // Escuchar el evento cliente
-  socket.on('mensaje-cliente', (data) => {
+  // Escuchar el evento del cliente
+  socket.on('mensaje-to-server', (data) => {
     console.log(data);
+
+    // io para emitir a todos los clientes
+    io.emit('mensaje-from-server', data);
   });
 });
 
