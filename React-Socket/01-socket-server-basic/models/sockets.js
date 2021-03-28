@@ -1,29 +1,26 @@
-
-
+// clase para llamarla en mi clase server y hacer la conexión con sockets
 class Sockets {
 
-  constructor(io) {
+    constructor(io) {
 
-    this.io = io;
+        this.io = io;
+        this.socketEvents();
 
-    this.socketEvents();
-  }
+    }
 
-  socketEvents() {
-    // On connection
-    this.io.on('connection', (socket) => {
+    socketEvents() {
+        // socket pasado en el callback equivale al cliente conectado
+        this.io.on('connection', (socket) => {
 
-      // Escuchar el evento del cliente
-      socket.on('mensaje-to-server', (data) => {
-        console.log(data);
+            // Escuchar el evento
+            socket.on('mensaje-to-server', (data) => {
+                console.log(data);
 
-        // io.emit para emitir a todos los clientes
-        this.io.emit('mensaje-from-server', data);
-      });
-
-    });
-  }
-
+                // Emitir a todos los clientes
+                this.io.emit('mensaje-from-server', data);
+            });
+        });
+    }
 }
 
 module.exports = Sockets;
