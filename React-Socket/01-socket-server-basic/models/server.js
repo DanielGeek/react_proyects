@@ -20,7 +20,7 @@ class Server {
         this.io = socketio(this.server, {
             cors: {
                 origin: "*",
-                methods: ["GET", "POST"]
+                methods: ["GET", "POST", "PUT", "DELETE"]
             }
         });
     }
