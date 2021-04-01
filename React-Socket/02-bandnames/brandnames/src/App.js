@@ -1,3 +1,5 @@
+import { BandAdd } from "./components/BandAdd";
+import { BandList } from "./components/BandList";
 
 function App() {
   return (
@@ -14,11 +16,11 @@ function App() {
       <hr />
       <div className="row">
         <div className="col-8">
-          BandList
+          <BandList />
         </div>
 
         <div className="col-4">
-          BandAdd
+          <BandAdd />
         </div>
       </div>
     </div>
