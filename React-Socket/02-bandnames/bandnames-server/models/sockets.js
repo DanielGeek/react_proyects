@@ -34,7 +34,7 @@ class Sockets {
                 this.io.emit('current-bands', this.bandList.getBands());
             })
 
-            // cambiar nombre de la banda
+            // cambiar nombre de las bandas
             socket.on('cambiar-nombre-banda', ({id, nombre}) => {
                 this.bandList.changeName(id, nombre);
                 this.io.emit('current-bands', this.bandList.getBands());
