@@ -40,6 +40,12 @@ class Sockets {
                 this.io.emit('current-bands', this.bandList.getBands());
             })
 
+            // agregar nueva banda
+            socket.on('nueva-manda', ({nombre}) => {
+                this.bandList.addBand(nombre);
+                this.io.emit('current-bands', this.bandList.getBands());
+            })
+
         });
     }
 
