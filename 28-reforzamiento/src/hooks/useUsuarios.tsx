@@ -23,8 +23,8 @@ export const useUsuarios = () => {
 
       if( resp.data.data.length > 0 ) {
         setUsuarios( resp.data.data );
-        paginaRef.current ++;
       } else {
+        paginaRef.current--;
         alert('No hay más registros');
       }
     } catch (error) {
@@ -32,9 +32,22 @@ export const useUsuarios = () => {
     }
   }
 
+  const paginaSiguiente = () => {
+    paginaRef.current ++;
+    cargarUsuarios();
+  }
+
+  const paginaAnterior = () => {
+    if ( paginaRef.current > 1 ) {
+      paginaRef.current --;
+      cargarUsuarios();
+    }
+  }
+
   return {
     usuarios,
-    cargarUsuarios
+    paginaSiguiente,
+    paginaAnterior,
   }
 
 }
