@@ -5,9 +5,7 @@ import './index.css';
 import { BandNamesApp } from './BandNamesApp';
 
 ReactDOM.render(
-    <React.StrictMode>
-      <BandNamesApp />
-    </React.StrictMode>,
-    document.getElementById('root')
+  <BandNamesApp />,
+  document.getElementById('root')
 );
 
