@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { SocketContext } from '../context/SocketContext';
 import { useSocket } from '../hooks/useSocket';
 
 export const BandAdd = () => {
 
   const [ valor, setValor ] = useState('');
-  const { socket } = useSocket('http://localhost:8080');
+  const { socket } = useContext(SocketContext);
 
   const onSubmit =(ev) => {
     ev.preventDefault();
