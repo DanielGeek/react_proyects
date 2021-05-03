@@ -6,28 +6,7 @@ import { BandList } from "../components/BandList";
 
 function HomePage() {
 
-  // const [ bands, setBands ] = useState([]);
-
   const { online } = useContext(SocketContext);
-
-  // useEffect(() => {
-  //   // recibo la data de mi emisor server
-  //   socket.on('current-bands', (bands) => {
-  //     setBands( bands );
-  //   })
-  // }, [socket])
-
-  // const votar = (id) => {
-  //   socket.emit('votar-banda', id);
-  // }
-
-  // const borrarBanda = (id) => {
-  //   socket.emit('borrar-banda', id);
-  // }
-
-  // const cambiarNombre = ( id, nombre ) => {
-  //   socket.emit('cambiar-nombre-banda', {id, nombre});
-  // }
 
   return (
     <div className="container">
@@ -46,16 +25,11 @@ function HomePage() {
       <hr />
       <div className="row">
         <div className="col-8">
-          {/* <BandList
-            data={bands}
-            votar={votar}
-            borrarBanda={borrarBanda}
-            cambiarNombre={cambiarNombre}
-          /> */}
+          <BandList />
         </div>
 
         <div className="col-4">
-          {/* <BandAdd /> */}
+          <BandAdd />
         </div>
       </div>
     </div>
