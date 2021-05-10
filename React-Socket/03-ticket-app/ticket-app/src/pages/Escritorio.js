@@ -1,9 +1,12 @@
 import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { Row, Col, Typography, Button, Divider } from 'antd';
+import { useHideMenu } from '../hooks/useHideMenu';
 
 const { Title, Text } = Typography;
 
 export const Escritorio = () => {
+
+  useHideMenu(false);
 
   const logout = () => {
     console.log('logout');
