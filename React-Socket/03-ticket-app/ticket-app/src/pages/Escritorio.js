@@ -1,5 +1,8 @@
 import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { Row, Col, Typography, Button, Divider } from 'antd';
+import { useState } from 'react';
+import { Redirect, useHistory } from 'react-router';
+import { getUserStorage } from '../helpers/getUsuarioStorage';
 import { useHideMenu } from '../hooks/useHideMenu';
 
 const { Title, Text } = Typography;
@@ -7,22 +10,29 @@ const { Title, Text } = Typography;
 export const Escritorio = () => {
 
   useHideMenu(false);
+  const [objUser] = useState(getUserStorage());
+  const history = useHistory();
 
   const logout = () => {
-    console.log('logout');
+    localStorage.clear();
+    history.replace('/ingresar');
   }
 
   const nextTicket = () => {
     console.log('nextTicket');
   }
 
+  if(!objUser.username || !objUser.desktop) {
+    return <Redirect to="/ingresar" />
+  }
+
   return (
     <>
       <Row>
         <Col span={ 20 }>
-            <Title level={ 2 }>Daniel</Title>
+            <Title level={ 2 }>{objUser.username}</Title>
             <Text>You are working in desktop number: </Text>
-            <Text type="success"> 5 </Text>
+            <Text type="success"> {objUser.desktop} </Text>
         </Col>
 
         <Col span={ 4 } align="right">
