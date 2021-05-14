@@ -1,9 +1,9 @@
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuid } = require('uuid');
 
 class Ticket {
 
   constructor(number) {
-    this.id       = uuidv4();
+    this.id       = uuid();
     this.number   = number;
     this.desktop  = null;
     this.agent    = null;
