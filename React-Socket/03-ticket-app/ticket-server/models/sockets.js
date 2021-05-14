@@ -13,6 +13,8 @@ class Sockets {
         // On connection
         this.io.on('connection', ( socket ) => {
 
+            console.log('cliente conectado');
+
             // Escuchar evento: mensaje-to-server
             socket.on('mensaje-to-server', ( data ) => {
                 console.log( data );
