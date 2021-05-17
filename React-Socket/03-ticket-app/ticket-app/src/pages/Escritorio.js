@@ -1,7 +1,8 @@
 import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { Row, Col, Typography, Button, Divider } from 'antd';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Redirect, useHistory } from 'react-router';
+import { SocketContext } from '../context/SocketContext';
 import { getUserStorage } from '../helpers/getUsuarioStorage';
 import { useHideMenu } from '../hooks/useHideMenu';
 
@@ -10,7 +11,10 @@ const { Title, Text } = Typography;
 export const Escritorio = () => {
 
   useHideMenu(false);
+
   const [objUser] = useState(getUserStorage());
+  const { socket } = useContext(SocketContext);
+  const [ ticket, setTicket ] = useState(null);
   const history = useHistory();
 
   const logout = () => {
@@ -19,7 +23,10 @@ export const Escritorio = () => {
   }
 
   const nextTicket = () => {
-    console.log('nextTicket');
+    console.log('objUser ', objUser);
+    socket.emit('next-ticket-working', objUser, (ticket) => {
+      setTicket(ticket);
+    });
   }
 
   if(!objUser.username || !objUser.desktop) {
@@ -50,18 +57,21 @@ export const Escritorio = () => {
 
     <Divider />
 
-    <Row>
+   {
+     ticket && (
+      <Row>
         <Col>
             <Text>You are attending the ticket number: </Text>
             <Text
                 style={{ fontSize: 30 }}
                 type="danger"
             >
-            55
+            {ticket.number}
             </Text>
         </Col>
-    </Row>
-
+      </Row>
+     )
+   }
 
     <Row>
         <Col offset={ 18 } span={ 6 } align="right">

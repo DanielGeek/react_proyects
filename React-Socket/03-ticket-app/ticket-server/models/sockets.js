@@ -23,6 +23,13 @@ class Sockets {
                 const newTicket = this.ticketList.createTicket();
                 callback(newTicket);
             })
+
+            socket.on('next-ticket-working', ({ username, desktop }, callback) => {
+
+                const yourTicket = this.ticketList.assigneedTicket( username, desktop)
+                console.log('yourTicket ', yourTicket)
+                callback(yourTicket);
+            })
         });
     }
 
