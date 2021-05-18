@@ -29,6 +29,8 @@ class Sockets {
                 const yourTicket = this.ticketList.assigneedTicket( username, desktop)
                 console.log('yourTicket ', yourTicket)
                 callback(yourTicket);
+
+                this.io.emit('ticket-assignee', this.ticketList.last13);
             })
         });
     }
