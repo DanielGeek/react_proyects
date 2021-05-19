@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import {Col, Row, Typography, List, Card, Tag, Divider} from 'antd';
 import { useHideMenu } from '../hooks/useHideMenu';
 import { SocketContext } from '../context/SocketContext';
+import { getLasts } from '../helpers/getLasts';
 
 const {Title, Text} = Typography;
 
@@ -23,6 +24,10 @@ export const Cola = () => {
       socket.off('ticket-assignee');
     }
   }, [socket])
+
+  useEffect(() => {
+    getLasts().then( setTickets );
+  }, []);
 
   return (
     <>
