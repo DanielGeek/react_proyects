@@ -1,6 +1,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
+import { v4 } from 'uuid';
 
 
 export const useMapbox = (puntoInicial) => {
@@ -9,8 +10,10 @@ export const useMapbox = (puntoInicial) => {
   const mapDiv = useRef();
   const setRef = useCallback( (node) => {
       mapDiv.current = node;
-    },[])
+    },[]);
 
+    // Referenc to markers
+    const markers = useRef({});
 
   const map = useRef();
   const [coords, setCoords] = useState(puntoInicial);
@@ -39,10 +42,32 @@ export const useMapbox = (puntoInicial) => {
       })
     });
 
-  }, [])
+  }, []);
+
+  // Add market when click
+  useEffect(() => {
+
+    map.current?.on('click', (ev) => {
+
+      const { lng, lat } = ev.lngLat;
+
+      const marker = new mapboxgl.Marker();
+      marker.id = v4(); //TODO: si el marcador ya tiene ID
+
+      marker
+          .setLngLat([ lng, lat ])
+          .addTo( map.current )
+          .setDraggable( true );
+
+          markers.current[ marker.id ] = marker;
+
+    });
+
+  }, []);
 
   return {
       coords,
+      markers,
       setRef
   }
 }
