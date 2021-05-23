@@ -18,6 +18,23 @@ export const useMapbox = (puntoInicial) => {
   const map = useRef();
   const [coords, setCoords] = useState(puntoInicial);
 
+  // function add markers
+  const addMarker = useCallback( (ev) => {
+
+    const { lng, lat } = ev.lngLat;
+
+    const marker = new mapboxgl.Marker();
+    marker.id = v4(); //TODO: si el marcador ya tiene ID
+
+    marker
+        .setLngLat([ lng, lat ])
+        .addTo( map.current )
+        .setDraggable( true );
+
+        markers.current[ marker.id ] = marker;
+
+  },[]);
+
   useEffect(() => {
 
     const mapObj = new mapboxgl.Map({
@@ -47,25 +64,12 @@ export const useMapbox = (puntoInicial) => {
   // Add market when click
   useEffect(() => {
 
-    map.current?.on('click', (ev) => {
+    map.current?.on('click', addMarker);
 
-      const { lng, lat } = ev.lngLat;
-
-      const marker = new mapboxgl.Marker();
-      marker.id = v4(); //TODO: si el marcador ya tiene ID
-
-      marker
-          .setLngLat([ lng, lat ])
-          .addTo( map.current )
-          .setDraggable( true );
-
-          markers.current[ marker.id ] = marker;
-
-    });
-
-  }, []);
+  }, [addMarker]);
 
   return {
+      addMarker,
       coords,
       markers,
       setRef
