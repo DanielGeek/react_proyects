@@ -33,6 +33,12 @@ export const useMapbox = (puntoInicial) => {
 
         markers.current[ marker.id ] = marker;
 
+        // listening moves of marker
+        marker.on('drag', ({ target }) => {
+          const { id } = target;
+          const { lng, lat } = target.getLngLat();
+        });
+
   },[]);
 
   useEffect(() => {
