@@ -4,6 +4,8 @@ import mapboxgl from 'mapbox-gl';
 import { v4 } from 'uuid';
 
 
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsZ2VlayIsImEiOiJja291eHg4NGQwMm83MndwdWx3c3JwMm80In0.DuKBoxCaNqDsaVhMuyZvPA';
+
 export const useMapbox = (puntoInicial) => {
 
   // Referenc to div of map
@@ -12,8 +14,12 @@ export const useMapbox = (puntoInicial) => {
       mapDiv.current = node;
     },[]);
 
-    // Referenc to markers
-    const markers = useRef({});
+  // Referenc to markers
+  const markers = useRef({});
+
+  // Rxjs
+  const movesMarkers = useRef( new Subject() );
+  const newMarker = useRef( new Subject() );
 
   const map = useRef();
   const [coords, setCoords] = useState(puntoInicial);
@@ -32,6 +38,12 @@ export const useMapbox = (puntoInicial) => {
         .setDraggable( true );
 
         markers.current[ marker.id ] = marker;
+
+        newMarker.current.next({
+          id: marker.id,
+          lng,
+          lat
+        });
 
         // listening moves of marker
         marker.on('drag', ({ target }) => {
@@ -78,6 +90,7 @@ export const useMapbox = (puntoInicial) => {
       addMarker,
       coords,
       markers,
+      newMarker$: newMarker.current,
       setRef
   }
 }
