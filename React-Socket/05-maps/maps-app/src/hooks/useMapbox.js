@@ -3,6 +3,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { v4 } from 'uuid';
 
+import { Subject } from 'rxjs';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsZ2VlayIsImEiOiJja291eHg4NGQwMm83MndwdWx3c3JwMm80In0.DuKBoxCaNqDsaVhMuyZvPA';
 
@@ -49,6 +50,7 @@ export const useMapbox = (puntoInicial) => {
         marker.on('drag', ({ target }) => {
           const { id } = target;
           const { lng, lat } = target.getLngLat();
+          movesMarkers.current.next({id, lng, lat});
         });
 
   },[]);
@@ -91,6 +93,7 @@ export const useMapbox = (puntoInicial) => {
       coords,
       markers,
       newMarker$: newMarker.current,
+      movesMarkers$: movesMarkers.current,
       setRef
   }
 }

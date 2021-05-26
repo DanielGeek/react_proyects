@@ -9,13 +9,19 @@ const puntoInicial = {
 
 export const MapPage = () => {
 
-  const { setRef, coords, newMarker$ } = useMapbox( puntoInicial );
+  const { setRef, coords, newMarker$, movesMarkers$ } = useMapbox( puntoInicial );
 
   useEffect(() => {
     newMarker$.subscribe( marker => {
       // TODO: new marker emit
     });
   }, [newMarker$]);
+
+  useEffect(() => {
+    movesMarkers$.subscribe( marker => {
+      console.log(marker.id);
+    });
+  }, [movesMarkers$]);
 
   return (
     <>
