@@ -37,9 +37,9 @@ export const MapPage = () => {
   // Listen new markers
   useEffect(() => {
     socket.on('marker-new', (marker) => {
-      console.log('marker ', marker);
+      addMarker(marker, marker.id);
     });
-  }, [socket]);
+  }, [socket, addMarker]);
 
   return (
     <>
