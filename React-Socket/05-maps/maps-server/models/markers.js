@@ -6,7 +6,6 @@ class Markers {
   }
 
   addMarker(marker) {
-    console.log('marker en admarker', marker)
     this.actives[marker.id] = marker;
     return marker;
   }

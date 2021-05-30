@@ -10,7 +10,7 @@ const puntoInicial = {
 
 export const MapPage = () => {
 
-  const { setRef, coords, newMarker$, movesMarkers$ } = useMapbox( puntoInicial );
+  const { setRef, coords, newMarker$, movesMarkers$, addMarker } = useMapbox( puntoInicial );
   const { socket } = useContext( SocketContext );
 
   useEffect(() => {
@@ -24,6 +24,15 @@ export const MapPage = () => {
       console.log(marker.id);
     });
   }, [movesMarkers$]);
+
+  // Listen markers existent
+  useEffect(() => {
+    socket.on('markers-actives', (markers) => {
+      for( const key of Object.keys( markers )) {
+        addMarker(markers[key], key);
+      }
+    });
+  }, [socket, addMarker]);
 
   // Listen new markers
   useEffect(() => {
