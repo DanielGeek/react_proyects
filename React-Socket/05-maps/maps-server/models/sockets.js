@@ -24,7 +24,10 @@ class Sockets {
                 socket.broadcast.emit('marker-new', marker);
             });
 
-            // TODO: marker-update
+            socket.on('marker-update', (marker) => {
+                this.markers.updateMarker(marker);
+                socket.broadcast.emit('marker-update', marker);
+            });
 
 
         });
