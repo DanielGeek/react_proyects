@@ -6,6 +6,7 @@ const path     = require('path');
 
 const Sockets  = require('./sockets');
 const { dbConnection } = require('../database/config');
+const router = require('../router/auth');
 
 class Server {
 
@@ -27,6 +28,11 @@ class Server {
     middlewares() {
         // Desplegar el directorio público
         this.app.use( express.static( path.resolve( __dirname, '../public' ) ) );
+
+        // TODO: CORS
+
+        // API Ednpoints
+        this.app.use('/api/login', require('../router/auth'));
     }
 
     // Esta configuración se puede tener aquí o como propieda de clase
