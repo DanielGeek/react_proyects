@@ -9,7 +9,7 @@ const UserSchema = Schema({
     email: {
       type: String,
       required: true,
-      uniquie: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -17,7 +17,7 @@ const UserSchema = Schema({
     },
     online: {
       type: Boolean,
-      required: false,
+      default: false,
     },
 });
 
