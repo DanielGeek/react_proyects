@@ -1,6 +1,7 @@
 import React from 'react';
 import { InboxPeople } from '../components/InboxPeople';
 import { Message } from '../components/Message';
+import { ChatSelect } from '../components/ChatSelect';
 
 import '../css/chat.css';
 
@@ -11,7 +12,11 @@ export const ChatPage = () => {
 
                 <InboxPeople />
 
-                <Message />
+                {
+                    (true)
+                        ? <Message />
+                        : <ChatSelect />
+                }
 
             </div>
 
