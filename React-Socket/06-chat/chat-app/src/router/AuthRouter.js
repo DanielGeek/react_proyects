@@ -10,7 +10,7 @@ export const AuthRouter = () => {
   return (
     <div className="limiter">
 		  <div className="container-login100">
-			  <div class="wrap-login100 p-t-50 p-b-90">
+			  <div className="wrap-login100 p-t-50 p-b-90">
           <Switch>
             <Route exact path="/auth/login" component={ LoginPage } />
             <Route exact path="/auth/register" component={ RegisterPage } />
