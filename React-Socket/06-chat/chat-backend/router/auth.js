@@ -12,16 +12,16 @@ const router = Router();
 
 // Create new users
 router.post('/new', [
-    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('password', 'El password es obligatorio').not().isEmpty(),
-    check('email', 'El email es obligatorio').isEmail(),
+    check('name', 'The name is required').not().isEmpty(),
+    check('password', 'The password is required').not().isEmpty(),
+    check('email', 'The email is required').isEmail(),
     campsValidator
 ], createUser);
 
 // Login
 router.post('/', [
-    check('email', 'El email es obligatorio').isEmail(),
-    check('password', 'El password es obligatorio').not().isEmpty(),
+    check('email', 'The email is required').isEmail(),
+    check('password', 'The password is required').not().isEmpty(),
     campsValidator
 ], loginUser);
 

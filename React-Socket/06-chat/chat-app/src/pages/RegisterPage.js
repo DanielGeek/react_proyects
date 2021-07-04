@@ -9,7 +9,7 @@ export const RegisterPage = () => {
         </span>
 
         <div className="wrap-input100 validate-input mb-3">
-          <input className="input100" type="text" name="name" placeholder="Nombre" />
+          <input className="input100" type="text" name="name" placeholder="Name" />
           <span className="focus-input100"></span>
         </div>
 
