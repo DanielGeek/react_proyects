@@ -30,6 +30,8 @@ export const AuthProvider = ({ children }) => {
         name: user.name,
         email: user.email,
       });
+
+      console.log('Autenticate!');
     }
 
     return resp.ok;
