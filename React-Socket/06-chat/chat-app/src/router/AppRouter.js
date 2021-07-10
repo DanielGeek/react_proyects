@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 import { ChatPage } from '../pages/ChatPage';
 import { AuthRouter } from './AuthRouter';
+import { PublicRoute } from './PublicRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 export const AppRouter = () => {
 
@@ -25,8 +27,9 @@ export const AppRouter = () => {
       <Router>
         <div>
           <Switch>
-            <Route path="/auth" component={ AuthRouter } />
-            <Route exact path="/" component={ ChatPage } />
+            {/* <Route path="/auth" component={ AuthRouter } /> */}
+            <PublicRoute isAuthenticated={ auth.logged } path="/auth" component={ AuthRouter } />
+            <PrivateRoute isAuthenticated={ auth.logged } exact path="/" component={ ChatPage } />
 
             <Redirect to="/" />
           </Switch>

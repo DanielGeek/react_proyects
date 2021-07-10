@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
 
     if( !token ) {
-      return setAuth({
+      setAuth({
           uid: null,
           checking: false,
           logged: false,
