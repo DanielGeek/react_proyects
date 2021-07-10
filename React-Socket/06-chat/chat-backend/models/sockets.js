@@ -29,6 +29,9 @@ class Sockets {
             // TODO: Disconnect
 
             // TODO: emit all user connected
+            socket.on('disconnect', () => {
+                console.log('Client disconected');
+            })
 
         });
     }
