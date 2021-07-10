@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useState } from "react";
-import { fetchSinToken } from '../helpers/fetch';
+import { fetchWithOutToken, fetchWithToken } from '../helpers/fetch';
 
 export const AuthContext = createContext();
 
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async ( email, password ) => {
 
-    const resp = await fetchSinToken('login', { email, password }, 'POST');
+    const resp = await fetchWithOutToken('login', { email, password }, 'POST');
 
     if( resp.ok ) {
       localStorage.setItem('token', resp.token );
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async(name, email, password) => {
 
-    const resp = await fetchSinToken('login/new', { name, email, password }, 'POST');
+    const resp = await fetchWithOutToken('login/new', { name, email, password }, 'POST');
 
     if( resp.ok ) {
       localStorage.setItem('token', resp.token );
@@ -62,12 +62,49 @@ export const AuthProvider = ({ children }) => {
 
   }
 
-  const verifyToken = useCallback(
-    () => {
+  const verifyToken = useCallback( async() => {
+    const token = localStorage.getItem('token');
 
-    },
-    [],
-  )
+    if( !token ) {
+      return setAuth({
+          uid: null,
+          checking: false,
+          logged: false,
+          name: null,
+          email: null,
+      })
+
+      return false
+    }
+
+    const resp = await fetchWithToken('login/renew');
+    if( resp.ok ) {
+      localStorage.setItem('token', resp.token );
+      const { user } = resp;
+
+      setAuth({
+        uid: user.uid,
+        checking: false,
+        logged: true,
+        name: user.name,
+        email: user.email,
+      });
+
+      console.log('Autenticate!');
+      return true;
+    } else {
+      setAuth({
+        uid: null,
+        checking: false,
+        logged: false,
+        name: null,
+        email: null,
+      });
+
+      return false;
+    }
+
+  }, [])
 
   const logout = () => {
 
