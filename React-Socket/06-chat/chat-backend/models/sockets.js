@@ -12,6 +12,9 @@ class Sockets {
     socketEvents() {
         // On connection
         this.io.on('connection', ( socket ) => {
+
+            console.log('client connect');
+
             // TODO: validate JWT
             // is not valid token. disconect
 

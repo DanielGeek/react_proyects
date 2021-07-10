@@ -3,8 +3,7 @@ import { AuthContext } from './../auth/AuthContext';
 import { Redirect } from 'react-router';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
+  Switch
 } from 'react-router-dom';
 import { ChatPage } from '../pages/ChatPage';
 import { AuthRouter } from './AuthRouter';
