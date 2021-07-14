@@ -16,7 +16,8 @@ export const ChatProvider = ({ children }) => {
 
   return (
         <ChatContext.Provider value={{
-          msg: 'Hola Mundo'
+          chatState,
+          dispatch
         }}>
           { children }
         </ChatContext.Provider>

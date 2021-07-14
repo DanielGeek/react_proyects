@@ -1,5 +1,5 @@
 const { verifyJWT } = require("../helpers/jwt");
-const { userConnected, userDisconnected } = require("../controllers/sockets");
+const { userConnected, userDisconnected, getUsers } = require("../controllers/sockets");
 
 
 class Sockets {
@@ -32,6 +32,7 @@ class Sockets {
             // TODO: user actived
 
             // TODO: Emit all users online
+            this.io.emit('list-users', await getUsers());
 
             // TODO: Socket join, uid
 
