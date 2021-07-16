@@ -24,7 +24,6 @@ class Sockets {
 
             const user = await userConnected( uid );
 
-            console.log('client connect', user.name);
 
             // TODO: validate JWT
             // is not valid token. disconect
