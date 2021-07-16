@@ -25,10 +25,10 @@ export const SocketProvider = ({ children }) => {
 
     // Listen users changes
     useEffect(() => {
-        socket?.on('list-users', (users) => {
-            console.log(users);
+        socket?.on("list-users", (users) => {
+            console.log('user', users);
         })
-    }, [socket]);
+    }, [ socket ]);
 
     return (
         <SocketContext.Provider value={{ socket, online }}>

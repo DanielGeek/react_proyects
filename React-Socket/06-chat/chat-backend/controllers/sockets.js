@@ -23,9 +23,9 @@ const userDisconnected = async( uid ) => {
 
 const getUsers = async() => {
 
-  const users = User
+  const users = await User
     .find()
-    .sort('online');
+    .sort('-online');
 
   return users;
 }
