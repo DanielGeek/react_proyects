@@ -43,6 +43,7 @@ class Sockets {
             socket.on('disconnect', async() => {
                 console.log('Client disconected', uid);
                 await userDisconnected( uid );
+                this.io.emit('list-users', await getUsers());
             })
 
         });
