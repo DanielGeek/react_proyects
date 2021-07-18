@@ -22,7 +22,10 @@ class Sockets {
                 return socket.disconnect();
             }
 
-            const user = await userConnected( uid );
+            await userConnected( uid );
+
+            // Join user to socket room
+            socket.join( uid );
 
 
             // TODO: validate JWT
@@ -36,6 +39,9 @@ class Sockets {
             // TODO: Socket join, uid
 
             // TODO: Listen when the client send a message
+            socket.on('personal-message', ( payload ) => {
+                console.log(payload);
+            });
 
             // TODO: Disconnect
 
