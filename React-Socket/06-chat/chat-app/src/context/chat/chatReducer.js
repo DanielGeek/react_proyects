@@ -11,8 +11,6 @@ import { types } from "../../types/types";
 
 export const chatReducer = ( state, action ) => {
 
-  console.log(action);
-
   switch ( action.type ) {
 
     case types.usersLoaded:
@@ -22,12 +20,24 @@ export const chatReducer = ( state, action ) => {
       }
 
     case types.activedChat:
-        if ( state.activeChat === action.payload ) return state;
+      if ( state.activeChat === action.payload ) return state;
 
       return {
         ...state,
         activeChat: action.payload,
         messages: []
+      }
+
+    case types.newMessage:
+      if ( state.activeChat === action.payload.from ||
+           state.activeChat === action.payload.to
+        ) {
+          return {
+            ...state,
+            messages : [ ...state.messages , action.payload ]
+          }
+      } else {
+        return state;
       }
 
     default:
