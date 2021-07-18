@@ -41,7 +41,8 @@ class Sockets {
             // TODO: Listen when the client send a message
             socket.on('personal-message', async( payload ) => {
                 const message = await saveMessages( payload );
-                console.log(message);
+                this.io.to( payload.to ).emit('personal-message', message );
+                this.io.to( payload.from ).emit('personal-message', message );
             });
 
             // TODO: Disconnect
