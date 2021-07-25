@@ -13,8 +13,11 @@ export const Message = () => {
   return (
       <div className="mesgs">
 
-          {/* <!-- Historia inicio --> */}
-          <div className="msg_history">
+          {/* <!-- start History  --> */}
+          <div
+              id="messages"
+              className="msg_history"
+          >
 
           {
             chatState.messages.map( msg => (
@@ -25,7 +28,7 @@ export const Message = () => {
           }
 
           </div>
-          {/* <!-- Historia Fin --> */}
+          {/* <!-- End History --> */}
 
           <SendMessage />
 
