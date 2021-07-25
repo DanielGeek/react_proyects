@@ -6,7 +6,7 @@ import { ChatContext } from './chat/ChatContext';
 import { useSocket } from '../hooks/useSocket'
 
 import { types } from '../types/types';
-import { scrollToBottom, scrollToBottomAnimated } from './../helpers/scrollToBottom';
+import { scrollToBottomAnimated } from './../helpers/scrollToBottom';
 
 export const SocketContext = createContext();
 

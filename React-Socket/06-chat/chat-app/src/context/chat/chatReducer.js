@@ -13,6 +13,14 @@ export const chatReducer = ( state, action ) => {
 
   switch ( action.type ) {
 
+    case types.ClosedSession:
+      return {
+          uid: '', // UID user to send message
+          activeChat: null,
+          users: [], // All users from bd
+          messages: [], // chat selected
+      }
+
     case types.usersLoaded:
       return {
         ...state,

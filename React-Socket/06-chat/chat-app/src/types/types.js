@@ -4,5 +4,6 @@ export const types = {
   usersLoaded: '[Chat] Users Loaded',
   activedChat: '[Chat] Actived Chat',
   newMessage: '[Chat] New Message',
-  loadedMessages: '[Chat] Load Messages'
+  loadedMessages: '[Chat] Load Messages',
+  closedSession: '[Chat] Closed session'
 }
