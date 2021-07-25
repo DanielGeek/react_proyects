@@ -30,7 +30,7 @@ export const chatReducer = ( state, action ) => {
 
     case types.newMessage:
       if ( state.activeChat === action.payload.from ||
-           state.activeChat === action.payload.to
+            state.activeChat === action.payload.to
         ) {
           return {
             ...state,
@@ -38,6 +38,12 @@ export const chatReducer = ( state, action ) => {
           }
       } else {
         return state;
+      }
+
+    case types.loadedMessages:
+      return {
+        ...state,
+        messages: [ ...action.payload ]
       }
 
     default:
