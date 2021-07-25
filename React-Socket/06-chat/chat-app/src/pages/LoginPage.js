@@ -67,7 +67,7 @@ export const LoginPage = () => {
           onSubmit={ onSubmit }
       >
         <span className="login100-form-title mb-3">
-          Chat - Ingreso
+          Chat - Login
         </span>
 
         <div className="wrap-input100 validate-input mb-3">
@@ -108,13 +108,13 @@ export const LoginPage = () => {
                 readOnly
           />
             <label className="label-checkbox100">
-              Recordarme
+              Remember me
             </label>
           </div>
 
           <div className="col text-right">
             <Link to="/auth/register" className="txt1">
-              Nueva cuenta?
+              New account?
             </Link>
           </div>
         </div>
@@ -125,7 +125,7 @@ export const LoginPage = () => {
               className="login100-form-btn"
               disabled={ !allOk() }
               >
-            Ingresar
+              Login
           </button>
         </div>
 			</form>

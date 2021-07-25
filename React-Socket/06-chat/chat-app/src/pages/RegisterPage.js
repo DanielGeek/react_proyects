@@ -48,7 +48,7 @@ export const RegisterPage = () => {
           onSubmit={ onSubmit }
       >
         <span className="login100-form-title mb-3">
-          Chat - Registro
+          Chat - Register
         </span>
 
         <div className="wrap-input100 validate-input mb-3">
@@ -92,7 +92,7 @@ export const RegisterPage = () => {
         <div className="row mb-3">
           <div className="col text-right">
             <Link to="/auth/login" className="txt1">
-              Ya tienes cuenta?
+              You already have an accountYa tienes cuenta?
             </Link>
           </div>
         </div>
@@ -103,7 +103,7 @@ export const RegisterPage = () => {
               className="login100-form-btn"
               disabled={ !allOk() }
           >
-            Crear cuenta
+            Create Account
           </button>
         </div>
       </form>
