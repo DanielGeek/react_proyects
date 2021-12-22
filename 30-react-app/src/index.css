@@ -28,6 +28,9 @@ nav {
   text-align: center;
   width: 250px;
 }
+nav::-webkit-scrollbar {
+  display: none;
+}
 nav ul {
   align-items: center;
   display: flex;
