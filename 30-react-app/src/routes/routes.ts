@@ -4,7 +4,7 @@ import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazyload/pages";
 
 interface Route {
   path: string;
-  Component: () => JSX.Element;
+  component: () => JSX.Element;
   name: string;
   children?: Route[]
 }
@@ -12,19 +12,19 @@ interface Route {
 export const routes: Route[] = [
   {
     path: '/lazy1',
-    Component: LazyPage1,
+    component: LazyPage1,
     name: 'LazyPage-1',
 
   },
   {
     path: '/lazy2',
-    Component: LazyPage2,
+    component: LazyPage2,
     name: 'LazyPage-2',
 
   },
   {
     path: '/lazy3',
-    Component: LazyPage3,
+    component: LazyPage3,
     name: 'LazyPage-3',
 
   },
