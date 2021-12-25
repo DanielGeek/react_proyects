@@ -19,7 +19,9 @@ code {
   display: flex;
   flex-direction: row;
 }
-
+nav::-webkit-scrollbar {
+  display: none;
+}
 nav {
   background-color: #363a45;
   height: 100vh;
