@@ -20,18 +20,14 @@ export const ShoppingPage = () => {
       }}>
         <ProductCard product={ product }>
           <ProductCard.Image />
-          <ProductCard.Title title={ '' } />
-          <ProductCard.Buttons increaseBy={function (value: number): void {
-            throw new Error('Function not implemented.');
-          } } counter={0} />
+          <ProductCard.Title title={ 'Hola Mundo' } />
+          <ProductCard.Buttons />
         </ProductCard>
-        {/* <ProductCard product={ product }>
+        <ProductCard product={ product }>
           <ProductImage />
           <ProductTitle title={ '' } />
-          <ProductButtons increaseBy={function (value: number): void {
-            throw new Error('Function not implemented.');
-          } } counter={0} />
-        </ProductCard> */}
+          <ProductButtons />
+        </ProductCard>
       </div>
     </div>
   )
