@@ -19,7 +19,9 @@ code {
   display: flex;
   flex-direction: row;
 }
-
+nav::-webkit-scrollbar {
+  display: none;
+}
 nav {
   background-color: #363a45;
   height: 100vh;
@@ -27,9 +29,6 @@ nav {
   overflow-y: scroll;
   text-align: center;
   width: 250px;
-}
-nav::-webkit-scrollbar {
-  display: none;
 }
 nav ul {
   align-items: center;
