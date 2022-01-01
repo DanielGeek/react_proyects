@@ -1,10 +1,5 @@
 import { ReactElement } from 'react';
-
-
-export interface ProductCardProps {
-    product: Product;
-    children?: ReactElement | ReactElement[] 
-}
+import { Props as ProductCardProps } from '../components/ProductCard';
 
 export interface Product {
     id: string;
