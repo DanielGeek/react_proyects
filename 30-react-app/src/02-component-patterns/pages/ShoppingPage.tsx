@@ -26,6 +26,25 @@ export const ShoppingPage = () => {
 
     const [ shoppingCart, setshoppingCart ] = useState<{ [key:string]: ProductInCart}>({});
 
+    const onProductCountChange = ({ count, product }: { count:number, product: Product } ) => {
+        // console.log(shoppingCart);
+
+        setshoppingCart( oldShoppingCart => {
+
+            if( count === 0 ) {
+                const { [product.id]: toDelete, ...rest } = oldShoppingCart;
+                console.log( toDelete ); // Obj with data
+                console.log(rest); // Clean obj
+                return rest;
+            }
+
+            return {
+                ...oldShoppingCart,
+                [ product.id ]: { ...product, count }
+            }
+        })
+    }
+
     return (
         <div>
             <h1>Shopping Store</h1>
@@ -42,6 +61,7 @@ export const ShoppingPage = () => {
                             key={ product.id }
                             product={ product }
                             className="bg-dark text-white"
+                            onChange={ onProductCountChange }
                         >
                             <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
                             <ProductTitle className="text-bold" />
@@ -57,6 +77,7 @@ export const ShoppingPage = () => {
                     product={ product2 }
                     className="bg-dark text-white"
                     style={{ width: '100px' }}
+                    onChange={ onProductCountChange }
                 >
                     <ProductImage className="custom-image" style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }} />
                     <ProductButtons className="custom-buttons" />
@@ -70,6 +91,14 @@ export const ShoppingPage = () => {
                     <ProductButtons className="custom-buttons" />
                 </ProductCard>
             </div>
+
+            <div>
+                <code>
+                    { JSON.stringify(shoppingCart, null, 5)}
+                </code>
+            </div>
+
         </div>
+
     )
 }
