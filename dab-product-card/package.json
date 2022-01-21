@@ -7,6 +7,11 @@
     "dist",
     "src"
   ],
+  "repository": {
+    "url": "https://github.com/DanielGeek/react_proyectos/tree/master/dab-product-card",
+    "type": "git"
+  },
+  "homepage": "https://www.linkedin.com/in/daniel-angel",
   "engines": {
     "node": ">=10"
   },
@@ -14,6 +19,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
+    "test:watch": "tsdx test --watch",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
@@ -60,5 +66,26 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4"
+  },
+  "keywords": [
+    "product",
+    "card",
+    "daniel",
+    "angel",
+    "barreto"
+  ],
+  "dependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@types/react-test-renderer": "^17.0.1",
+    "babel-jest": "^27.4.6",
+    "jest": "^27.4.7",
+    "react-test-renderer": "^17.0.2"
+  },
+  "jest":{
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    }
   }
 }
