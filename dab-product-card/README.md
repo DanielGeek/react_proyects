@@ -11,7 +11,6 @@ import { ProductCard, ProductImage, ProductTitle, ProductButtons } from 'dab-pro
 
 ```
 <ProductCard
-    key={ product.id }
     product={ product }
     initialValues={{
         count: 6,
