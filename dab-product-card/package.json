@@ -7,6 +7,11 @@
     "dist",
     "src"
   ],
+  "repository": {
+    "url": "https://github.com/DanielGeek/react_proyectos/tree/master/dab-product-card",
+    "type": "git"
+  },
+  "homepage": "https://www.linkedin.com/in/daniel-angel",
   "engines": {
     "node": ">=10"
   },
@@ -60,5 +65,12 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4"
-  }
+  },
+  "keywords": [
+    "product",
+    "card",
+    "daniel",
+    "angel",
+    "barreto"
+  ]
 }
