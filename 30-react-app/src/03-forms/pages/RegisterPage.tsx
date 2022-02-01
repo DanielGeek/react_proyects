@@ -1,29 +1,39 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import '../styles/styles.css';
 
 export const RegisterPage = () => {
 
   const [ registerData, setRegisterData ] = useState({
-    name: 'Daniel',
-    email: 'daniel@gmail.com',
-    password1: '123456',
-    password2: '123456',
+    name: '',
+    email: '',
+    password1: '',
+    password2: '',
   });
 
   const { name, email, password1, password2 } = registerData;
 
   const onChange = (event:ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
+    setRegisterData( prev => ({
+      ...prev,
+      [event.target.name]: event.target.value
+    }))
+  }
+
+  const onSubmit = ( event: FormEvent<HTMLFormElement> ) => {
+    event.preventDefault();
+
+    console.log( registerData );
   }
 
   return (
     <div>
       <h1>Register Page</h1>
 
-      <form>
+      <form noValidate onSubmit={ onSubmit }>
         <input
           type="text"
           placeholder="Name"
+          name="name"
           value={ name }
           onChange={ onChange }
           />
@@ -31,6 +41,7 @@ export const RegisterPage = () => {
           <input
           type="email"
           placeholder="Email"
+          name="email"
           value={ email }
           onChange={ onChange }
           />
@@ -38,6 +49,7 @@ export const RegisterPage = () => {
           <input
           type="password"
           placeholder="Password"
+          name="password1"
           value={ password1 }
           onChange={ onChange }
           />
@@ -45,6 +57,7 @@ export const RegisterPage = () => {
           <input
           type="password"
           placeholder="Repeat Password"
+          name="password2"
           value={ password2 }
           onChange={ onChange }
           />
