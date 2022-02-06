@@ -16,13 +16,13 @@ export const FormikBasePage = () => {
 
     if( !firstName ) {
       errors.firstName = 'Required';
-    } else if ( firstName.length > 15 ) {
+    } else if ( firstName.length >= 15 ) {
       errors.firstName = 'Must be 15 characters or less';
     }
 
     if( !lastName ) {
       errors.lastName = 'Required';
-    } else if ( lastName.length > 15 ) {
+    } else if ( lastName.length >= 10 ) {
       errors.lastName = 'Must be 15 characters or less';
     }
 
@@ -36,7 +36,7 @@ export const FormikBasePage = () => {
 
   }
 
-  const { handleChange, values, handleSubmit } = useFormik({
+  const { handleChange, values, handleSubmit, errors, touched, handleBlur } = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -57,29 +57,31 @@ export const FormikBasePage = () => {
         <input
             type="text"
             name="firstName"
+            onBlur={ handleBlur }
             onChange={ handleChange }
             value={ values.firstName }
         />
-        <span>First name is required</span>
+        { touched.firstName && errors.firstName &&  <span>{ errors.firstName }</span> }
 
         <label htmlFor="lastName">Last Name</label>
         <input
             type="text"
             name="lastName"
+            onBlur={ handleBlur }
             onChange={ handleChange }
             value={ values.lastName }
         />
-        <span>Last name is required</span>
+        { touched.lastName && errors.lastName &&  <span>{ errors.lastName }</span> }
 
         <label htmlFor="email">Email Address</label>
         <input
             type="email"
             name="email"
+            onBlur={ handleBlur }
             onChange={ handleChange }
             value={ values.email }
         />
-        <span>Email is required</span>
-        <span>Check for an valid email format</span>
+        { touched.email && errors.email &&  <span>{ errors.email }</span> }
 
         <button type="submit">Submit</button>
 
