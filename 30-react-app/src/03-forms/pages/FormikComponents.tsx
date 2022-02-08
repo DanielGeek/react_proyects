@@ -31,7 +31,7 @@ export const FormikComponents = () => {
                           .email('Email don`t have a correct format')
                           .required('Required'),
             terms: Yup.boolean()
-                      .oneOf([true], 'Debe de aceptar las condiciones'),
+                      .oneOf([true], 'You must accept the conditions'),
             jobType: Yup.string()
                         .notOneOf(['it-jr'], 'This option is not allowed')
                         .required('Required')

@@ -1,6 +1,7 @@
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
+import { MyCheckbox } from '../components/MyCheckbox';
 import { MyTextInput } from '../components/MyTextInput';
 import { MySelect } from '../components/MySelect';
 
@@ -34,7 +35,7 @@ export const FormikAbstractation = () => {
                           .email('Email don`t have a correct format')
                           .required('Required'),
             terms: Yup.boolean()
-                      .oneOf([true], 'Debe de aceptar las condiciones'),
+                      .oneOf([true], 'You must accept the conditions'),
             jobType: Yup.string()
                         .notOneOf(['it-jr'], 'This option is not allowed')
                         .required('Required')
@@ -70,11 +71,7 @@ export const FormikAbstractation = () => {
                     <option value="it-jr">It Junior</option>
                 </MySelect>
 
-                <label>
-                  <Field name="terms" type="checkbox" />
-                  Terms and conditions
-                </label>
-                <ErrorMessage name="terms" component="span" />
+                <MyCheckbox label="Termns & Conditions" name="terms" />
 
                 <button type="submit">Submit</button>
 
