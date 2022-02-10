@@ -5,11 +5,15 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { FormikAbstractation } from '../03-forms/pages/FormikAbstractation';
-import { FormikBasePage } from '../03-forms/pages/FormikBasicPage';
-import { FormikComponents } from '../03-forms/pages/FormikComponents';
-import { FormikYupPage } from '../03-forms/pages/FormikYupPage';
-import { RegisterPage } from '../03-forms/pages/RegisterPage';
+import {
+  FormikAbstractation,
+  FormikBasePage,
+  FormikComponents,
+  FormikYupPage,
+  RegisterPage,
+  RegisterFormitkPage
+} from '../03-forms/pages';
+
 
 import logo from '../logo.svg';
 
@@ -36,7 +40,10 @@ export const Navigation = () => {
               <NavLink to="/formik-abstractation" activeClassName="nav-active" exact>Formik Abstractation</NavLink>
             </li>
             <li>
-              <NavLink to="/users" activeClassName="nav-active" exact>Users</NavLink>
+              <NavLink to="/formik-register" activeClassName="nav-active" exact>Register Formik</NavLink>
+            </li>
+            <li>
+              <NavLink to="/home" activeClassName="nav-active" exact>Home</NavLink>
             </li>
           </ul>
         </nav>
@@ -59,8 +66,11 @@ export const Navigation = () => {
           <Route path="/formik-abstractation">
             <FormikAbstractation />
           </Route>
-          <Route path="/users">
-            <h1>Users</h1>
+          <Route path="/formik-register">
+            <RegisterFormitkPage />
+          </Route>
+          <Route path="/home">
+            <h1>Homo</h1>
           </Route>
         </Switch>
       </div>
