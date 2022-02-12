@@ -29,4 +29,9 @@ describe('when the form is mounted', () => {
     // screen.debug();
   });
 
+  it('should exists the submit button', () => {
+    setup();
+    expect(screen.getByRole('button', {name: /submit/i})).toBeInTheDocument();
+  })
+
 });
