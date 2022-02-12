@@ -4,11 +4,29 @@ import { screen, render } from '@testing-library/react';
 
 import { Form } from './form';
 
-describe('when the form is mounted', () => {
-  it('there must be a create product form page', () => {
-    render(<Form />);
+const setup = () => render(<Form />);
 
+
+describe('when the form is mounted', () => {
+  // beforeEach(() => render(<Form />)) // bad practice
+
+  it('there must be a create product form page', () => {
+    setup();
     expect(screen.queryByRole('heading', { name: /create product/i}),
     ).toBeInTheDocument();
   });
+
+  it('should exists the fields: name, size, type (electronic, furniture, clothing', () => {
+    setup();
+    expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/size/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/type/i)).toBeInTheDocument();
+
+    expect(screen.getByText(/electronic/i)).toBeInTheDocument();
+    expect(screen.getByText(/furniture/i)).toBeInTheDocument();
+    expect(screen.getByText(/clothing/i)).toBeInTheDocument();
+
+    // screen.debug();
+  });
+
 });
