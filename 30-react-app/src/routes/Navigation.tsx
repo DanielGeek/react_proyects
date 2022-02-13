@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import {
+  DynamicForm,
   FormikAbstractation,
   FormikBasePage,
   FormikComponents,
@@ -43,7 +44,7 @@ export const Navigation = () => {
               <NavLink to="/formik-register" activeClassName="nav-active" exact>Register Formik</NavLink>
             </li>
             <li>
-              <NavLink to="/home" activeClassName="nav-active" exact>Home</NavLink>
+              <NavLink to="/dynamic-form" activeClassName="nav-active" exact>Dynamic Form</NavLink>
             </li>
           </ul>
         </nav>
@@ -68,6 +69,9 @@ export const Navigation = () => {
           </Route>
           <Route path="/formik-register">
             <RegisterFormikPage />
+          </Route>
+          <Route path="/dynamic-form">
+            <DynamicForm />
           </Route>
           <Route path="/home">
             <h1>Homo</h1>
