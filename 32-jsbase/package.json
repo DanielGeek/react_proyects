@@ -1,0 +1,14 @@
+{
+  "name": "32-jsbase",
+  "version": "1.0.0",
+  "description": "Unit Test with Jest",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "DanielGeek",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
