@@ -11,7 +11,7 @@ import {
   FormikComponents,
   FormikYupPage,
   RegisterPage,
-  RegisterFormitkPage
+  RegisterFormitkPage,
 } from '../03-forms/pages';
 
 
