@@ -1,70 +1,95 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel'
-import Select from '@material-ui/core/Select'
-import Button from '@material-ui/core/Button'
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 export const Form = () => {
-  const [formErrors, setFormErrors] = useState({
-    name: '',
-    size: '',
-    type: '',
-  })
+	const [formErrors, setFormErrors] = useState({
+		name: '',
+		size: '',
+		type: '',
+	});
 
-  const handleSubmit = ( e ) => {
-    e.preventDefault();
+	const handleSubmit = (e) => {
+		e.preventDefault();
 
-    const {
-      name,
-      size,
-      type,
-    } = e.target.elements;
+		const { name, size, type } = e.target.elements;
 
-    if (!name.value) {
-      setFormErrors(prevState => ({...prevState, name: 'The name is required'}))
-    }
+		if (!name.value) {
+			setFormErrors((prevState) => ({
+				...prevState,
+				name: 'The name is required',
+			}));
+		}
 
-    if (!size.value) {
-      setFormErrors(prevState => ({...prevState, size: 'The size is required'}))
-    }
+		if (!size.value) {
+			setFormErrors((prevState) => ({
+				...prevState,
+				size: 'The size is required',
+			}));
+		}
 
-    if (!type.value) {
-      setFormErrors(prevState => ({...prevState, type: 'The type is required'}))
-    }
+		if (!type.value) {
+			setFormErrors((prevState) => ({
+				...prevState,
+				type: 'The type is required',
+			}));
+		}
+	};
 
-  };
+	const handleBlur = (e) => {
+		const { name, value } = e.target;
 
-  return (
-    <>
-      <h1>Create product</h1>
+		setFormErrors({
+			...formErrors,
+			[name]: value.length ? '' : `The ${name} is required`,
+		});
+	};
 
-      <form onSubmit={handleSubmit}>
-        <TextField label="name" id="name" helperText={ formErrors.name } />
+	return (
+		<>
+			<h1>Create product</h1>
 
-        <TextField label="size" id="size" helperText={ formErrors.size } />
+			<form onSubmit={handleSubmit}>
+				<TextField
+					label='name'
+					id='name'
+					name='name'
+					helperText={formErrors.name}
+					onBlur={handleBlur}
+				/>
 
-        <InputLabel htmlFor="type">Type</InputLabel>
+				<TextField
+					label='size'
+					id='size'
+					name='size'
+					helperText={formErrors.size}
+					onBlur={handleBlur}
+				/>
 
-        <Select
-          native
-          value=""
-          inputProps={{
-            name: 'type',
-            id: 'type',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value="electronic">Electronic</option>
-          <option value="furniture">Furniture</option>
-          <option value="clothing">Clothing</option>
-        </Select>
+				<InputLabel htmlFor='type'>Type</InputLabel>
 
-        {formErrors.type.length && <p>{formErrors.type}</p>}
+				<Select
+					native
+					value=''
+					inputProps={{
+						name: 'type',
+						id: 'type',
+					}}
+				>
+					<option aria-label='None' value='' />
+					<option value='electronic'>Electronic</option>
+					<option value='furniture'>Furniture</option>
+					<option value='clothing'>Clothing</option>
+				</Select>
 
-        <Button type="submit">Submit</Button>
-      </form>
-    </>
-  );
-}
+				{formErrors.type.length && <p>{formErrors.type}</p>}
+
+				<Button type='submit'>Submit</Button>
+			</form>
+		</>
+	);
+};
 
 export default Form;

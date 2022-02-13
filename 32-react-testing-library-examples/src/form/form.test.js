@@ -51,5 +51,28 @@ describe('when the user submits the form without values', () => {
     expect(screen.queryByText(/the name is required/i)).toBeInTheDocument();
     expect(screen.queryByText(/the size is required/i)).toBeInTheDocument();
     expect(screen.queryByText(/the type is required/i)).toBeInTheDocument();
-  })
- })
+  });
+});
+
+describe('When the user blurs an empty field', () => {
+
+  it('should display a validation error message for the input name', () => {
+    setup();
+
+    expect(screen.queryByText(/the name is required/i)).not.toBeInTheDocument();
+
+    fireEvent.blur(screen.getByLabelText(/name/i), { taget: { name: 'name', value: ''}});
+
+    expect(screen.queryByText(/the name is required/i)).toBeInTheDocument();
+  });
+
+  it('should display a validation error message for the input size', () => {
+    setup();
+
+    expect(screen.queryByText(/the size is required/i)).not.toBeInTheDocument();
+
+    fireEvent.blur(screen.getByLabelText(/size/i), { taget: { name: 'size', value: ''}});
+
+    expect(screen.queryByText(/the size is required/i)).toBeInTheDocument();
+  });
+});
