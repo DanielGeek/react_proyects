@@ -11,7 +11,7 @@ import {
   FormikComponents,
   FormikYupPage,
   RegisterPage,
-  RegisterFormitkPage,
+  RegisterFormikPage
 } from '../03-forms/pages';
 
 
@@ -67,7 +67,7 @@ export const Navigation = () => {
             <FormikAbstractation />
           </Route>
           <Route path="/formik-register">
-            <RegisterFormitkPage />
+            <RegisterFormikPage />
           </Route>
           <Route path="/home">
             <h1>Homo</h1>

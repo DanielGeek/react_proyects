@@ -1,74 +1,75 @@
-import { FormEvent } from 'react';
-import { useForm } from '../hooks/useForm';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { MyTextInput } from '../components';
 
 import '../styles/styles.css';
 
 
 export const RegisterFormikPage = () => {
 
-  const { formData, onChange, resetForm, isValidEmail, name, email, password1, password2 } = useForm({
-    name: '',
-    email: '',
-    password1: '',
-    password2: '',
-  });
-
-  const onSubmit = ( event: FormEvent<HTMLFormElement> ) => {
-    event.preventDefault();
-
-    console.log( formData );
-  }
-
   return (
     <div>
       <h1>Register Formik Page</h1>
 
-      <form noValidate onSubmit={ onSubmit }>
-        <input
-          type="text"
-          placeholder="Name"
-          name="name"
-          value={ name }
-          onChange={ onChange }
-          className={`${ name.trim().length <= 0 && 'has-error' }`}
-          />
-          { name.trim().length <= 0 && <span>This field is necesary</span> }
+      <Formik
+        initialValues={{
+            name: '',
+            email: '',
+            password1: '',
+            password2: '',
+        }}
+        onSubmit={ (values) => {
+          console.log(values)
+        }}
+        validationSchema={
+          Yup.object({
+            name: Yup.string()
+                        .min(2, 'Must be has 3 characters or more')
+                        .max(15, 'Must be has 15 characters or less')
+                        .required('Required'),
+            email: Yup.string()
+                        .email('Check the correct format')
+                        .required('Required'),
+            password1: Yup.string()
+                        .min( 6, 'Min 6 letters')
+                        .required('Required'),
+            password2: Yup.string()
+                        .oneOf([ Yup.ref('password1') ], 'The Passwords are not equals')
+                        .required('Required')
+          })
+        }
+      >
+          { ({ handleReset }) => (
+            <Form>
+              <MyTextInput
+                label="Name"
+                name="name"
+                placeholder="Daniel"
+              />
+              <MyTextInput
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="john@google.com"
+              />
+              <MyTextInput
+                label="Password"
+                name="password1"
+                type="password"
+                placeholder="*******"
+              />
+              <MyTextInput
+                label="Password 2"
+                name="password2"
+                type="password"
+                placeholder="*******"
+              />
+              <button type="submit">Create</button>
+              <button type="button" onClick={ handleReset }>Reset Form</button>
+            </Form>
+          )}
 
-          <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={ email }
-          onChange={ onChange }
-          className={`${ !isValidEmail( email ) && 'has-error' }`}
-          />
-          { !isValidEmail( email ) && <span>Email no valid</span> }
-
-          <input
-          type="password"
-          placeholder="Password"
-          name="password1"
-          value={ password1 }
-          onChange={ onChange }
-          />
-          { password1.trim().length <= 0 && <span>This field is necesary</span> }
-          { password1.trim().length < 6 && password1.trim().length > 0 && <span>Passwod should be have 6 characters</span> }
-
-          <input
-          type="password"
-          placeholder="Repeat Password"
-          name="password2"
-          value={ password2 }
-          onChange={ onChange }
-          />
-          { password2.trim().length <= 0 && <span>This field is necesary</span> }
-          { password2.trim().length > 0 && password1 !== password2 && <span>The passwords should be equals</span> }
-
-          <button type="submit">Create</button>
-
-          <button type="button" onClick={ resetForm }>Reset Form</button>
-
-      </form>
+      </Formik>
     </div>
   )
 }
