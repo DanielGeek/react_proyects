@@ -4,21 +4,36 @@
 		"name": "firstName",
 		"placeholder": "Daniel",
 		"label": "First Name",
-		"value": "Ezequiel"
+		"value": "",
+		"validations": [
+			{
+				"type": "required"
+			}
+		]
 	},
 	{
 		"type": "input",
 		"name": "lastName",
 		"placeholder": "Ángel",
 		"label": "Last Name",
-		"value": ""
+		"value": "",
+		"validations": [
+			{
+				"type": "required"
+			}
+		]
 	},
 	{
 		"type": "email",
 		"name": "email",
 		"placeholder": "daniel@google.com",
 		"label": "Email",
-		"value": ""
+		"value": "",
+		"validations": [
+			{
+				"type": "required"
+			}
+		]
 	},
 	{
 		"type": "select",
@@ -40,6 +55,11 @@
 				"name": "Resident Evil",
         "value": "resident_evil",
 				"id": "3"
+			}
+		],
+		"validations": [
+			{
+				"type": "required"
 			}
 		]
 	}
