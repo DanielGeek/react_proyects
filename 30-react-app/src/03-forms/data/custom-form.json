@@ -1,23 +1,46 @@
 [
-  {
-    "type": "input",
-    "name": "firstName",
-    "placeholder": "Daniel",
-    "label": "First Name",
-    "value": "Ezequiel"
-  },
-  {
-    "type": "input",
-    "name": "lastName",
-    "placeholder": "Ángel",
-    "label": "Last Name",
-    "value": ""
-  },
-  {
-    "type": "email",
-    "name": "email",
-    "placeholder": "daniel@google.com",
-    "label": "Email",
-    "value": ""
-  }
+	{
+		"type": "input",
+		"name": "firstName",
+		"placeholder": "Daniel",
+		"label": "First Name",
+		"value": "Ezequiel"
+	},
+	{
+		"type": "input",
+		"name": "lastName",
+		"placeholder": "Ángel",
+		"label": "Last Name",
+		"value": ""
+	},
+	{
+		"type": "email",
+		"name": "email",
+		"placeholder": "daniel@google.com",
+		"label": "Email",
+		"value": ""
+	},
+	{
+		"type": "select",
+		"name": "favoriteGame",
+		"label": "Favorite Game",
+		"value": "",
+		"options": [
+			{
+				"name": "Super Smash",
+        "value": "super_smash",
+				"id": "1"
+			},
+			{
+				"name": "Metal Gear",
+        "value": "metal_gear",
+				"id": "2"
+			},
+			{
+				"name": "Resident Evil",
+        "value": "resident_evil",
+				"id": "3"
+			}
+		]
+	}
 ]
