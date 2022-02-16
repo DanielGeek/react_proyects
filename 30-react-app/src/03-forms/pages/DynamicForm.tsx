@@ -19,6 +19,14 @@ for ( const input of formJson ) {
       schema = schema.required('This field is required');
     }
 
+    if ( rule.type === 'minLength' ) {
+      schema = schema.min( (rule as any ).value || 2, `Minimun of: ${ (rule as any ).value || 2 } characters`);
+    }
+
+    if ( rule.type === 'email' ) {
+      schema = schema.email('Check the email format');
+    }
+
     // other rules
   }
 
@@ -69,7 +77,6 @@ export const DynamicForm = () => {
 
               throw new Error(`Type: ${ type } is not soported`);
             })}
-            <span>Hello World</span>
             <button type="submit">Submit</button>
           </Form>
         )}
