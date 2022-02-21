@@ -1,7 +1,12 @@
 import './mylabel.css';
 
-export const MyLabel = () => {
+export interface MyLabelProps {
+  label: string;
+  size: 'normal'|'h1'|'h2'|'h3';
+}
+
+export const MyLabel = ( { label = 'No Label', size = 'normal' }: MyLabelProps ) => {
   return (
-    <span>Hello World!</span>
+    <span className={ `${ size }`}>{ label }</span>
   )
 }
