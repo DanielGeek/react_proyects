@@ -5,9 +5,10 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
 import { Form } from './form';
+import { CREATED_STATUS } from '../consts/httpStatus';
 
 const server = setupServer(
-  rest.post('/products', (req, res, ctx) => res(ctx.json(201))),
+  rest.post('/products', (req, res, ctx) => res(ctx.status(CREATED_STATUS))),
 );
 
 beforeAll(() => server.listen());
@@ -99,13 +100,21 @@ describe('When the user submits the form', () => {
 
     expect(submitBtn).not.toBeDisabled();
 
-    fireEvent.click(screen.getByRole('button', {name: /submit/i}));
+    fireEvent.click(submitBtn);
 
     expect(screen.getByRole('button', {name: /submit/i})).toBeDisabled();
 
     await waitFor(() => {
       expect(screen.getByRole('button', {name: /submit/i})).not.toBeDisabled();
     });
+  });
 
+  it('the form page must display the success message Product Stored and clean the fields values', async() => {
+    setup();
+
+    fireEvent.click(screen.getByRole('button', {name: /submit/i}));
+
+    await waitFor(() =>
+      expect(screen.getByText(/product stored/i)).toBeInTheDocument());
   });
 });
