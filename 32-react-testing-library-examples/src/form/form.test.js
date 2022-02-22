@@ -5,7 +5,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
 import { Form } from './form';
-import { CREATED_STATUS, ERROR_SERVER_STATUS } from '../consts/httpStatus';
+import { CREATED_STATUS, ERROR_SERVER_STATUS, INVALID_REQUEST_STATUS } from '../consts/httpStatus';
 
 const server = setupServer(
   rest.post('/products', (req, res, ctx) => {
@@ -24,6 +24,8 @@ beforeAll(() => server.listen());
 afterAll(() => server.close());
 
 const setup = () => render(<Form />);
+
+afterEach(() => server.resetHandlers())
 
 describe('when the form is mounted', () => {
   // beforeEach(() => render(<Form />)) // bad practice
@@ -148,6 +150,31 @@ describe('When the user submits the form and the server returns an unexpected er
     // eslint-disable-next-line testing-library/prefer-find-by
     await waitFor(() =>
       expect(screen.getByText(/unexpected error, please try again/i)).toBeInTheDocument());
+
+  })
+});
+
+describe('When the user submits the form and the server returns an invalid request error', () => {
+  it('The form page must display the error message `The form is invalid, the fields [field1...fieldN] are required', async () => {
+    setup();
+
+    server.use(
+      rest.post('/products', (req, res, ctx) => {
+        return res(
+          ctx.status(INVALID_REQUEST_STATUS),
+          ctx.json({
+            message:
+              'The form is invalid, the fields name, size, type are required',
+          }),
+        )
+      }),
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: /submit/i}));
+
+    // eslint-disable-next-line testing-library/prefer-find-by
+    await waitFor(() =>
+      expect(screen.getByText(/the form is invalid, the fields name, size, type are required/i)).toBeInTheDocument());
 
   })
 });
