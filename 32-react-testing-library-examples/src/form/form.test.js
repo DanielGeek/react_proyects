@@ -178,3 +178,20 @@ describe('When the user submits the form and the server returns an invalid reque
 
   })
 });
+
+describe('When the user submits the form and the server returns an Falied to connect', () => {
+  it('The form page must display the error message `Falied to connect`', async () => {
+    setup();
+
+    server.use(
+      rest.post('/products', (req, res) => res.networkError('Falied to connect')),
+    )
+
+    fireEvent.click(screen.getByRole('button', {name: /submit/i}));
+
+    // eslint-disable-next-line testing-library/prefer-find-by
+    await waitFor(() =>
+      expect(screen.getByText(/connection error, please try later/i)).toBeInTheDocument());
+
+  })
+});
