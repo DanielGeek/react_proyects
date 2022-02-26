@@ -7,17 +7,24 @@ const setup = () => render(<GithubSearchPage />);
 
 describe('When the GithubSearchPage is mounted', () => {
 
-	it('must be display the title', () => {
+  it('must be display the title', () => {
     setup();
 
-		expect(
-			screen.getByRole('heading', { name: /github repositories list page/i })
-		).toBeInTheDocument();
-	});
+    expect(
+      screen.getByRole('heading', { name: /github repositories list page/i })
+    ).toBeInTheDocument();
+  });
 
   it('must be an input text with label "filter by" field', () => {
     setup();
 
     expect(screen.getByLabelText(/filter by/i)).toBeInTheDocument();
   });
+
+  it('must be a Search Button', () => {
+    setup();
+
+    expect(screen.getByRole('button', {name: /search/i})).toBeInTheDocument()
+  })
+
 });
