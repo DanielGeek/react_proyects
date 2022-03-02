@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { GithubSearchPage } from './github-serach-page';
 
@@ -34,4 +34,21 @@ describe('When the GithubSearchPage is mounted', () => {
 			)
 		).toBeInTheDocument();
 	});
+});
+
+describe('When the developer does a search', () => {
+  it('the search button should be disabled until the search is done', async () => {
+    setup();
+
+    expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled();
+
+    // click btn
+    fireEvent.click(screen.getByRole('button', {name: /search/i}));
+
+    // expect disabled
+    expect(screen.getByRole('button', {name: /search/i})).toBeDisabled();
+
+    // not disabled (finish) async
+    await waitFor(() => expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled());
+  });
 });
