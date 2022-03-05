@@ -28,7 +28,7 @@ describe('When the GithubSearchPage is mounted', () => {
 
 	it('must be a initial message `Please provide a search option and click in the search button`.', () => {
 		setup();
-    expect(
+		expect(
 			screen.getByText(
 				/please provide a search option and click in the search button/i
 			)
@@ -37,18 +37,36 @@ describe('When the GithubSearchPage is mounted', () => {
 });
 
 describe('When the developer does a search', () => {
-  it('the search button should be disabled until the search is done', async () => {
-    setup();
+	it('the search button should be disabled until the search is done', async () => {
+		setup();
 
-    expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled();
+		expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled();
 
-    // click btn
-    fireEvent.click(screen.getByRole('button', {name: /search/i}));
+		// click btn
+		fireEvent.click(screen.getByRole('button', { name: /search/i }));
 
-    // expect disabled
-    expect(screen.getByRole('button', {name: /search/i})).toBeDisabled();
+		// expect disabled
+		expect(screen.getByRole('button', { name: /search/i })).toBeDisabled();
 
-    // not disabled (finish) async
-    await waitFor(() => expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled());
-  });
+		// not disabled (finish) async
+		await waitFor(() =>
+			expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled()
+		);
+	});
+
+	it('the data should be displayed as a sticky table', async () => {
+		setup();
+
+		fireEvent.click(screen.getByRole('button', { name: /search/i }));
+
+		await waitFor(() =>
+			expect(
+				screen.queryByText(
+					/please provide a search option and click in the search button/i
+				)
+			).not.toBeInTheDocument()
+		);
+
+		expect(screen.getByRole('table')).toBeInTheDocument();
+	});
 });
