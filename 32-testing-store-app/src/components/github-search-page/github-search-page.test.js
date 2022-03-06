@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 
 import { GithubSearchPage } from './github-serach-page';
 
@@ -37,13 +37,15 @@ describe('When the GithubSearchPage is mounted', () => {
 });
 
 describe('When the developer does a search', () => {
+	const fireClickSearch = () => fireEvent.click(screen.getByRole('button', { name: /search/i }))
+
 	it('the search button should be disabled until the search is done', async () => {
 		setup();
 
 		expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled();
 
 		// click btn
-		fireEvent.click(screen.getByRole('button', { name: /search/i }));
+		fireClickSearch()
 
 		// expect disabled
 		expect(screen.getByRole('button', { name: /search/i })).toBeDisabled();
@@ -57,7 +59,7 @@ describe('When the developer does a search', () => {
 	it('the data should be displayed as a sticky table', async () => {
 		setup();
 
-		fireEvent.click(screen.getByRole('button', { name: /search/i }));
+		fireClickSearch()
 
 		await waitFor(() =>
 			expect(
@@ -68,5 +70,25 @@ describe('When the developer does a search', () => {
 		);
 
 		expect(screen.getByRole('table')).toBeInTheDocument();
+	});
+
+	it('the table headers must contain: Repository, starts, forks, open, issues and updated at', async() => {
+		setup();
+
+		fireClickSearch()
+
+		const table = await screen.findByRole('table');
+
+		const tableHeaders = within(table).getAllByRole('columnheader');
+
+		expect(tableHeaders).toHaveLength(5);
+
+		const [repository, starts, forks, openIssues, updatedAt] = tableHeaders;
+
+		expect(repository).toHaveTextContent(/repository/i);
+		expect(starts).toHaveTextContent(/starts/i);
+		expect(forks).toHaveTextContent(/forks/i);
+		expect(openIssues).toHaveTextContent(/open issues/i);
+		expect(updatedAt).toHaveTextContent(/updated at/i);
 	});
 });
