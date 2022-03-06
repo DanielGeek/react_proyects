@@ -113,7 +113,7 @@ describe('When the developer does a search', () => {
 		const [repository, stars, forks, openIssues, updatedAt] = tableCells;
 
 		// eslint-disable-next-line jest/valid-expect
-		expect(within(tableCells[0]).getByRole('img', { name: /test/i }));
+		expect(within(repository).getByRole('img', { name: /test/i }));
 
 		expect(tableCells).toHaveLength(5);
 
