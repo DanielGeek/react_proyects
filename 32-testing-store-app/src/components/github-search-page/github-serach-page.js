@@ -17,39 +17,43 @@ export const GithubSearchPage = () => {
 		setIsSearching(false);
 	};
 
-	const renderContent = () => isSearchApplied ? (
-		<table>
-			<thead>
-				<tr>
-					<th>Repository</th>
-					<th>Starts</th>
-					<th>forks</th>
-					<th>Open issues</th>
-					<th>Updated at</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Test</td>
-					<td>10</td>
-					<td>5</td>
-					<td>2</td>
-					<td>2020-01-01</td>
-				</tr>
-			</tbody>
-		</table>
-	) : (
-		<Box
-			display='flex'
-			alignItems='center'
-			justifyContent='center'
-			height={400}
-		>
-			<Typography>
-				Please provide a search option and click in the search button
-			</Typography>
-		</Box>
-	)
+	const renderContent = () =>
+		isSearchApplied ? (
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<img alt='test' src='' />
+							Repository
+						</th>
+						<th>Starts</th>
+						<th>forks</th>
+						<th>Open issues</th>
+						<th>Updated at</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Test</td>
+						<td>10</td>
+						<td>5</td>
+						<td>2</td>
+						<td>2020-01-01</td>
+					</tr>
+				</tbody>
+			</table>
+		) : (
+			<Box
+				display='flex'
+				alignItems='center'
+				justifyContent='center'
+				height={400}
+			>
+				<Typography>
+					Please provide a search option and click in the search button
+				</Typography>
+			</Box>
+		);
 
 	return (
 		<Container>
