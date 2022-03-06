@@ -82,3 +82,9 @@ self.addEventListener('install', async( event ) => {
   ])
 
 });
+
+self.addEventListener('fetch', ( event ) => {
+
+  console.log( event.request.url );
+
+});
