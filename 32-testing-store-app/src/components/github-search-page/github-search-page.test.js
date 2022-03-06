@@ -1,5 +1,11 @@
 import React from 'react';
-import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import {
+	fireEvent,
+	render,
+	screen,
+	waitFor,
+	within,
+} from '@testing-library/react';
 
 import { GithubSearchPage } from './github-serach-page';
 
@@ -37,7 +43,8 @@ describe('When the GithubSearchPage is mounted', () => {
 });
 
 describe('When the developer does a search', () => {
-	const fireClickSearch = () => fireEvent.click(screen.getByRole('button', { name: /search/i }))
+	const fireClickSearch = () =>
+		fireEvent.click(screen.getByRole('button', { name: /search/i }));
 
 	it('the search button should be disabled until the search is done', async () => {
 		setup();
@@ -45,7 +52,7 @@ describe('When the developer does a search', () => {
 		expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled();
 
 		// click btn
-		fireClickSearch()
+		fireClickSearch();
 
 		// expect disabled
 		expect(screen.getByRole('button', { name: /search/i })).toBeDisabled();
@@ -59,7 +66,7 @@ describe('When the developer does a search', () => {
 	it('the data should be displayed as a sticky table', async () => {
 		setup();
 
-		fireClickSearch()
+		fireClickSearch();
 
 		await waitFor(() =>
 			expect(
@@ -72,10 +79,10 @@ describe('When the developer does a search', () => {
 		expect(screen.getByRole('table')).toBeInTheDocument();
 	});
 
-	it('the table headers must contain: Repository, starts, forks, open, issues and updated at', async() => {
+	it('the table headers must contain: Repository, starts, forks, open, issues and updated at', async () => {
 		setup();
 
-		fireClickSearch()
+		fireClickSearch();
 
 		const table = await screen.findByRole('table');
 
@@ -92,28 +99,34 @@ describe('When the developer does a search', () => {
 		expect(updatedAt).toHaveTextContent(/updated at/i);
 	});
 
-	it('each table result must contain: name, starts, updated at, forks, open issues', async () => {
+	it('each table result must contain: name, starts, updated at, forks, open issues, it should have a link that opens is a new tab', async () => {
 		setup();
 
-		fireClickSearch()
+		fireClickSearch();
 
 		const table = await screen.findByRole('table');
 
 		const withinTable = within(table);
 
-		const tableCells = withinTable.getAllByRole('cell')
-
-		// eslint-disable-next-line jest/valid-expect
-		expect(withinTable.getByRole('img', {name: /test/i}))
-
-		expect(tableCells).toHaveLength(5);
+		const tableCells = withinTable.getAllByRole('cell');
 
 		const [repository, stars, forks, openIssues, updatedAt] = tableCells;
+
+		// eslint-disable-next-line jest/valid-expect
+		expect(within(tableCells[0]).getByRole('img', { name: /test/i }));
+
+		expect(tableCells).toHaveLength(5);
 
 		expect(repository).toHaveTextContent(/test/i);
 		expect(stars).toHaveTextContent(/10/);
 		expect(forks).toHaveTextContent(/5/);
 		expect(openIssues).toHaveTextContent(/2/i);
 		expect(updatedAt).toHaveTextContent(/2020-01-01/i);
+
+		// eslint-disable-next-line testing-library/no-node-access
+		expect(withinTable.getByText(/test/i).closest('a')).toHaveAttribute(
+			'href',
+			'http://localhost:3000/test'
+		);
 	});
 });
