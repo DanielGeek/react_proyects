@@ -79,7 +79,7 @@ describe('When the developer does a search', () => {
 		expect(screen.getByRole('table')).toBeInTheDocument();
 	});
 
-	it('the table headers must contain: Repository, starts, forks, open, issues and updated at', async () => {
+	it('the table headers must contain: Repository, stars, forks, open, issues and updated at', async () => {
 		setup();
 
 		fireClickSearch();
@@ -90,16 +90,16 @@ describe('When the developer does a search', () => {
 
 		expect(tableHeaders).toHaveLength(5);
 
-		const [repository, starts, forks, openIssues, updatedAt] = tableHeaders;
+		const [repository, stars, forks, openIssues, updatedAt] = tableHeaders;
 
 		expect(repository).toHaveTextContent(/repository/i);
-		expect(starts).toHaveTextContent(/starts/i);
+		expect(stars).toHaveTextContent(/stars/i);
 		expect(forks).toHaveTextContent(/forks/i);
 		expect(openIssues).toHaveTextContent(/open issues/i);
 		expect(updatedAt).toHaveTextContent(/updated at/i);
 	});
 
-	it('each table result must contain: name, starts, updated at, forks, open issues, it should have a link that opens is a new tab', async () => {
+	it('each table result must contain: name, stars, updated at, forks, open issues, it should have a link that opens is a new tab', async () => {
 		setup();
 
 		fireClickSearch();
@@ -129,4 +129,14 @@ describe('When the developer does a search', () => {
 			'http://localhost:3000/test'
 		);
 	});
+
+	it('must display the total results number of the search and the current number of results', async () => {
+		setup();
+
+    fireClickSearch()
+
+    await screen.findByRole('table')
+
+    expect(screen.getByText(/1-1 of 1/)).toBeInTheDocument()
+  })
 });
