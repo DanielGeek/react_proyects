@@ -180,3 +180,7 @@ describe('When the developer does a search', () => {
 		expect(previousPageBtn).toBeDisabled();
 	});
 });
+
+describe('when the developer does a search without results', () => {
+	it.todo('must show a empty state message')
+})
