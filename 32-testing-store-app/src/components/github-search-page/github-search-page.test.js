@@ -133,17 +133,17 @@ describe('When the developer does a search', () => {
 	it('must display the total results number of the search and the current number of results', async () => {
 		setup();
 
-    fireClickSearch()
+		fireClickSearch();
 
-    await screen.findByRole('table')
+		await screen.findByRole('table');
 
-    expect(screen.getByText(/1-1 of 1/)).toBeInTheDocument()
-  });
+		expect(screen.getByText(/1-1 of 1/)).toBeInTheDocument();
+	});
 
-	it('results size per page select/combobox with the options: 30, 50, 100. The default is 30.', async() => {
+	it('results size per page select/combobox with the options: 30, 50, 100. The default is 30.', async () => {
 		setup();
 
-    fireClickSearch();
+		fireClickSearch();
 
 		await screen.findByRole('table');
 
@@ -151,7 +151,7 @@ describe('When the developer does a search', () => {
 
 		fireEvent.mouseDown(screen.getByLabelText(/rows per page/i));
 
-		const listbox = screen.getByRole('listbox', {name: /Rows per page/i});
+		const listbox = screen.getByRole('listbox', { name: /Rows per page/i });
 
 		const options = within(listbox).getAllByRole('option');
 
@@ -160,5 +160,23 @@ describe('When the developer does a search', () => {
 		expect(option30).toHaveTextContent(/30/);
 		expect(option50).toHaveTextContent(/50/);
 		expect(option100).toHaveTextContent(/100/);
+	});
+
+	it('muest exists the next and previous pagination button', async () => {
+		setup();
+
+		fireClickSearch();
+
+		await screen.findByRole('table');
+
+		const previousPageBtn = screen.getByRole('button', {name: /previous page/i});
+
+		expect(previousPageBtn).toBeInTheDocument()
+
+		expect(
+			screen.getByRole('button', { name: /next page/i })
+		).toBeInTheDocument();
+
+		expect(previousPageBtn).toBeDisabled();
 	});
 });
