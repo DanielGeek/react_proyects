@@ -224,9 +224,7 @@ describe('when the developer does a search without results', () => {
 
 		fireClickSearch();
 
-		await waitFor(() =>
-			expect(screen.getByText(/you search has no results/i)).toBeInTheDocument()
-		);
+		await screen.findByText(/you search has no results/i);
 
 		expect(screen.queryByRole('table')).not.toBeInTheDocument();
 	});
