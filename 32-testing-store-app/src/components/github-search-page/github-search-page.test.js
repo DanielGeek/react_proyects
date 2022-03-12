@@ -6,44 +6,47 @@ import {
 	waitFor,
 	within,
 } from '@testing-library/react';
-import {rest} from 'msw'
-import {setupServer} from 'msw/node'
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
 
 import { GithubSearchPage } from './github-serach-page';
 
 const fakeRepo = {
-  id: '56757919',
-  name: 'django-rest-framework-reactive',
-  owner: {
-    avatar_url: 'https://avatars0.githubusercontent.com/u/2120224?v=4',
-  },
-  html_url: 'https://github.com/genialis/django-rest-framework-reactive',
-  updated_at: '2020-10-24',
-  stargazers_count: 58,
-  forks_count: 9,
-  open_issues_count: 0,
-}
+	id: '56757919',
+	name: 'django-rest-framework-reactive',
+	owner: {
+		avatar_url: 'https://avatars0.githubusercontent.com/u/2120224?v=4',
+	},
+	html_url: 'https://github.com/genialis/django-rest-framework-reactive',
+	updated_at: '2020-10-24',
+	stargazers_count: 58,
+	forks_count: 9,
+	open_issues_count: 0,
+};
 
 const server = setupServer(
-  rest.get('/search/repositories', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        total_count: 8643,
-        incomplete_results: false,
-        items: [fakeRepo],
-      }),
-    )
-  }),
-)
+	rest.get('/search/repositories', (req, res, ctx) => {
+		return res(
+			ctx.status(200),
+			ctx.json({
+				total_count: 8643,
+				incomplete_results: false,
+				items: [fakeRepo],
+			})
+		);
+	})
+);
 
-beforeAll(() => server.listen())
+beforeAll(() => server.listen());
 
-afterEach(() => server.resetHandlers())
+afterEach(() => server.resetHandlers());
 
-afterAll(() => server.close())
+afterAll(() => server.close());
 
 const setup = () => render(<GithubSearchPage />);
+
+const fireClickSearch = () =>
+	fireEvent.click(screen.getByRole('button', { name: /search/i }));
 
 describe('When the GithubSearchPage is mounted', () => {
 	it('must be display the title', () => {
@@ -77,9 +80,6 @@ describe('When the GithubSearchPage is mounted', () => {
 });
 
 describe('When the developer does a search', () => {
-	const fireClickSearch = () =>
-		fireEvent.click(screen.getByRole('button', { name: /search/i }));
-
 	it('the search button should be disabled until the search is done', async () => {
 		setup();
 
@@ -146,7 +146,9 @@ describe('When the developer does a search', () => {
 
 		const [repository, stars, forks, openIssues, updatedAt] = tableCells;
 
-		const avatarImg = within(repository).getByRole('img', { name: fakeRepo.name })
+		const avatarImg = within(repository).getByRole('img', {
+			name: fakeRepo.name,
+		});
 		// eslint-disable-next-line jest/valid-expect
 		expect(avatarImg).toBeInTheDocument();
 
@@ -160,7 +162,7 @@ describe('When the developer does a search', () => {
 		// eslint-disable-next-line testing-library/no-node-access
 		expect(withinTable.getByText(fakeRepo.name).closest('a')).toHaveAttribute(
 			'href',
-			fakeRepo.html_url,
+			fakeRepo.html_url
 		);
 
 		expect(avatarImg).toHaveAttribute('src', fakeRepo.owner.avatar_url);
@@ -205,9 +207,11 @@ describe('When the developer does a search', () => {
 
 		await screen.findByRole('table');
 
-		const previousPageBtn = screen.getByRole('button', {name: /previous page/i});
+		const previousPageBtn = screen.getByRole('button', {
+			name: /previous page/i,
+		});
 
-		expect(previousPageBtn).toBeInTheDocument()
+		expect(previousPageBtn).toBeInTheDocument();
 
 		expect(
 			screen.getByRole('button', { name: /next page/i })
@@ -218,5 +222,28 @@ describe('When the developer does a search', () => {
 });
 
 describe('when the developer does a search without results', () => {
-	it.todo('must show a empty state message')
-})
+	it('must show a empty state message "You search has no results"', async () => {
+		setup();
+
+		server.use(
+			rest.get('/search/repositories', (req, res, ctx) =>
+				res(
+					ctx.status(200),
+					ctx.json({
+						total_count: 0,
+						incomplete_results: false,
+						items: [],
+					})
+				)
+			)
+		);
+
+		fireClickSearch();
+
+		await waitFor(() =>
+			expect(screen.getByText(/you search has no results/i)).toBeInTheDocument()
+		);
+
+		expect(screen.queryByRole('table')).not.toBeInTheDocument();
+	});
+});
