@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { uiActions } from './ui-slice';
 
 const cartSlice = createSlice({
 	name: 'cart',
@@ -26,31 +27,70 @@ const cartSlice = createSlice({
 					totalPrice: newItem.price,
 					name: newItem.name,
 				});
-        state.totalQuantity++;
+				state.totalQuantity++;
 			}
 		},
 		removeFromCart(state, action) {
-      const id = action.payload;
+			const id = action.payload;
 
-      const existingItem = state.itemsList.find(item => item.id === id);
+			const existingItem = state.itemsList.find((item) => item.id === id);
 
-      if ( existingItem.quantity === 1) {
-          state.itemsList = state.itemsList.filter(item => item.id !== id);
-          if(state.totalQuantity === 1) {
-            state.showCart = !state.showCart;
-          }
-          state.totalQuantity--;
-      }
-      else {
-        existingItem.quantity--;
-        existingItem.totalPrice -= existingItem.price;
-      }
-    },
+			if (existingItem.quantity === 1) {
+				state.itemsList = state.itemsList.filter((item) => item.id !== id);
+				if (state.totalQuantity === 1) {
+					state.showCart = !state.showCart;
+				}
+				state.totalQuantity--;
+			} else {
+				existingItem.quantity--;
+				existingItem.totalPrice -= existingItem.price;
+			}
+		},
 		setShowCart(state) {
 			state.showCart = !state.showCart;
 		},
 	},
 });
+
+export const sendCartData = (cart) => {
+	return async (dispatch) => {
+		dispatch(
+			uiActions.showNotification({
+				open: true,
+				message: 'Sending Request',
+				type: 'warning',
+			})
+		);
+
+		const sendRequest = async () => {
+			const res = await fetch(
+				'https://redux-http-1a18f-default-rtdb.firebaseio.com/cartItems.json',
+				{
+					method: 'PUT',
+					body: JSON.stringify(cart),
+				}
+			);
+			const data = await res.json();
+			dispatch(
+				uiActions.showNotification({
+					open: true,
+					message: 'Send Request to Database Successfully',
+					type: 'success',
+				})
+			);
+		};
+		try {
+			await sendRequest();
+		} catch (err) {
+			 // send state as Error
+			 dispatch(uiActions.showNotification({
+        open: true,
+        message: "Sending Request Failed",
+        type: "error"
+      }));
+		}
+	};
+};
 
 export const cartActions = cartSlice.actions;
 
