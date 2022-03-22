@@ -14,6 +14,7 @@ export const GithubSearchPage = () => {
 	const [isSearchApplied, setIsSearchApplied] = useState(false);
 	const [reposList, setReposList] = useState([]);
 	const [searchBy, setSearchBy] = useState('');
+	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(30);
 
 	const didMount = useRef(false);
@@ -77,6 +78,8 @@ export const GithubSearchPage = () => {
 					reposList={reposList}
 					rowsPerPage={rowsPerPage}
 					setRowsPerPage={setRowsPerPage}
+					setPage={setPage}
+					page={page}
 				/>
 			</Box>
 		</Container>

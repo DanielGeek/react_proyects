@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
 import Table from '@material-ui/core/Table';
@@ -24,10 +24,16 @@ export const Content = ({
 	isSearchApplied,
 	reposList,
 	rowsPerPage,
-	setRowsPerpage,
+	setRowsPerPage,
+	setPage,
+	page
 }) => {
-	const handleChangeRowsPerPage = ({ taget: { value } }) =>
-		setRowsPerpage(value);
+
+	const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+		setPage(0);
+  };
+
 
 	const renderWithBox = (cb) => (
 		<Box
@@ -84,7 +90,7 @@ export const Content = ({
 					component='div'
 					count={1}
 					rowsPerPage={rowsPerPage}
-					page={0}
+					page={page}
 					onChangePage={() => {}}
 					onChangeRowsPerPage={handleChangeRowsPerPage}
 				/>
