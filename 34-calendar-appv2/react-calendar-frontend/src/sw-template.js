@@ -26,10 +26,10 @@ registerRoute(
 )
 
 // Referencia
-registerRoute(
-    new RegExp('http://localhost:4000/api/auth/renew'),
-    new NetworkFirst()
-)
+// registerRoute(
+//     new RegExp('http://localhost:4000/api/auth/renew'),
+//     new NetworkFirst()
+// )
 
 
 const cacheFirstNetwork = [
