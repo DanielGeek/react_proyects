@@ -4,14 +4,20 @@ import { PlacesContext } from "./PlacesContext";
 import { placesReducer } from "./PlacesReducer";
 import { searchApi } from "../../apis";
 
+import { Feature, PlacesResponse } from "../../interfaces/places";
+
 export interface PlacesState {
   isLoading: boolean;
-  userLocation?: [ number, number ],
+  userLocation?: [ number, number ];
+  isLoadingPlaces: boolean;
+  places: Feature[];
 }
 
 const INITIAL_STATE: PlacesState = {
   isLoading: true,
-  userLocation: undefined
+  userLocation: undefined,
+  isLoadingPlaces: false,
+  places: [],
 }
 
 interface Props {
@@ -28,19 +34,20 @@ export const PlacesProvider = ({ children }: Props) => {
         .then( lngLat => dispatch({ type: 'setUserLocation', payload: lngLat }) )
   }, []);
 
-  const searchPlacesByTerm = async( query: string ) => {
+  const searchPlacesByTerm = async( query: string ): Promise<Feature[]> => {
     if ( query.length === 0 ) return []; //TODO: clear state
     if ( !state.userLocation ) throw new Error('The ubication not existe');
 
-    const resp = await searchApi.get(`/${ query }.json`, {
+    dispatch({ type: 'setLodingPlaces' });
+
+    const resp = await searchApi.get<PlacesResponse>(`/${ query }.json`, {
       params: {
         proximity: state.userLocation.join(',')
       }
     });
 
-    console.log(resp.data);
-
-    return resp.data;
+    dispatch({ type: 'setPlaces', payload: resp.data.features });
+    return resp.data.features;
   }
 
   return (
