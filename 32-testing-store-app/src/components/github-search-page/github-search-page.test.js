@@ -78,6 +78,13 @@ describe('When the developer does a search', () => {
 
 		expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled();
 
+		fireEvent.change(screen.getByLabelText(/filter by/i), {
+			target: {value: 'test'},
+		})
+
+
+		expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled();
+
 		// click btn
 		fireClickSearch();
 
