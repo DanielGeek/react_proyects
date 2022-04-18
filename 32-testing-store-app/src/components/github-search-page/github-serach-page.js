@@ -17,27 +17,31 @@ export const GithubSearchPage = () => {
 	const [isSearching, setIsSearching] = useState(false);
 	const [isSearchApplied, setIsSearchApplied] = useState(false);
 	const [reposList, setReposList] = useState([]);
-	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(ROWS_PER_PAGE_DEFAULT);
+	const [currentPage, setCurrentPage] = useState(0)
 
 	const didMount = useRef(false);
 	const searchByInput = useRef(null);
 
 	const handleSearch = useCallback(async () => {
 		setIsSearching(true);
-		const response = await getRepos({ q: searchByInput.current.value, rowsPerPage });
+		const response = await getRepos({ q: searchByInput.current.value, rowsPerPage, currentPage });
 
 		const data = await response.json();
 
 		setReposList(data.items);
 		setIsSearchApplied(true);
 		setIsSearching(false);
-	}, [rowsPerPage]);
+	}, [rowsPerPage, currentPage]);
 
 	const handleChangeRowsPerPage = (event) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
-		setPage(0);
+		setCurrentPage(0);
 	};
+
+	const handleChangePage = (event, newPage) => {
+    setCurrentPage(newPage)
+  }
 
 	useEffect(() => {
 		if (!didMount.current) {
@@ -87,8 +91,8 @@ export const GithubSearchPage = () => {
 							component='div'
 							count={1000}
 							rowsPerPage={rowsPerPage}
-							page={page}
-							onChangePage={() => {}}
+							page={currentPage}
+							onChangePage={handleChangePage}
 							onChangeRowsPerPage={handleChangeRowsPerPage}
 						/>
 					</>
