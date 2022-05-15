@@ -11,14 +11,15 @@ import { setupServer } from 'msw/node';
 
 import { GithubSearchPage } from './github-serach-page';
 import {
-  makeFakeResponse,
-  makeFakeRepo,
-  getReposListBy,
+	makeFakeResponse,
+	makeFakeRepo,
+	getReposListBy,
+	makeFakeError,
 } from '../../__fixtures__/repos'
 import { handlerPaginated } from '../../__fixtures__/handlers';
 import { OK_STATUS } from '../../consts';
 
-const fakeResponse = makeFakeResponse({ totalCount: 1})
+const fakeResponse = makeFakeResponse({ totalCount: 1 })
 
 const fakeRepo = makeFakeRepo();
 
@@ -26,8 +27,8 @@ fakeResponse.items = [fakeRepo];
 
 const server = setupServer(
 	rest.get('/search/repositories', (req, res, ctx) =>
-		res(ctx.status(OK_STATUS),ctx.json(fakeResponse)),
-		),
+		res(ctx.status(OK_STATUS), ctx.json(fakeResponse)),
+	),
 );
 
 beforeAll(() => server.listen());
@@ -79,7 +80,7 @@ describe('When the developer does a search', () => {
 		expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled();
 
 		fireEvent.change(screen.getByLabelText(/filter by/i), {
-			target: {value: 'test'},
+			target: { value: 'test' },
 		})
 
 
@@ -243,43 +244,43 @@ describe('when the developer does a search without results', () => {
 });
 
 describe('when the developer types on filter by and does a search', () => {
-  it('must display the related repos', async () => {
+	it('must display the related repos', async () => {
 		setup();
-    const internalFakeResponse = makeFakeResponse()
-    const REPO_NAME = 'laravel'
+		const internalFakeResponse = makeFakeResponse()
+		const REPO_NAME = 'laravel'
 
-    const expectedRepo = getReposListBy({name: REPO_NAME})[0]
+		const expectedRepo = getReposListBy({ name: REPO_NAME })[0]
 
-    server.use(
-      rest.get('/search/repositories', (req, res, ctx) =>
-        res(
-          ctx.status(OK_STATUS),
-          ctx.json({
-            ...internalFakeResponse,
-            items: getReposListBy({name: req.url.searchParams.get('q')}),
-          }),
-        ),
-      ),
-    )
+		server.use(
+			rest.get('/search/repositories', (req, res, ctx) =>
+				res(
+					ctx.status(OK_STATUS),
+					ctx.json({
+						...internalFakeResponse,
+						items: getReposListBy({ name: req.url.searchParams.get('q') }),
+					}),
+				),
+			),
+		)
 
-    fireEvent.change(screen.getByLabelText(/filter by/i), {
-      target: {value: REPO_NAME},
-    })
+		fireEvent.change(screen.getByLabelText(/filter by/i), {
+			target: { value: REPO_NAME },
+		})
 
-    fireClickSearch()
+		fireClickSearch()
 
-    const table = await screen.findByRole('table')
+		const table = await screen.findByRole('table')
 
-    expect(table).toBeInTheDocument()
+		expect(table).toBeInTheDocument()
 
-    const withinTable = within(table)
+		const withinTable = within(table)
 
-    const tableCells = withinTable.getAllByRole('cell')
+		const tableCells = withinTable.getAllByRole('cell')
 
-    const [repository] = tableCells
+		const [repository] = tableCells
 
-    expect(repository).toHaveTextContent(expectedRepo.name)
-  })
+		expect(repository).toHaveTextContent(expectedRepo.name)
+	})
 })
 
 describe('when the developer does a search and selects 50 rows per page', () => {
@@ -291,106 +292,124 @@ describe('when the developer does a search and selects 50 rows per page', () => 
 			),
 		)
 
-    fireClickSearch()
+		fireClickSearch()
 
-    expect(await screen.findByRole('table')).toBeInTheDocument()
-    expect(await screen.findAllByRole('row')).toHaveLength(31)
+		expect(await screen.findByRole('table')).toBeInTheDocument()
+		expect(await screen.findAllByRole('row')).toHaveLength(31)
 
-    fireEvent.mouseDown(screen.getByLabelText(/rows per page/i))
-    fireEvent.click(screen.getByRole('option', {name: '50'}))
+		fireEvent.mouseDown(screen.getByLabelText(/rows per page/i))
+		fireEvent.click(screen.getByRole('option', { name: '50' }))
 
 		await waitFor(() =>
-			expect(screen.getByRole('button', {name: /search/i})).not.toBeDisabled(),
+			expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled(),
 		)
-    expect(screen.getAllByRole('row')).toHaveLength(51)
+		expect(screen.getAllByRole('row')).toHaveLength(51)
 	})
 })
 
 describe('when the developer clicks on search and then on next page button', () => {
-  it('must display the next repositories page', async () => {
+	it('must display the next repositories page', async () => {
 		setup();
-    // config server handler
-    server.use(rest.get('/search/repositories', handlerPaginated))
+		// config server handler
+		server.use(rest.get('/search/repositories', handlerPaginated))
 
-    // click search
-    fireClickSearch()
+		// click search
+		fireClickSearch()
 
-    // wait table
-    expect(await screen.findByRole('table')).toBeInTheDocument()
+		// wait table
+		expect(await screen.findByRole('table')).toBeInTheDocument()
 
-    // expect first repo name is from page 0
-    expect(screen.getByRole('cell', {name: /1-0/})).toBeInTheDocument()
+		// expect first repo name is from page 0
+		expect(screen.getByRole('cell', { name: /1-0/ })).toBeInTheDocument()
 
-    // expect next page is not disabled
-    expect(screen.getByRole('button', {name: /next page/i})).not.toBeDisabled()
+		// expect next page is not disabled
+		expect(screen.getByRole('button', { name: /next page/i })).not.toBeDisabled()
 
-    // click next page button
-    fireEvent.click(screen.getByRole('button', {name: /next page/i}))
+		// click next page button
+		fireEvent.click(screen.getByRole('button', { name: /next page/i }))
 
-    // wait search button is not disabled
-    expect(screen.getByRole('button', {name: /search/i})).toBeDisabled()
+		// wait search button is not disabled
+		expect(screen.getByRole('button', { name: /search/i })).toBeDisabled()
 
 		await waitFor(
-      () =>
-        expect(
-          screen.getByRole('button', {name: /search/i}),
-        ).not.toBeDisabled(),
-      {timeout: 3000},
-    )
+			() =>
+				expect(
+					screen.getByRole('button', { name: /search/i }),
+				).not.toBeDisabled(),
+			{ timeout: 3000 },
+		)
 
 		// expect first repo name is from page 1
-		expect(screen.getByRole('cell', {name: /2-0/})).toBeInTheDocument()
-  })
+		expect(screen.getByRole('cell', { name: /2-0/ })).toBeInTheDocument()
+	})
 })
 
 describe('when the developer clicks on search and then on next page button and then on previous page button', () => {
-  it('must display the previus repositories page', async () => {
+	it('must display the previus repositories page', async () => {
 		setup();
-    // config server handler
-    server.use(rest.get('/search/repositories', handlerPaginated))
+		// config server handler
+		server.use(rest.get('/search/repositories', handlerPaginated))
 
-    // click search
-    fireClickSearch()
+		// click search
+		fireClickSearch()
 
-    // wait table
-    expect(await screen.findByRole('table')).toBeInTheDocument()
+		// wait table
+		expect(await screen.findByRole('table')).toBeInTheDocument()
 
-    // expect first repo name is from page 0
-    expect(screen.getByRole('cell', {name: /1-0/})).toBeInTheDocument()
+		// expect first repo name is from page 0
+		expect(screen.getByRole('cell', { name: /1-0/ })).toBeInTheDocument()
 
-    // expect next page is not disabled
-    expect(screen.getByRole('button', {name: /next page/i})).not.toBeDisabled()
+		// expect next page is not disabled
+		expect(screen.getByRole('button', { name: /next page/i })).not.toBeDisabled()
 
-    // click next page button
-    fireEvent.click(screen.getByRole('button', {name: /next page/i}))
+		// click next page button
+		fireEvent.click(screen.getByRole('button', { name: /next page/i }))
 
-    // wait search button is not disabled
-    expect(screen.getByRole('button', {name: /search/i})).toBeDisabled()
+		// wait search button is not disabled
+		expect(screen.getByRole('button', { name: /search/i })).toBeDisabled()
 
 		await waitFor(
-      () =>
-        expect(
-          screen.getByRole('button', {name: /search/i}),
-        ).not.toBeDisabled(),
-      {timeout: 3000},
-    )
+			() =>
+				expect(
+					screen.getByRole('button', { name: /search/i }),
+				).not.toBeDisabled(),
+			{ timeout: 3000 },
+		)
 
 		// expect first repo name is from page 1
-		expect(screen.getByRole('cell', {name: /2-0/})).toBeInTheDocument()
+		expect(screen.getByRole('cell', { name: /2-0/ })).toBeInTheDocument()
 
 		// click previous page
-		fireEvent.click(screen.getByRole('button', {name: /previous page/i}))
+		fireEvent.click(screen.getByRole('button', { name: /previous page/i }))
 
 		// wait search finish
 		await waitFor(
-      () =>
-        expect(
-          screen.getByRole('button', {name: /search/i}),
-        ).not.toBeDisabled(),
-      {timeout: 3000},
-    )
+			() =>
+				expect(
+					screen.getByRole('button', { name: /search/i }),
+				).not.toBeDisabled(),
+			{ timeout: 3000 },
+		)
 
 		// expect
-		expect(screen.getByRole('cell', {name: /1-0/})).toBeInTheDocument()
-  }, 10000)
+		expect(screen.getByRole('cell', { name: /1-0/ })).toBeInTheDocument()
+	}, 10000)
+})
+
+describe('when there is an unexpected error from the backend', () => {
+	it('must display an alert message error with the message from the service', async () => {
+		setup();
+		// config server return error
+		server.use(
+			rest.get('/search/repositories', (req, res, ctx) =>
+				res(ctx.status(422), ctx.json(makeFakeError())),
+			),
+		)
+
+		// click search
+		fireClickSearch()
+
+		// expect message
+		expect(await screen.findByRole('alert', { name: /validation failed/i })).toBeInTheDocument()
+	})
 })
