@@ -17,7 +17,7 @@ import {
 	makeFakeError,
 } from '../../__fixtures__/repos'
 import { handlerPaginated } from '../../__fixtures__/handlers';
-import { OK_STATUS } from '../../consts';
+import { OK_STATUS, UNEXPECTED_STATUS, UNPROCESSABLE_STATUS } from '../../consts';
 
 const fakeResponse = makeFakeResponse({ totalCount: 1 })
 
@@ -396,13 +396,15 @@ describe('when the developer clicks on search and then on next page button and t
 	}, 10000)
 })
 
-describe('when there is an unexpected error from the backend', () => {
+describe('when there is an Unprocessable Entity from the backend', () => {
 	it('must display an alert message error with the message from the service', async () => {
 		setup();
+
+		expect(screen.queryByText(/validation failed/i)).not.toBeInTheDocument()
 		// config server return error
 		server.use(
 			rest.get('/search/repositories', (req, res, ctx) =>
-				res(ctx.status(422), ctx.json(makeFakeError())),
+				res(ctx.status(UNPROCESSABLE_STATUS), ctx.json(makeFakeError())),
 			),
 		)
 
@@ -410,6 +412,26 @@ describe('when there is an unexpected error from the backend', () => {
 		fireClickSearch()
 
 		// expect message
-		expect(await screen.findByText(/validation failed/)).toBeVisible()
+		expect(await screen.findByText(/validation failed/i)).toBeVisible()
+	})
+})
+
+describe('when there is an unexpected error from the backend', () => {
+	it('must display an alert message error with the message from the service', async () => {
+		setup();
+
+		expect(screen.queryByText(/unexpected error/i)).not.toBeInTheDocument()
+		// config server return error
+		server.use(
+			rest.get('/search/repositories', (req, res, ctx) =>
+				res(ctx.status(UNEXPECTED_STATUS), ctx.json(makeFakeError({ message: 'Unexpected Error' }))),
+			),
+		)
+
+		// click search
+		fireClickSearch()
+
+		// expect message
+		expect(await screen.findByText(/unexpected error/i)).toBeVisible()
 	})
 })

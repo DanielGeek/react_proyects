@@ -11,6 +11,7 @@ import Snackbar from '@material-ui/core/Snackbar'
 import Content from '../content';
 import GitHubTable from '../github-table';
 import { getRepos } from '../../services';
+import { response } from 'msw';
 
 const ROWS_PER_PAGE_DEFAULT = 30;
 const INITIAL_CURRENT_PAGE = 0;
@@ -24,6 +25,7 @@ export const GithubSearchPage = () => {
 	const [currentPage, setCurrentPage] = useState(INITIAL_CURRENT_PAGE)
 	const [totalCount, setTotalCount] = useState(INITIAL_TOTAL_COUNT)
 	const [isOpen, setIsOpen] = useState(false)
+	const [errorMessage, setErrorMessage] = useState('')
 
 	const didMount = useRef(false);
 	const searchByInput = useRef(null);
@@ -42,8 +44,10 @@ export const GithubSearchPage = () => {
 			setReposList(data.items);
 			setTotalCount(data.total_count);
 			setIsSearchApplied(true);
-		} catch (error) {
+		} catch (err) {
+			const data = await err.json()
 			setIsOpen(true)
+			setErrorMessage(data.message)
 		} finally {
 			setIsSearching(false);
 		}
@@ -122,7 +126,7 @@ export const GithubSearchPage = () => {
         open={isOpen}
         autoHideDuration={6000}
         onClose={() => setIsOpen(false)}
-        message="validation failed"
+        message={errorMessage}
       />
 		</Container>
 	);
