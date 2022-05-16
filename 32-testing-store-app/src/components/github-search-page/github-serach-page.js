@@ -55,7 +55,7 @@ export const GithubSearchPage = () => {
 
 	const handleChangeRowsPerPage = (event) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
-		setCurrentPage(0);
+		setCurrentPage(INITIAL_CURRENT_PAGE);
 	};
 
 	const handleChangePage = (event, newPage) => {
