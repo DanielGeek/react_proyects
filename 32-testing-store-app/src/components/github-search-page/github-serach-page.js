@@ -62,6 +62,15 @@ export const GithubSearchPage = () => {
     setCurrentPage(newPage)
   }
 
+	const handleClickSearch = () => {
+		if (currentPage === INITIAL_CURRENT_PAGE) {
+			handleSearch();
+			return
+		}
+
+		setCurrentPage(INITIAL_CURRENT_PAGE)
+	}
+
 	useEffect(() => {
 		if (!didMount.current) {
 			didMount.current = true;
@@ -94,7 +103,7 @@ export const GithubSearchPage = () => {
 						fullWidth
 						color='primary'
 						variant='contained'
-						onClick={handleSearch}
+						onClick={handleClickSearch}
 					>
 						Search
 					</Button>

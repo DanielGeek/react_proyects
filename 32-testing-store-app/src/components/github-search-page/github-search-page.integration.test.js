@@ -164,3 +164,51 @@ describe('When the developer does a search and clicks on next page button and se
 	})
 })
 
+describe('When the developer does a search and clicks on next page button and clicks on search again', () => {
+	it('must display the results of the first page', async() => {
+		setup();
+		// config server handler
+		server.use(rest.get('/search/repositories', handlerPaginated))
+
+		// click search
+		fireClickSearch()
+
+		// wait table
+		expect(await screen.findByRole('table')).toBeInTheDocument()
+
+		// expect first repo name is from page 0
+		expect(screen.getByRole('cell', { name: /1-0/ })).toBeInTheDocument()
+
+		// expect next page is not disabled
+		expect(screen.getByRole('button', { name: /next page/i })).not.toBeDisabled()
+
+		// click next page button
+		fireEvent.click(screen.getByRole('button', { name: /next page/i }))
+
+		// wait search button is not disabled
+		expect(screen.getByRole('button', { name: /search/i })).toBeDisabled()
+
+		await waitFor(
+			() =>
+				expect(
+					screen.getByRole('button', { name: /search/i }),
+				).not.toBeDisabled(),
+			{ timeout: 3000 },
+		)
+
+		// expect first repo name is from page 1
+		expect(screen.getByRole('cell', { name: /2-0/ })).toBeInTheDocument()
+
+		// click search
+		fireClickSearch()
+
+		await waitFor(() =>
+			expect(screen.getByRole('button', { name: /search/i })).not.toBeDisabled(),
+		)
+
+		// expect first repo name is from page 0
+		expect(screen.getByRole('cell', { name: /1-0/ })).toBeInTheDocument()
+
+	})
+})
+
