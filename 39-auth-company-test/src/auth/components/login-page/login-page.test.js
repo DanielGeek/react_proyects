@@ -1,15 +1,25 @@
 import React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
+import {setupServer} from 'msw/node'
 
 import { LoginPage } from './login-page';
+import { handlers } from '../../../mocks/handlers';
 
 const passwordValidationMessage =
   'The password must contain at least 8 characters, one upper case letter, one number and one special character'
 
 const getPasswordInput = () => screen.getByLabelText(/password/i)
 
+const server = setupServer(...handlers)
+
 // eslint-disable-next-line testing-library/no-render-in-setup
 beforeEach(() => render(<LoginPage />))
+
+beforeAll(() => server.listen())
+
+afterEach(() => server.resetHandlers())
+
+afterAll(() => server.close())
 
 describe('when login page is mounted', () => {
   it('must display the login title', () => {
@@ -143,4 +153,14 @@ then change with valid value and blur again`, () => {
       screen.queryByText(passwordValidationMessage),
     ).not.toBeInTheDocument()
   })
+})
+
+describe('when the user submit the login form with valid data', () => {
+  it.todo(
+    'must disable the submit button while the form page is fetching the data',
+  )
+
+  it.todo(
+    'must be a loading indicator at the top of the form while it is fetching',
+  )
 })
