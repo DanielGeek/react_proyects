@@ -53,10 +53,12 @@ export const LoginPage = () => {
       return
     }
 
+    const { email, password } = formValues
+
     try {
       setIsFetching(true)
 
-      const response = await login()
+      const response = await login({ email, password })
 
       if (!response.ok) {
         throw response
