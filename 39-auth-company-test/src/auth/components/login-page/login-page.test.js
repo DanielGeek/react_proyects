@@ -12,6 +12,15 @@ const getPasswordInput = () => screen.getByLabelText(/password/i)
 
 const getSendButton = () => screen.getByRole('button', {name: /send/i})
 
+const fillInputsWithValidValues = () => {
+  fireEvent.change(screen.getByLabelText(/email/i), {
+    target: {value: 'john.doe@test.com'},
+  })
+  fireEvent.change(screen.getByLabelText(/password/i), {
+    target: {value: 'Aa123456789!@#'},
+  })
+}
+
 const server = setupServer(...handlers)
 
 // eslint-disable-next-line testing-library/no-render-in-setup
@@ -52,8 +61,7 @@ describe('when the user leaves empty fields and clicks the submit button', () =>
 
 describe('when the user fills the fields and clicks the submit button', () => {
   it('must not display the required messages', () => {
-    screen.getByLabelText(/email/i).value = 'john.doe@test.com'
-    screen.getByLabelText(/password/i).value = 'Aa123456789!@#'
+    fillInputsWithValidValues()
 
     fireEvent.click(getSendButton())
 
@@ -161,6 +169,8 @@ then change with valid value and blur again`, () => {
 
 describe('when the user submit the login form with valid data', () => {
   it('must disable the submit button while the form page is fetching the data', async () => {
+    fillInputsWithValidValues()
+
     fireEvent.click(getSendButton())
 
     expect(getSendButton()).toBeDisabled()
@@ -170,6 +180,8 @@ describe('when the user submit the login form with valid data', () => {
 
   it('must be a loading indicator at the top of the form while it is fetching', async() => {
     expect(screen.queryByTestId('loading-indicator')).not.toBeInTheDocument()
+
+    fillInputsWithValidValues()
 
     fireEvent.click(getSendButton())
 
