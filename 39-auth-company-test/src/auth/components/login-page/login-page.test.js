@@ -1,26 +1,28 @@
 import React from 'react';
 import { screen, render, fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
-import {setupServer} from 'msw/node'
+import { setupServer } from 'msw/node'
 import { rest } from 'msw'
 
 import { LoginPage } from './login-page';
 import { handlers } from '../../../mocks/handlers';
 
 const HTTP_UNEXPECTED_ERROR_STATUS = 500
+const HTTP_INVALID_CREDENTIALS_STATUS = 401
+const HTTP_OK_STATUS = 200
 
 const passwordValidationMessage =
   'The password must contain at least 8 characters, one upper case letter, one number and one special character'
 
 const getPasswordInput = () => screen.getByLabelText(/password/i)
 
-const getSendButton = () => screen.getByRole('button', {name: /send/i})
+const getSendButton = () => screen.getByRole('button', { name: /send/i })
 
-const fillInputsWithValidValues = () => {
+const fillInputs = ({ email = 'john.doe@test.com', password = 'Aa123456789!@#' } = {}) => {
   fireEvent.change(screen.getByLabelText(/email/i), {
-    target: {value: 'john.doe@test.com'},
+    target: { value: email },
   })
   fireEvent.change(screen.getByLabelText(/password/i), {
-    target: {value: 'Aa123456789!@#'},
+    target: { value: password },
   })
 }
 
@@ -49,7 +51,7 @@ describe('when login page is mounted', () => {
 })
 
 describe('when the user leaves empty fields and clicks the submit button', () => {
-  it('display required messages as the format: “The [field name] is required”', async() => {
+  it('display required messages as the format: “The [field name] is required”', async () => {
     expect(screen.queryByText(/the email is required/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/the password is required/i)).not.toBeInTheDocument()
 
@@ -64,7 +66,7 @@ describe('when the user leaves empty fields and clicks the submit button', () =>
 
 describe('when the user fills the fields and clicks the submit button', () => {
   it('must not display the required messages', () => {
-    fillInputsWithValidValues()
+    fillInputs()
 
     fireEvent.click(getSendButton())
 
@@ -96,7 +98,7 @@ describe('when the user fills and blur the password input with a value with 7 ch
     const passwordSevenLengthVal = 'asdfghj'
 
     fireEvent.change(getPasswordInput(), {
-      target: {value: passwordSevenLengthVal},
+      target: { value: passwordSevenLengthVal },
     })
     fireEvent.blur(getPasswordInput())
 
@@ -110,7 +112,7 @@ describe('when the user fills and blur the password input with a value without o
     const passwordWithoutUpperCaseVal = 'asdfghj8'
 
     fireEvent.change(getPasswordInput(), {
-      target: {value: passwordWithoutUpperCaseVal},
+      target: { value: passwordWithoutUpperCaseVal },
     })
     fireEvent.blur(getPasswordInput())
 
@@ -124,7 +126,7 @@ describe('when the user fills and blur the password input with a value without o
     const passwordWithoutNumb = 'asdfghjA'
 
     fireEvent.change(getPasswordInput(), {
-      target: {value: passwordWithoutNumb},
+      target: { value: passwordWithoutNumb },
     })
     fireEvent.blur(getPasswordInput())
 
@@ -138,7 +140,7 @@ describe('when the user fills and blur the password input with a value without o
     const passwordWithoutSpecialChar = 'asdfghjA1a'
 
     fireEvent.change(getPasswordInput(), {
-      target: {value: passwordWithoutSpecialChar},
+      target: { value: passwordWithoutSpecialChar },
     })
     fireEvent.blur(getPasswordInput())
 
@@ -153,14 +155,14 @@ then change with valid value and blur again`, () => {
     const validPassword = 'aA1asdasda#'
 
     fireEvent.change(getPasswordInput(), {
-      target: {value: passwordWithoutSpecialChar},
+      target: { value: passwordWithoutSpecialChar },
     })
     fireEvent.blur(getPasswordInput())
 
     expect(screen.getByText(passwordValidationMessage)).toBeInTheDocument()
 
     fireEvent.change(getPasswordInput(), {
-      target: {value: validPassword},
+      target: { value: validPassword },
     })
     fireEvent.blur(getPasswordInput())
 
@@ -172,7 +174,7 @@ then change with valid value and blur again`, () => {
 
 describe('when the user submit the login form with valid data', () => {
   it('must disable the submit button while the form page is fetching the data', async () => {
-    fillInputsWithValidValues()
+    fillInputs()
 
     fireEvent.click(getSendButton())
 
@@ -181,10 +183,10 @@ describe('when the user submit the login form with valid data', () => {
     await waitFor(() => expect(getSendButton()).not.toBeDisabled())
   })
 
-  it('must be a loading indicator at the top of the form while it is fetching', async() => {
+  it('must be a loading indicator at the top of the form while it is fetching', async () => {
     expect(screen.queryByTestId('loading-indicator')).not.toBeInTheDocument()
 
-    fillInputsWithValidValues()
+    fillInputs()
 
     fireEvent.click(getSendButton())
 
@@ -201,7 +203,7 @@ describe('when the user submit the login form with valid data and there is an un
       rest.post('/login', (req, res, ctx) =>
         res(
           ctx.status(HTTP_UNEXPECTED_ERROR_STATUS),
-          ctx.json({message: 'Unexpected error, please try again'}),
+          ctx.json({ message: 'Unexpected error, please try again' }),
         ),
       ),
     )
@@ -211,7 +213,7 @@ describe('when the user submit the login form with valid data and there is an un
     ).not.toBeInTheDocument()
 
     // trigger submit form
-    fillInputsWithValidValues()
+    fillInputs()
 
     fireEvent.click(getSendButton())
 
@@ -223,7 +225,30 @@ describe('when the user submit the login form with valid data and there is an un
 })
 
 describe('when the user submit the login form with valid data and there is an invalid credentials error', () => {
-  it.todo(
-    'must display the error message "The email or password are not correct" from the api',
-  )
+  it('must display the error message "The email or password are not correct" from the api', async() => {
+    // septup server
+    server.use(
+      rest.post('/login', (req, res, ctx) => {
+        const {email, password} = req.body
+
+        if (email === 'wrong@mail.com' && password === 'Aa12345678$') {
+          return res(
+            ctx.status(HTTP_INVALID_CREDENTIALS_STATUS),
+            ctx.json({message: 'The email or password are not correct'}),
+          )
+        }
+
+        return res(ctx.status(HTTP_OK_STATUS))
+      }),
+    )
+
+    // trigger - submit form
+    fillInputs({email: 'wrong@mail.com', password: 'Aa12345678$'})
+    fireEvent.click(getSendButton())
+
+    // expects error message
+    expect(
+      await screen.findByText(/the email or password are not correct/i),
+    ).toBeInTheDocument()
+  })
 })
