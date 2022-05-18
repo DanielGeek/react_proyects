@@ -1,6 +1,7 @@
 import React from 'react';
 import { screen, render, fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import {setupServer} from 'msw/node'
+import { rest } from 'msw'
 
 import { LoginPage } from './login-page';
 import { handlers } from '../../../mocks/handlers';
@@ -189,4 +190,34 @@ describe('when the user submit the login form with valid data', () => {
 
     await waitForElementToBeRemoved(() => screen.queryByTestId('loading-indicator'))
   })
+})
+
+describe('when the user submit the login form with valid data and there is an unexpected server error', () => {
+  it('must display the error message "Unexpected error, please try again" from the api', async () => {
+    // setup - config server
+    server.use(
+      rest.post('/login', (req, res, ctx) =>
+        res(
+          ctx.status(500),
+          ctx.json({message: 'Unexpected error, please try again'}),
+        ),
+      ),
+    )
+
+    // trigger submit form
+    fillInputsWithValidValues()
+
+    fireEvent.click(getSendButton())
+
+    // expect display message error
+    expect(
+      await screen.findByText(/unexpected error, please try again/i),
+    ).toBeInTheDocument()
+  })
+})
+
+describe('when the user submit the login form with valid data and there is an invalid credentials error', () => {
+  it.todo(
+    'must display the error message "The email or password are not correct" from the api',
+  )
 })
