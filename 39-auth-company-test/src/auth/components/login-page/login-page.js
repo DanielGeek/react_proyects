@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -7,7 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Avatar from '@material-ui/core/Avatar'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
 import { login } from '../../services';
@@ -52,10 +53,11 @@ export const LoginPage = () => {
   const classes = useStyles()
   const [emailValidationMessage, setEmailValidationMessage] = useState('')
   const [passwordValidationMessage, setPasswordValidationMessage] = useState('')
-  const [formValues, setFormValues] = useState({ email: '', password: ''})
+  const [formValues, setFormValues] = useState({ email: '', password: '' })
   const [isFetching, setIsFetching] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [user, setUser] = useState({ role: '' })
 
   const validateForm = () => {
     const { email, password } = formValues
@@ -76,7 +78,7 @@ export const LoginPage = () => {
   const handleSubmit = async e => {
     e.preventDefault()
 
-    if(validateForm()) {
+    if (validateForm()) {
       return
     }
 
@@ -91,6 +93,8 @@ export const LoginPage = () => {
         throw response
       }
 
+      const { user: { role } } = await response.json()
+      setUser({ role })
     } catch (err) {
       const data = await err.json()
       setErrorMessage(data.message)
@@ -100,8 +104,8 @@ export const LoginPage = () => {
     }
   }
 
-  const handleChange = ({target:{value, name}}) => {
-    setFormValues({...formValues, [name]: value})
+  const handleChange = ({ target: { value, name } }) => {
+    setFormValues({ ...formValues, [name]: value })
   }
 
   const handleBlurEmail = () => {
@@ -123,6 +127,10 @@ export const LoginPage = () => {
     }
 
     setPasswordValidationMessage()
+  }
+
+  if (user.role) {
+    return <Redirect to="/admin" />
   }
 
   return (
@@ -171,7 +179,7 @@ export const LoginPage = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            >
+          >
             Send
           </Button>
         </form>
