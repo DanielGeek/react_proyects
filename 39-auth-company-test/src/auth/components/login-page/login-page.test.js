@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render, fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, fireEvent, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
 
@@ -8,6 +8,7 @@ import { handlers, handlerInvalidCredentials } from '../../../mocks/handlers';
 import {
   HTTP_UNEXPECTED_ERROR_STATUS,
 } from '../../../consts';
+import { renderWithRouter } from '../../../utils/tests';
 
 const passwordValidationMessage =
   'The password must contain at least 8 characters, one upper case letter, one number and one special character'
@@ -28,7 +29,7 @@ const fillInputs = ({ email = 'john.doe@test.com', password = 'Aa123456789!@#' }
 const server = setupServer(...handlers)
 
 // eslint-disable-next-line testing-library/no-render-in-setup
-beforeEach(() => render(<LoginPage />))
+beforeEach(() => renderWithRouter(<LoginPage />))
 
 beforeAll(() => server.listen())
 

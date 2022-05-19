@@ -3,12 +3,21 @@ import { rest } from 'msw'
 import {
   HTTP_INVALID_CREDENTIALS_STATUS,
   HTTP_OK_STATUS,
+  ADMIN_ROLE,
 } from '../consts';
 
 export const handlers = [
   rest.post('/login', (req, res, ctx) => {
     sessionStorage.setItem('is-authenticated', true)
-    return res(ctx.status(200), ctx.json({user: {role: 'admin'}}))
+    let role = ''
+
+    const {email} = req.body
+
+    if (email === 'admin@mail.com') {
+      role = ADMIN_ROLE
+    }
+
+    return res(ctx.status(200), ctx.json({user: {role}}))
   }),
 ]
 
