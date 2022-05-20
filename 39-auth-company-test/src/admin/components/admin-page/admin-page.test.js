@@ -2,11 +2,16 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 
 import {AdminPage} from './admin-page'
+import {AuthContext} from '../../../utils/contexts/auth-context'
 
 describe('When the admin page is mounted', () => {
   it('must display the admin username', () => {
-    render(<AdminPage />)
+    render(
+      <AuthContext.Provider value={{user: {username: 'John Doe'}}}>
+        <AdminPage />
+      </AuthContext.Provider>,
+    )
 
-    screen.getByText(/john doe/i).toBeInTheDocumente()
+    expect(screen.getByText(/john doe/i)).toBeInTheDocument()
   })
 })
