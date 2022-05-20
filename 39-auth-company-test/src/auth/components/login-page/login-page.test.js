@@ -20,7 +20,7 @@ const server = setupServer(...handlers)
 
 // eslint-disable-next-line testing-library/no-render-in-setup
 beforeEach(() => renderWithRouter(
-  <AuthContext.Provider value={{ handleSuccessLogin: jest.fn() }}>
+  <AuthContext.Provider value={{ handleSuccessLogin: jest.fn(), user: {role: ''} }}>
     <LoginPage />
   </AuthContext.Provider>
 ))
