@@ -9,6 +9,7 @@ import {
   HTTP_UNEXPECTED_ERROR_STATUS,
 } from '../../../consts';
 import { renderWithRouter } from '../../../utils/tests';
+import { AuthContext } from '../../../utils/contexts/auth-context'
 
 const passwordValidationMessage =
   'The password must contain at least 8 characters, one upper case letter, one number and one special character'
@@ -29,7 +30,11 @@ const fillInputs = ({ email = 'john.doe@test.com', password = 'Aa123456789!@#' }
 const server = setupServer(...handlers)
 
 // eslint-disable-next-line testing-library/no-render-in-setup
-beforeEach(() => renderWithRouter(<LoginPage />))
+beforeEach(() => renderWithRouter(
+  <AuthContext.Provider value={{ handleSuccessLogin: jest.fn() }}>
+    <LoginPage />
+  </AuthContext.Provider>
+))
 
 beforeAll(() => server.listen())
 
