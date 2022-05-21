@@ -51,5 +51,6 @@ describe('when the admin is authenticated in login page', () => {
 
     expect(await screen.findByText(/admin page/i)).toBeInTheDocument()
     // screen.debug()
+    expect(await screen.findByText(/john doe/i)).toBeInTheDocument()
   })
 })

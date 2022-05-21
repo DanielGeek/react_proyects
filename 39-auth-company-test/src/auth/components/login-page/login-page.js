@@ -96,8 +96,8 @@ export const LoginPage = () => {
         throw response
       }
 
-      const { user: { role } } = await response.json()
-      handleSuccessLogin({role})
+      const { user: { role, username } } = await response.json()
+      handleSuccessLogin({role, username})
     } catch (err) {
       const data = await err.json()
       setErrorMessage(data.message)
