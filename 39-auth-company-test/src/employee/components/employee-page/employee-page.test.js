@@ -28,4 +28,11 @@ describe('When the employee access to employee page', () => {
 
     expect(screen.queryByRole('button', { name: /delete/i })).not.toBeInTheDocument()
   })
+
+  it('the employee username should be displayed on the common navbar', () => {
+    renderWith({role: EMPLOYEE_ROLE, username: 'Joana Doe'})
+
+    // eslint-disable-next-line jest/valid-expect
+    expect(expect(screen.getByText(/joana doe/i)).toBeInTheDocument())
+  })
 })
