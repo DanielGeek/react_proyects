@@ -5,6 +5,7 @@ import {setupServer} from 'msw/node'
 import { renderWithAuthProvider, goTo, fillInputs, getSendButton, } from './utils/tests'
 import { handlers } from './mocks/handlers';
 import {AppRouter} from './app-router'
+import { ADMIN_EMAIL ,EMPLOYEE_EMAIL } from './consts';
 
 const server = setupServer(...handlers)
 
@@ -45,7 +46,7 @@ describe('when the admin is authenticated in login page', () => {
   it('must be redirected to admin page', async () => {
     renderWithAuthProvider(<AppRouter />)
 
-    fillInputs({email: 'admin@mail.com'})
+    fillInputs({email: ADMIN_EMAIL})
 
     fireEvent.click(getSendButton())
 
@@ -70,7 +71,7 @@ describe('when the employee is authenticated in login page', () => {
   it('must be redirected to employee page', async () => {
     renderWithAuthProvider(<AppRouter />)
 
-    fillInputs({email: 'employee@mail.com'})
+    fillInputs({email: EMPLOYEE_EMAIL})
 
     fireEvent.click(getSendButton())
 

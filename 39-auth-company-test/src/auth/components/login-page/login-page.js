@@ -15,20 +15,9 @@ import { login } from '../../services';
 
 import { ADMIN_ROLE, EMPLOYEE_ROLE } from '../../../consts';
 import { AuthContext } from '../../../utils/contexts/auth-context';
+import { validateEmail, validatePassword } from '../../../utils/helpers';
 
 const passwordValidationsMsg = 'The password must contain at least 8 characters, one upper case letter, one number and one special character';
-
-const validateEmail = (email) => {
-  const regex = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/
-
-  return regex.test(email);
-}
-
-const validatePassword = password => {
-  const passwordRulesRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/
-
-  return passwordRulesRegex.test(password)
-}
 
 const useStyles = makeStyles(theme => ({
   paper: {
