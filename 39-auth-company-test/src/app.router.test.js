@@ -5,7 +5,7 @@ import {setupServer} from 'msw/node'
 import { renderWithAuthProvider, goTo, fillInputs, getSendButton, } from './utils/tests'
 import { handlers } from './mocks/handlers';
 import {AppRouter} from './app-router'
-import { ADMIN_EMAIL ,EMPLOYEE_EMAIL, EMPLOYEE_ROLE } from './consts';
+import { ADMIN_EMAIL ,ADMIN_ROLE,EMPLOYEE_EMAIL, EMPLOYEE_ROLE } from './consts';
 
 const server = setupServer(...handlers)
 
@@ -33,15 +33,6 @@ describe('when the user is not authenticated and enters on employee page', () =>
   })
 })
 
-describe('when the user is authenticated and enters on admin page', () => {
-  it('must be redirected to login page', () => {
-    goTo('/admin')
-    renderWithAuthProvider(<AppRouter />, {isAuth: true})
-
-    expect(screen.getByText(/admin page/i)).toBeInTheDocument()
-  })
-})
-
 describe('when the admin is authenticated in login page', () => {
   it('must be redirected to admin page', async () => {
     renderWithAuthProvider(<AppRouter />)
@@ -59,7 +50,7 @@ describe('when the admin is authenticated in login page', () => {
 describe('when the admin goes to employees page', () => {
   it('must have access', () => {
     goTo('/admin')
-    renderWithAuthProvider(<AppRouter />, {isAuth: true})
+    renderWithAuthProvider(<AppRouter />, {isAuth: true, role: ADMIN_ROLE})
 
     fireEvent.click(screen.getByText(/employee/i))
 

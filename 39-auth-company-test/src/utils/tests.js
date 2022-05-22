@@ -11,7 +11,7 @@ export const renderWithRouter = (ui, { route = '/' } = {}) => {
 };
 
 export const renderWithAuthProvider = (ui, { isAuth = false, role = '' } = {}) => {
-	return render(<AuthGuard isAuth={isAuth} role={role}>{ui}</AuthGuard>, {
+	return render(<AuthGuard isAuth={isAuth} initialRole={role}>{ui}</AuthGuard>, {
 		wrapper: Router,
 	});
 };

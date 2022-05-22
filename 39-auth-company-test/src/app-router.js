@@ -14,7 +14,7 @@ export const AppRouter = () => {
         <Route path="/" exact>
           <LoginPage/>
         </Route>
-        <PrivateRoute path="/admin">
+        <PrivateRoute path="/admin" allowRoles={['admin']}>
           <AdminPage />
         </PrivateRoute>
         <PrivateRoute path="/employee">

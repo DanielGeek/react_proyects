@@ -6,6 +6,7 @@ import { UserLayout } from '../../../utils/components/user-layout'
 
 export const AdminPage = () => {
   const {user} = useContext(AuthContext)
+
   return (
     <UserLayout user={user}>
       <Typography component="h1" variant="h5">
