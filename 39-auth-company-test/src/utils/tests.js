@@ -10,8 +10,8 @@ export const renderWithRouter = (ui, { route = '/' } = {}) => {
 	return render(ui, { wrapper: Router });
 };
 
-export const renderWithAuthProvider = (ui, { isAuth = false } = {}) => {
-	return render(<AuthGuard isAuth={isAuth}>{ui}</AuthGuard>, {
+export const renderWithAuthProvider = (ui, { isAuth = false, role = '' } = {}) => {
+	return render(<AuthGuard isAuth={isAuth} role={role}>{ui}</AuthGuard>, {
 		wrapper: Router,
 	});
 };
