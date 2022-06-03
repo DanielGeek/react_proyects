@@ -6,7 +6,7 @@ const initialState = [{
 
 const todoReducer = ( state = initialState, action ) => {
 
-  if ( action.type === 'agregar' ) {
+  if ( action?.type === 'agregar' ) {
     return [ ...state, action.payload ];
   }
 
