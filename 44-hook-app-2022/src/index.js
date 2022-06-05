@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 
 // import { HookApp } from './HookApp';
 // import { CounterApp } from './components/01-useState/CounterApp';
@@ -13,9 +13,8 @@ import ReactDOM from 'react-dom/client';
 // import { TodoApp } from './components/06-useReducer/TodoApp';
 import { MainApp } from './components/07-useContext/MainApp';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <MainApp />
-  </React.StrictMode>
+ReactDOM.render(
+  <MainApp />,
+document.getElementById('root')
 );
+
