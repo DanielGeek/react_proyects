@@ -10,11 +10,12 @@ import ReactDOM from 'react-dom/client';
 // import { FocusScreen } from './components/04-useRef/FocusScreen';
 // import { RealExampleRef } from './components/04-useRef/RealExampleRef';
 // import { Layout } from './components/05-useLayoutEffect/Layout';
-import { TodoApp } from './components/06-useReducer/TodoApp';
+// import { TodoApp } from './components/06-useReducer/TodoApp';
+import { MainApp } from './components/07-useContext/MainApp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <TodoApp />
+    <MainApp />
   </React.StrictMode>
 );
