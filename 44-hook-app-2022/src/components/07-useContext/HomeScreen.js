@@ -5,14 +5,12 @@ export const HomeScreen = () => {
 
   const { user } = useContext(UserContext);
 
-  console.log(user);
-
   return (
     <div>
-      <h1>HomeScreen</h1>
+      <h1>HomeScreen<small>{ user?.name}</small></h1>
       <hr />
 
-      <pre className="container">
+      <pre aria-label="pre" className="container">
         { JSON.stringify( user, null, 3 )}
       </pre>
     </div>
