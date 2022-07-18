@@ -5,11 +5,6 @@ import { LoginScreen } from '../../../components/07-useContext/LoginScreen';
 
 describe('Pruebas en <LoginPage />', () => {
 
-  const user = {
-    id: 1,
-    name: 'Daniel'
-  }
-
   test('debe de mostrar el componente sin el usuario', () => {
     render(
     <UserContext.Provider value={{ user: null }}>
