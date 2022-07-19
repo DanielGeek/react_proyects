@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 export const counterSlice = createSlice({
   name: 'counter',
   initialState: {
-    counter: 10
+    counter: 10,
+    times: 0
   },
   reducers: {
     increment: (state) => {
@@ -13,8 +14,14 @@ export const counterSlice = createSlice({
       // immutable state based off those changes
       state.counter += 1
     },
+    incrementBy: (state, action) => {
+      state.counter += action.payload
+    },
+    decrement: (state) => {
+      state.counter -= 1;
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment } = counterSlice.actions
+export const { increment, decrement, incrementBy } = counterSlice.actions
