@@ -47,3 +47,7 @@ export const registerUserWithEmailPassword = async({ email, password, displayNam
     return { ok: false, errorMessage: error.message }
   }
 }
+
+export const loginWithEmailPassword = () => {
+  
+}
