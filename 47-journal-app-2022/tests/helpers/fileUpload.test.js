@@ -1,5 +1,12 @@
+import { v2 as cloudinary } from 'cloudinary'
 import { fileUpload } from "../../src/helpers/fileUpload";
 
+cloudinary.config({
+  cloud_name: 'danielgeek',
+  api_key: '821718144147991',
+  api_secret: 'H44NijLU2ZDMRU3d-kTtp95PDPM',
+  secure: true
+});
 
 describe('Pruebas en fileUpload', () => {
 
@@ -13,6 +20,22 @@ describe('Pruebas en fileUpload', () => {
       const url = await fileUpload( file );
       expect( typeof url ).toBe('string');
 
+      // console.log(url);
+      const segments = url.split('/');
+      const imageId = segments[ segments.length - 1 ].replace('.png', '');
+
+      const cloudResp = await cloudinary.api.delete_resources([ 'journal/' + imageId ], {
+        resource_type: 'image'
+      });
+      // console.log({ cloudResp });
+
+    });
+
+    test('debe de retornar null', async() => {
+      const file = new File([], 'foto.jpg');
+
+      const url = await fileUpload( file );
+      expect( url ).toBe(null);
     });
 
  });
