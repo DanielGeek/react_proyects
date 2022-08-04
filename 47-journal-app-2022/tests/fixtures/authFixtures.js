@@ -22,7 +22,7 @@ export const notAuthenticatedState = {
   email: null,
   displayName: null,
   photoURL: null,
-  errorMessage: null,
+  errorMessage: undefined,
 }
 
 export const demoUser = {
@@ -30,4 +30,5 @@ export const demoUser = {
   email: 'demo@google.com',
   displayName: 'Demo User',
   photoURL: 'https:://demo.jpg',
+  errorMessage: null,
 }
