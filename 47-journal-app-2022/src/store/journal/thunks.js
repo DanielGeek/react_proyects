@@ -9,7 +9,6 @@ export const startNewNote = () => {
     dispatch( savingNewNote() );
 
     const { uid } = getState().auth;
-    // uid
 
     const newNote = {
       title: '',
