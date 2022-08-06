@@ -6,8 +6,16 @@ import { getEnvironments } from "../helpers";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-const env = getEnvironments();
-console.log(env);
+const {
+  VITE_APIKEY,
+  VITE_AUTHDOMAIN,
+  VITE_DATABASEURL,
+  VITE_PROJECTID,
+  VITE_STORAGEBUCKET,
+  VITE_MESSAGINGSENDERID,
+  VITE_APPID,
+} = getEnvironments();
+
 
 // Your web app's Firebase configuration
 // Dev/Prod
@@ -22,14 +30,16 @@ console.log(env);
 
 // Testing
 const firebaseConfig = {
-  apiKey: "AIzaSyAp6hEavF4tr9p6uNGA6-W0ah-v2hj62Us",
-  authDomain: "redux-http-1a18f.firebaseapp.com",
-  databaseURL: "https://redux-http-1a18f-default-rtdb.firebaseio.com",
-  projectId: "redux-http-1a18f",
-  storageBucket: "redux-http-1a18f.appspot.com",
-  messagingSenderId: "430410199971",
-  appId: "1:430410199971:web:3b5be6d4f068c8a8b8e016"
+  apiKey: VITE_APIKEY,
+  authDomain: VITE_AUTHDOMAIN,
+  databaseURL: VITE_DATABASEURL,
+  projectId: VITE_PROJECTID,
+  storageBucket: VITE_STORAGEBUCKET,
+  messagingSenderId: VITE_MESSAGINGSENDERID,
+  appId: VITE_APPID,
 };
+
+console.log(firebaseConfig);
 
 // Initialize Firebase
 export const FirebaseApp = initializeApp(firebaseConfig);
