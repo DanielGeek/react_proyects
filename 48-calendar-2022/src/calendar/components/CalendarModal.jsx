@@ -1,5 +1,9 @@
+import { addHours } from "date-fns";
 import { useState } from "react";
+
 import Modal from "react-modal"
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const customStyles = {
   content: {
@@ -18,6 +22,27 @@ export const CalendarModal = () => {
 
   const [isOpen, setIsOpen] = useState(true);
 
+  const [formValues, setFormValues] = useState({
+    title: 'Daniel',
+    notes: 'Angel',
+    start: new Date(),
+    end: addHours( new Date(), 2),
+  });
+
+  const onInputChanged = ({ target }) => {
+    setFormValues({
+      ...formValues,
+      [target.name]: target.value
+    })
+  }
+
+  const onDateChanged = ( event, changing ) => {
+    setFormValues({
+      ...formValues,
+      [changing]: event
+    })
+  }
+
   const onCloseModal = () => {
     console.log('Cerrando modal');
     setIsOpen(false);
@@ -25,16 +50,75 @@ export const CalendarModal = () => {
 
   return (
     <Modal
-      isOpen={ isOpen }
-      onRequestClose={ onCloseModal }
+      isOpen={isOpen}
+      onRequestClose={onCloseModal}
       style={customStyles}
       className="modal"
       overlayClassName="modal-fondo"
-      closeTimeoutMS={ 200 }
+      closeTimeoutMS={200}
     >
-      <h1>Hola mundo</h1>
+      <h1> Nuevo evento </h1>
       <hr />
-      <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original.</p>
+      <form className="container">
+
+        <div className="form-group mb-2">
+          <label>Fecha y hora inicio</label>
+          <DatePicker
+            selected={ formValues.start}
+            onChange={ (event ) => onDateChanged(event, 'start') }
+            className="form-control"
+            dateFormat="Pp"
+           />
+        </div>
+
+        <div className="form-group mb-2">
+          <label>Fecha y hora fin</label>
+          <DatePicker
+            minDate={ formValues.start }
+            selected={ formValues.end}
+            onChange={ (event ) => onDateChanged(event, 'end') }
+            className="form-control"
+            dateFormat="Pp"
+           />
+        </div>
+
+        <hr />
+        <div className="form-group mb-2">
+          <label>Titulo y notas</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Título del evento"
+            name="title"
+            autoComplete="off"
+            value={ formValues.title }
+            onChange={ onInputChanged }
+          />
+          <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
+        </div>
+
+        <div className="form-group mb-2">
+          <textarea
+            type="text"
+            className="form-control"
+            placeholder="Notas"
+            rows="5"
+            name="notes"
+            value={ formValues.notes }
+            onChange={ onInputChanged }
+          ></textarea>
+          <small id="emailHelp" className="form-text text-muted">Información adicional</small>
+        </div>
+
+        <button
+          type="submit"
+          className="btn btn-outline-primary btn-block"
+        >
+          <i className="far fa-save"></i>
+          <span> Guardar</span>
+        </button>
+
+      </form>
     </Modal>
   )
 }
