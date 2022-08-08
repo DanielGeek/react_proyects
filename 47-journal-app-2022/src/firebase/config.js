@@ -3,7 +3,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
 import { getEnvironments } from "../helpers";
-// TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const {
@@ -38,8 +37,6 @@ const firebaseConfig = {
   messagingSenderId: VITE_MESSAGINGSENDERID,
   appId: VITE_APPID,
 };
-
-console.log(firebaseConfig);
 
 // Initialize Firebase
 export const FirebaseApp = initializeApp(firebaseConfig);
