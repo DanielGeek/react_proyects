@@ -5,26 +5,29 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete } from "../"
 
 import { localizer, getMessagesEs } from '../../helpers';
-import { useUiStore, useCalendarStore } from '../../hooks';
+import { useUiStore, useCalendarStore, useAuthStore } from '../../hooks';
 
 export const CalendarPage = () => {
 
+  const { user } = useAuthStore();
   const { openDateModal } = useUiStore();
   const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
 
-  const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week');
+  const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week' );
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
 
-    const styles = {
-      backgroundColor: '#347CF7',
+    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
+
+    const style = {
+      backgroundColor: isMyEvent ? '#347CF7' : '#465660',
       borderRadius: '0px',
       opacity: 0.8,
       color: 'white'
     }
 
     return {
-      styles
+      style
     }
   }
 
@@ -38,14 +41,16 @@ export const CalendarPage = () => {
     setActiveEvent( event );
   }
 
-  const onViewChange = ( event ) => {
+  const onViewChanged = ( event ) => {
     localStorage.setItem('lastView', event );
-    setLastView( event );
+    setLastView( event )
   }
+
 
   useEffect(() => {
     startLoadingEvents()
   }, [])
+  
 
   return (
     <>
@@ -53,12 +58,12 @@ export const CalendarPage = () => {
 
       <Calendar
         culture='es'
-        localizer={localizer}
-        events={events}
+        localizer={ localizer }
+        events={ events }
         defaultView={ lastView }
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 'calc(100vh - 80px)' }}
+        style={{ height: 'calc( 100vh - 80px )' }}
         messages={ getMessagesEs() }
         eventPropGetter={ eventStyleGetter }
         components={{
@@ -66,12 +71,16 @@ export const CalendarPage = () => {
         }}
         onDoubleClickEvent={ onDoubleClick }
         onSelectEvent={ onSelect }
-        onView={ onViewChange }
+        onView={ onViewChanged }
       />
 
+
       <CalendarModal />
+      
       <FabAddNew />
       <FabDelete />
+
+
     </>
   )
 }
