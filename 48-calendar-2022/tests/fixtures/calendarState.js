@@ -22,7 +22,7 @@ export const initialState = {
   activeEvent: null
 }
 
-export const calendarWithActiveEventsState = {
+export const calendarWithEventsState = {
   isLoadingEvents: false,
   events: [ ...events ],
   activeEvent: { ...events[0] }
