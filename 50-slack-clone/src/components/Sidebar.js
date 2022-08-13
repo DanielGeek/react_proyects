@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import CreateIcon from '@material-ui/icons/Create';
@@ -13,8 +13,36 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
+import { collection, getDocs } from 'firebase/firestore/lite';
+import { db } from '../firebase';
 
 function Sidebar() {
+
+  const [channels, setChannels] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+
+      const loadChannel = async(channelName) => {
+      setLoading(true);
+      try {
+        const collectionRef = collection( db, channelName );
+        const docs = await getDocs(collectionRef);
+        setChannels(docs);
+      } catch (error) {
+        setError(error);
+      }
+      setLoading(false);
+    }
+
+    loadChannel('rooms');
+  }, []);
+
+  // console.log(channels?.docs[0]._document.data.value.mapValue.fields.channelName.stringValue);
+  channels?.docs.map(( doc ) => ( console.log(doc.data().channelName)))
+  // console.log(channels);
+
   return (
     <SidebarContainer>
         <SidebarHeader>
@@ -40,6 +68,15 @@ function Sidebar() {
         <SidebarOption Icon={ExpandMoreIcon} title="Channel" />
         <hr />
         <SidebarOption Icon={AddIcon} addChannelOption title="Add channel" />
+
+        {channels?.docs.map(( doc ) => (
+          <SidebarOption
+            key={doc.id}
+            id={doc.id}
+            addChannelOption
+            title={doc.data().channelName}
+          />
+        ))}
 
     </SidebarContainer>
 

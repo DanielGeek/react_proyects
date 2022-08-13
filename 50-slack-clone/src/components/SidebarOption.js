@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
+import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { db } from '../firebase';
 
 function SidebarOption({ Icon, title, addChannelOption }) {
@@ -27,7 +27,7 @@ function SidebarOption({ Icon, title, addChannelOption }) {
         <h3>{title}</h3>
       ): (
         <SidebarOptionChannel>
-          <span>#</span>
+          <span>#{ title }</span>
         </SidebarOptionChannel>
       )}
     </SidebarOptionContainer>
