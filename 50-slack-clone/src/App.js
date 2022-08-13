@@ -6,17 +6,23 @@ import {
   Route
 } from "react-router-dom";
 import Header from './components/Header';
+import styled from 'styled-components';
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
     <div className="app">
       <Router>
       <>
-        <Switch>
-          <Route path="/" exact>
-            <Header />
-          </Route>
-        </Switch>
+        <Header />
+        <AppBody>
+          <Sidebar />
+          <Switch>
+            <Route path="/" exact>
+              {/* Chat */}
+            </Route>
+          </Switch>
+        </AppBody>
       </>
     </Router>
     </div>
@@ -24,3 +30,5 @@ function App() {
 }
 
 export default App;
+
+const AppBody = styled.div``;
