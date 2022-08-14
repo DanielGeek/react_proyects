@@ -15,9 +15,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLoadingChannels } from '../features/thunks';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
 
 function Sidebar() {
-
+  const [user] = useAuthState(auth);
   const dispatch = useDispatch();
   const { channels } = useSelector( state => state.app)
 
@@ -34,7 +36,7 @@ function Sidebar() {
             <h2>PAPA FAM HQ</h2>
             <h3>
               <FiberManualRecordIcon />
-              Sonny Sangha
+              {user.displayName}
             </h3>
           </SidebarInfo>
           <CreateIcon />

@@ -1,3 +1,6 @@
+# Proyect slack clone
+https://react-cursos-cda62.web.app/
+
 # Proyecto MERN Calendar App
 
 <p>App para guardar eventos en el calendario, con el stack MERN, uso de json web token, hooks useReduce, Router y deploy en heroku </p>

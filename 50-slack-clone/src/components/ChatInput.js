@@ -1,14 +1,17 @@
 import { Button } from '@material-ui/core';
 import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore/lite';
 import React, { useState } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { startLoadingRoomDetails } from '../features/thunks';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 
 function ChatInput({ channelId, chatRef }) {
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
+  const [user] = useAuthState(auth);
+
 
   const sendMessage = async(e) => {
     e.preventDefault();
@@ -20,8 +23,8 @@ function ChatInput({ channelId, chatRef }) {
     const newMessage = {
       message: input,
       timestamp: serverTimestamp(),
-      user: 'Daniel Ángel',
-      userImage: 'https://i0.wp.com/ciberseguridadenlinea.com/wp-content/uploads/2021/08/png-transparent-gold-colored-bitcoin-coin-bitcoin-cryptocurrency-monero-initial-coin-offering-bitcoin-medal-gold-metal.png?resize=300%2C281&ssl=1'
+      user: user.displayName,
+      userImage: user.photoURL
     }
 
     const newDoc = doc( collection( db, `rooms/${channelId}/messages` ))
