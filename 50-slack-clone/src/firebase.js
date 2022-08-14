@@ -7,12 +7,12 @@ import { getFirestore } from 'firebase/firestore/lite';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB2wWugxo-8TW2yzzlinfgLbLC9BAYs7cw",
-  authDomain: "slack-clone-5bb94.firebaseapp.com",
-  projectId: "slack-clone-5bb94",
-  storageBucket: "slack-clone-5bb94.appspot.com",
-  messagingSenderId: "480786996595",
-  appId: "1:480786996595:web:4dffb4ca3f358e13a83906"
+  apiKey: "AIzaSyA7vaailqFJ1ufW7X6hXH2Z5I06yy_VCCI",
+  authDomain: "react-cursos-cda62.firebaseapp.com",
+  projectId: "react-cursos-cda62",
+  storageBucket: "react-cursos-cda62.appspot.com",
+  messagingSenderId: "995663104854",
+  appId: "1:995663104854:web:9161952cb6f946279f64f7"
 };
 
 // Initialize Firebase

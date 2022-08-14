@@ -13,35 +13,19 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
-import { collection, getDocs } from 'firebase/firestore/lite';
-import { db } from '../firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import { startLoadingChannels } from '../features/thunks';
 
 function Sidebar() {
 
-  const [channels, setChannels] = useState();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const dispatch = useDispatch();
+  const { channels } = useSelector( state => state.app)
 
   useEffect(() => {
 
-      const loadChannel = async(channelName) => {
-      setLoading(true);
-      try {
-        const collectionRef = collection( db, channelName );
-        const docs = await getDocs(collectionRef);
-        setChannels(docs);
-      } catch (error) {
-        setError(error);
-      }
-      setLoading(false);
-    }
+    dispatch( startLoadingChannels() );
 
-    loadChannel('rooms');
   }, []);
-
-  // console.log(channels?.docs[0]._document.data.value.mapValue.fields.channelName.stringValue);
-  channels?.docs.map(( doc ) => ( console.log(doc.data().channelName)))
-  // console.log(channels);
 
   return (
     <SidebarContainer>
@@ -65,15 +49,14 @@ function Sidebar() {
         <SidebarOption Icon={FileCopyIcon} title="File browser" />
         <SidebarOption Icon={ExpandLessIcon} title="Show less" />
         <hr />
-        <SidebarOption Icon={ExpandMoreIcon} title="Channel" />
+        <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
         <hr />
         <SidebarOption Icon={AddIcon} addChannelOption title="Add channel" />
 
-        {channels?.docs.map(( doc ) => (
+        { channels?.docs?.map(( doc ) => (
           <SidebarOption
             key={doc.id}
             id={doc.id}
-            addChannelOption
             title={doc.data().channelName}
           />
         ))}

@@ -2,8 +2,12 @@ import React from 'react'
 import styled from 'styled-components';
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { db } from '../firebase';
+import { useDispatch } from 'react-redux';
+import { enterRoom, setChannelSeleted } from '../features/appSlice';
+import { startLoadingChannels } from '../features/thunks';
 
-function SidebarOption({ Icon, title, addChannelOption }) {
+function SidebarOption({ Icon, title, addChannelOption, id }) {
+  const dispatch = useDispatch();
 
   const addChannel = async() => {
     const channelName = prompt('Please enter the channel name');
@@ -11,11 +15,18 @@ function SidebarOption({ Icon, title, addChannelOption }) {
     if (channelName) {
       const newDoc = doc( collection( db, `rooms` ))
       await setDoc( newDoc, {channelName} );
+      dispatch( startLoadingChannels() );
     }
   };
 
   const selectChannel = () => {
-
+    // TODO: dispatch title
+    if ( id ) {
+      dispatch(enterRoom({
+        roomId: id
+      }))
+      dispatch(setChannelSeleted(title));
+    }
   };
 
   return (
@@ -27,7 +38,7 @@ function SidebarOption({ Icon, title, addChannelOption }) {
         <h3>{title}</h3>
       ): (
         <SidebarOptionChannel>
-          <span>#{ title }</span>
+          <h3># { title }</h3>
         </SidebarOptionChannel>
       )}
     </SidebarOptionContainer>
@@ -58,5 +69,6 @@ const SidebarOptionContainer = styled.div`
 `;
 
 const SidebarOptionChannel = styled.div`
-
+  padding: 5px 10px 10px 15px;
+  font-weight: 300;
 `;
