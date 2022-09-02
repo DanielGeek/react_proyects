@@ -1,4 +1,5 @@
 import VideoPlayer from '../VideoPlayer'
+import styles from './styles.module.css'
 
 const VIDEOS = [
   {
@@ -10,7 +11,7 @@ const VIDEOS = [
     comments: 333,
     songTitle: 'cualquier cosa....',
     albumCover: 'https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1665515557763077~c5_100x100.jpeg?x-expires=1662256800&x-signature=FnwWB7GKc%2BfmAEN6vUJ4SQ5rHBk%3D',
-    src: 'https://v16-webapp.tiktok.com/74e1291b49d6d4b0c149cf9934df3437/6311b1cd/video/tos/useast2a/tos-useast2a-ve-0068c001/c538f01a391847da86a248e9d95a3ad8/?a=1988&ch=0&cr=0&dr=0&lr=tiktok_m&cd=0%7C0%7C1%7C0&cv=1&br=2146&bt=1073&cs=0&ds=3&ft=gKSYZ88Uo0PD1rnMYyg9w~XE75LiaQ2D~bT&mime_type=video_mp4&qs=0&rc=NTo2OjY0ZmhoODY2aGU1aEBpMzl5dzk6ZnBvZjMzNzczM0AyYTEuLi01Ni4xYC01YTMwYSNjLmA1cjQwcy1gLS1kMTZzcw%3D%3D&l=20220902013202010189071069006D1A76&btag=80000'
+    src: 'https://v16-webapp.tiktok.com/7ddd22f70d8c0a6a401ca1b9cc81d5b4/6312c09e/video/tos/useast2a/tos-useast2a-ve-0068c002/89fc81145246472c9c5cb84fc01504f2/?a=1988&ch=0&cr=0&dr=0&lr=tiktok_m&cd=0%7C0%7C1%7C0&cv=1&br=4754&bt=2377&cs=0&ds=3&ft=ar5S8qqwmo0PDiW-SMaQ9MtJzObpkV1PCA&mime_type=video_mp4&qs=0&rc=PDhpN2gzZDk2ZDU2ZGc4O0BpajV4OTU6Zm5xZjMzNzczM0A1LWA0NjM0Ni0xYjAwNC5jYSNrYTM0cjRvYi9gLS1kMTZzcw%3D%3D&l=202209022047570101920550560D4C3590&btag=80000'
   },
   {
     id: 2,
@@ -21,14 +22,18 @@ const VIDEOS = [
     comments: 333,
     songTitle: 'cualquier cosa....',
     albumCover: 'https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1665515557763077~c5_100x100.jpeg?x-expires=1662256800&x-signature=FnwWB7GKc%2BfmAEN6vUJ4SQ5rHBk%3D',
-    src: 'https://v16-webapp.tiktok.com/4f849b5f82cad35cac33f9cf57ea1a42/6311c2dd/video/tos/useast2a/tos-useast2a-pve-0068/d8fb18983ccb433c8e2278f6b5fd32bc/?a=1988&ch=0&cr=0&dr=0&lr=tiktok_m&cd=0%7C0%7C1%7C0&cv=1&br=3172&bt=1586&cs=0&ds=3&ft=eXd.6HHvMyq8Zs~b.he2N9RCol7Gb&mime_type=video_mp4&qs=0&rc=NzU6NDQ3ZzM7OjY5PGg2NUBpamo7NDU6ZjNpZDMzNzczM0AzMF4yYTE1NjExLjZjM2ExYSMxcHMwcjQwcXJgLS1kMTZzcw%3D%3D&l=2022090202444501022307604227727847&btag=80000'
+    src: 'https://v16-webapp.tiktok.com/92844bdc432b714e6d9007e5db11ed29/6312c08a/video/tos/useast2a/tos-useast2a-ve-0068c003/b6b5f01b98024781b58cb518f344b407/?a=1988&ch=0&cr=0&dr=0&lr=tiktok_m&cd=0%7C0%7C1%7C0&cv=1&br=3680&bt=1840&cs=0&ds=3&ft=ar5S8qqwmo0PDiW-SMaQ9MtJzObpkV1PCA&mime_type=video_mp4&qs=0&rc=ZmlpM2loZjU5NzQ0ZTloOkBpM3R2ZDo6ZnM0ZjMzNzczM0AuMl81LjM1XzYxYTU1YTAzYSNyMGJxcjRfMjZgLS1kMTZzcw%3D%3D&l=202209022047570101920550560D4C3590&btag=80000'
   }
 ]
 
 export default function FeedVideos () {
   return (
     VIDEOS.map(video => {
-      return <VideoPlayer key={video.id} {...video} />
+      return (
+        <div key={video.id} className={styles.item}>
+          <VideoPlayer {...video} />
+        </div>
+      )
     })
   )
 }

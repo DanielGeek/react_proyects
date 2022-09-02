@@ -11,8 +11,9 @@
 main {
   aspect-ratio: 9/16;
   border-radius: 3px;
-  overflow-y: scroll;
-  max-width: 375px;
-  width: 100vw;
   display: block;
+  height: auto;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  width: 375px;
 }
