@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import './App.css'
+import FeedVideos from './components/FeedVideos'
+import VideoPlayer from './components/VideoPlayer'
 
 function App () {
-  const [count, setCount] = useState(0)
-
   return (
     <div className='App'>
-      TikTok clone
+      <main>
+        <FeedVideos />
+      </main>
     </div>
   )
 }
