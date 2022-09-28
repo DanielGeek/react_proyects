@@ -1,34 +1,20 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
-import Head from 'next/head'
 import Link from 'next/link'
-import { Navbar } from '../components/Navbar'
-import styles from '../styles/Home.module.css'
+import { MainLayout } from '../components/layouts/MainLayout'
 
 export default function HomePage() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Home - Daniel</title>
-        <meta name="description" content="Home Page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <MainLayout>
+       <h1>Home Page</h1>
 
-      <Navbar />
-
-      <main className={styles.main}>
-
-        <h1>Home Page</h1>
-
-        <h1 className={styles.title}>
+        <h1 className="title">
           {/* Go to <a href="/about">About</a> */}
           Go to<Link href="/about"> About</Link>
         </h1>
 
-        <p className={styles.description}>
+        <p className={'description'}>
           Get started by editing{' '}
-          <code className={styles.code}>pages/index.jsx</code>
+          <code className={'code'}>pages/index.jsx</code>
         </p>
-      </main>
-    </div>
+    </MainLayout>
   )
 }
