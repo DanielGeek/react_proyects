@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import Head from 'next/head'
 import Link from 'next/link'
+import { Navbar } from '../components/Navbar'
+
 import styles from '../styles/Home.module.css'
 
 export default function AboutPage() {
@@ -12,7 +14,12 @@ export default function AboutPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Navbar />
+
       <main className={styles.main}>
+
+        <h1>About Page</h1>
+
         <h1 className={styles.title}>
         Go to<Link href="/"> Home</Link>
         </h1>
