@@ -1,19 +1,20 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 export default function AboutPage() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Home - Daniel</title>
+        <title>About - Daniel</title>
         <meta name="description" content="About Page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Go to <a href="/">Home</a>
+        Go to<Link href="/"> Home</Link>
         </h1>
 
         <p className={styles.description}>
