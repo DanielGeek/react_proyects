@@ -1,7 +1,6 @@
+/* eslint-disable import/no-anonymous-default-export */
 
 const toogleFavorite = ( id: number ) => {
-
-  console.log('toggleFavorite Llamado');
 
   let favorites: number[] = JSON.parse( localStorage.getItem('favorites') || '[]');
 
@@ -15,6 +14,17 @@ const toogleFavorite = ( id: number ) => {
 
 }
 
+const existInFavorites = ( id: number ): boolean => {
+
+  if ( typeof window === 'undefined' ) return false;
+
+  let favorites: number[] = JSON.parse( localStorage.getItem('favorites') || '[]');
+
+  return favorites.includes( id );
+
+}
+
 export default {
+  existInFavorites,
   toogleFavorite,
 }
