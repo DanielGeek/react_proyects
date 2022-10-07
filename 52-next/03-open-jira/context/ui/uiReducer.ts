@@ -1,8 +1,8 @@
 import { UIState } from './';
 
 type UIActionType =
- | { type: 'UI - Open Sidebar' }
- | { type: 'UI - Close Sidebar' }
+    | { type: 'UI - Open Sidebar' }
+    | { type: 'UI - Close Sidebar' }
 
 export const uiReducer = ( state: UIState, action: UIActionType ): UIState => {
 
