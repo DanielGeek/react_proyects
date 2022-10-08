@@ -1,3 +1,4 @@
+import { Description } from '@mui/icons-material';
 import React, { useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -37,11 +38,27 @@ const ENTRIES_INITIAL_STATE: EntriesState = {
 
 export const EntriesProvider:React.FC<Props> = ({ children }) => {
 
- const [state, dispatch] = useReducer( entriesReducer, ENTRIES_INITIAL_STATE)
+ const [state, dispatch] = useReducer( entriesReducer, ENTRIES_INITIAL_STATE);
+
+ const addNewEntry = ( description: string ) => {
+
+  const newEntry: Entry = {
+    _id: uuidv4(),
+    description,
+    createAt: Date.now(),
+    status: 'pending'
+  }
+
+  dispatch({ type: '[Entry] Add-Entry', payload: newEntry });
+
+ }
 
  return (
    <EntriesContext.Provider value={{
      ...state,
+
+     // Methos
+     addNewEntry,
    }}>
      { children }
    </EntriesContext.Provider>
