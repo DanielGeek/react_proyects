@@ -5,12 +5,12 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined'
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 import { EntriesContext } from '../../context/entries';
+import { UIContext } from '../../context/ui';
 
 export const NewEntry = () => {
 
   const { addNewEntry } = useContext( EntriesContext );
-
-  const [isAdding, setIsAdding] = useState(false);
+  const { isAddingEntry, setIsAddingEntry } = useContext( UIContext );
 
   const [inputValue, setInputValue] = useState('');
   const [touched, setTouched] = useState(false);
@@ -24,7 +24,7 @@ export const NewEntry = () => {
     if ( inputValue.length === 0 ) return;
 
     addNewEntry( inputValue );
-    setIsAdding( false );
+    setIsAddingEntry( false );
     setTouched( false );
     setInputValue('');
   }
@@ -33,7 +33,7 @@ export const NewEntry = () => {
     <Box sx={{ marginBottom: 2, paddingX: 1 }}>
 
       {
-        isAdding ? (
+        isAddingEntry ? (
           <>
             <TextField
               fullWidth
@@ -42,7 +42,7 @@ export const NewEntry = () => {
               autoFocus
               multiline
               label='New entry'
-              helperText={ inputValue.length <= 0 && touched && 'write a value' }
+              helperText={ inputValue.length <= 0 && touched && 'Write a value' }
               error={ inputValue.length <= 0 && touched }
               value={ inputValue }
               onChange={ onTextFieldChanged }
@@ -52,7 +52,7 @@ export const NewEntry = () => {
             <Box display='flex' justifyContent='space-between'>
               <Button
                 variant='text'
-                onClick={() => setIsAdding( false ) }
+                onClick={() => setIsAddingEntry( false ) }
               >
                 Cancel
               </Button>
@@ -72,7 +72,7 @@ export const NewEntry = () => {
             startIcon={ <AddIcon /> }
             fullWidth
             variant='outlined'
-            onClick={() => setIsAdding( true ) }
+            onClick={() => setIsAddingEntry( true ) }
           >
             Add Task
           </Button>
