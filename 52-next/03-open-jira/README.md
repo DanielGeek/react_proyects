@@ -11,3 +11,6 @@ docker-compose up -d
 ```
 mongodb://localhost:27017/entriesdb
 ```
+
+## Configure environment variables
+Rename file __.env.template__ to __.env__
