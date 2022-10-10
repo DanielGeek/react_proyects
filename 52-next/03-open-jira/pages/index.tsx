@@ -5,6 +5,10 @@ import { Layout } from '../components/layout';
 import { EntryList, NewEntry } from '../components/ui';
 
 const HomePage: NextPage = () => {
+
+  console.log(process.env.NEXT_PUBLIC_CLIENT_KEY);
+  console.log(process.env.SECRET_KEY);
+
   return (
     <Layout title='Home - OpenJira'>
       <Grid container spacing={ 2 }>
