@@ -1,6 +1,7 @@
 import { Description } from '@mui/icons-material';
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { entriesApi } from '../../apis';
 
 import { Entry } from '../../interfaces';
 
@@ -39,6 +40,16 @@ export const EntriesProvider:React.FC<Props> = ({ children }) => {
   dispatch({ type: '[Entry] Entry-Updated', payload: entry });
 
  }
+
+ const refreshEntries = async() => {
+    const { data } = await entriesApi.get<Entry[]>('/entries');
+    dispatch({ type: '[Entry] Refresh-Data', payload: data });
+ }
+
+ useEffect(() => {
+  refreshEntries();
+ }, [])
+
 
  return (
    <EntriesContext.Provider value={{
