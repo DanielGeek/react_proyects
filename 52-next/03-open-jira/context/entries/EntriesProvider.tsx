@@ -1,10 +1,7 @@
-import { Description } from '@mui/icons-material';
 import React, { useEffect, useReducer } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+
 import { entriesApi } from '../../apis';
-
 import { Entry } from '../../interfaces';
-
 import { EntriesContext, entriesReducer } from './';
 
 interface Props {
@@ -22,16 +19,10 @@ export const EntriesProvider:React.FC<Props> = ({ children }) => {
 
  const [state, dispatch] = useReducer( entriesReducer, ENTRIES_INITIAL_STATE);
 
- const addNewEntry = ( description: string ) => {
+ const addNewEntry = async( description: string ) => {
 
-  const newEntry: Entry = {
-    _id: uuidv4(),
-    description,
-    createdAt: Date.now(),
-    status: 'pending'
-  }
-
-  dispatch({ type: '[Entry] Add-Entry', payload: newEntry });
+  const { data } = await entriesApi.post<Entry>('/entries', { description });
+  dispatch({ type: '[Entry] Add-Entry', payload: data });
 
  }
 
