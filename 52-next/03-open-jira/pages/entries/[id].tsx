@@ -6,17 +6,17 @@ import { capitalize, Button, Card, CardActions, CardContent, CardHeader, FormCon
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
+import { dbEntries } from '../../database';
 import { Layout } from "../../components/layout"
-import { EntryStatus } from "../../interfaces";
-import { isValidObjectId } from 'mongoose';
+import { Entry, EntryStatus } from "../../interfaces";
 
 const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
 
 interface Props {
-
+    entry: Entry
 }
 
-export const EntryPage:FC = ( props ) => {
+export const EntryPage:FC<Props> = ( props ) => {
 
   console.log({ props });
 
@@ -123,7 +123,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   const { id } = params as { id: string };
 
-  if ( !isValidObjectId(id) ) {
+  const entry = await dbEntries.getEntryById( id );
+
+  if ( !entry ) {
     return {
       redirect: {
         destination: '/',
@@ -134,7 +136,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
-      id
+      entry
     }
   }
 }
