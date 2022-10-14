@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useMemo } from 'react';
 import { capitalize, Button, Card, CardActions, CardContent, CardHeader, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, IconButton } from "@mui/material";
 
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
@@ -14,6 +14,8 @@ export const EntryPage = () => {
   const [inputValue, setInputValue] = useState('');
   const [status, setStatus] = useState<EntryStatus>('pending');
   const [touched, setTouched] = useState(false);
+
+  const isNotValid = useMemo(() => inputValue.length <= 0 && touched, [inputValue, touched]);
 
   const onInputValueChanged = ( event: ChangeEvent<HTMLInputElement> ) => {
     setInputValue( event.target.value );
@@ -50,7 +52,10 @@ export const EntryPage = () => {
                 multiline
                 label="New entry"
                 value={ inputValue }
+                onBlur={ () => setTouched( true ) }
                 onChange={ onInputValueChanged }
+                helperText={ isNotValid && 'Write a value'}
+                error={ isNotValid }
               />
 
               <FormControl>
@@ -81,6 +86,7 @@ export const EntryPage = () => {
                 variant="contained"
                 fullWidth
                 onClick={ onSave }
+                disabled={ inputValue.length <= 0 }
               >
                 Save
               </Button>
