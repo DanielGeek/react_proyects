@@ -10,5 +10,5 @@ export const getEntryById = async( id: string): Promise<IEntry | null> => {
   const entry = await Entry.findById(id).lean();
   await db.disconnect();
 
-  return entry;
+  return JSON.parse( JSON.stringify(entry) );
 }
