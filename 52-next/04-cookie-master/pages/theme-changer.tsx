@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { GetServerSideProps } from 'next';
 import { Button, Card, CardContent, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 import { Layout } from "../components/layouts";
 
@@ -25,9 +26,16 @@ const ThemeChangerPage: React.FC = ( props ) => {
     Cookies.set('theme', selectedTheme);
   }
 
+  const onClick = async() => {
+    const { data } = await axios.get('/api/hello');
+
+    console.log({ data });
+  }
+
   useEffect(() => {
 
     console.log( 'LocalStorage ', localStorage.getItem('theme'));
+    console.log( 'Cookies ', Cookies.get('theme'));
 
   }, []);
 
@@ -48,7 +56,7 @@ const ThemeChangerPage: React.FC = ( props ) => {
                 </FormControl>
 
                 <Button
-                    // onClick={ onClick }
+                    onClick={ onClick }
                 >
                     Request
                 </Button>
