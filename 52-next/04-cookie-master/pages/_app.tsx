@@ -5,27 +5,38 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 
 import { darkTheme, lightTheme, customTheme } from '../themes';
 
-function MyApp({ Component, pageProps, ...rest }: AppProps) {
+interface Props extends AppProps {
+  theme: string;
+}
 
-  console.log({rest});
+function MyApp({ Component, pageProps, theme = 'dark' }: Props) {
+
+  // console.log({theme});
+
+  const currentTheme = theme === 'light'
+      ? lightTheme
+      : (theme === 'dark')
+        ? darkTheme
+        : customTheme;
+
   return (
-    <ThemeProvider theme={ darkTheme }>
+    <ThemeProvider theme={ currentTheme }>
       <CssBaseline />
       <Component {...pageProps} />
     </ThemeProvider>
   )
 }
 
-MyApp.getInitialProps = async( appContext: AppContext) => {
+// MyApp.getInitialProps = async( appContext: AppContext) => {
 
-  const { theme } = appContext.ctx.req ? ( appContext.ctx.req as any).cookies : { theme: 'light' }
+//   const { theme } = appContext.ctx.req ? ( appContext.ctx.req as any).cookies : { theme: 'light' }
 
-  const validThemes = ['light', 'dark', 'custom'];
-  // console.log('getInitialProps: ', cookies);
+//   const validThemes = ['light', 'dark', 'custom'];
+//   // console.log('getInitialProps: ', cookies);
 
-  return {
-    theme: validThemes.includes( theme ) ? theme : 'dark',
-  }
-}
+//   return {
+//     theme: validThemes.includes( theme ) ? theme : 'dark',
+//   }
+// }
 
 export default MyApp
