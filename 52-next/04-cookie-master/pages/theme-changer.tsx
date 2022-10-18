@@ -8,13 +8,12 @@ import { Layout } from "../components/layouts";
 
 interface Props {
     children?: React.ReactNode;
+    theme: String;
   }
 
-const ThemeChangerPage: React.FC = ( props ) => {
+const ThemeChangerPage: React.FC<Props> = ({ theme }) => {
 
-    console.log({ props });
-
-  const [currentTheme, setCurrentTheme] = useState('light');
+  const [currentTheme, setCurrentTheme] = useState(theme);
 
   const onThemeChange = ( event: ChangeEvent<HTMLInputElement>) => {
     const selectedTheme = event.target.value;
@@ -73,9 +72,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
     const { theme = 'light', name = "No name" } = req.cookies;
 
+    const validThemes = ['light', 'dark', 'custom'];
+
     return {
         props: {
-            theme,
+            theme: validThemes.includes( theme ) ? theme : 'dark',
             name,
         }
     }
