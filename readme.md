@@ -1,98 +1,110 @@
 # Proyect slack clone
 https://react-cursos-cda62.web.app/
 
-# Proyecto MERN Calendar App
+# Proyect MERN Calendar App
 
-<p>App para guardar eventos en el calendario, con el stack MERN, uso de json web token, hooks useReduce, Router y deploy en heroku </p>
+<p>App to save events in the calendar, with the MERN stack, use of json web token, hooks useReduce, Router and deploy in heroku </p>
+
 https://mern-calendar-dangel.herokuapp.com
 
 # RPS-Juego
 
-<p>Implementación usando React JS del tradicional juego de piedra papel y tijera con el stack MERN.</p>
+<p>Implementation using React JS of the traditional rock-paper-scissors game with the MERN stack.</p>
 
-<p>Uso de hooks useState, UseSelector, dispatch, redux, enzyme, react-router, el front es creado con react, el back en node con express y la bd es con mongodb
-Además se uso localStorage para mantener los datos del usuario y de cada ronda<p>
+<p>Use of hooks useState, UseSelector, dispatch, redux, enzyme, react-router, the front is created with react, the back in node with express and the db is with mongodb
+In addition, localStorage was used to maintain the user data and each round<p>
 
-# Como funciona?
+# How does it work?
 
-<p>Inicias en una pantalla donde te solicita tu nombre, al darle start comienza en juego tendrás disponible 3 cartas Pidra, Papel y Tijera, para jugar solo debes hacer click en una de las cartas, luego el segundo jugador el cual es simulado por una computadora hara su jugada y mostrara el resultado, en la parte derecha saldra cada ronda, si uno de los 2 jugadores gana 3 veces sera el ganador y el juego te pédira iniciar nuevamente.</p>
+<p>You start on a screen where it asks for your name, when you start the game you will have available 3 cards Stone, Paper and Scissors, to play you just have to click on one of the cards, then the second player which is simulated by a computer will your move and will show the result, on the right side each round will come out, if one of the 2 players wins 3 times he will be the winner and the game will ask you to start again.</p>
 
-<p>Existe un link hacia los ganadores guardados en la bd de mongo que se muestran en la ruta /winners</p>
-
-# url de la app para probarla en línea
+<p>There is a link to the winners saved in the mongo database that are shown in the /winners route</p>
 
 https://rpsgamer.herokuapp.com/
 
 # Journal App <br>
 
-<p>Uso de SASS, react hooks useState, Redux, Firebase y Firestore, google sign-in, useSelector, subida imagenes por API, route entre otros y deploy en netlify </p>
+<p>Use of SASS, react hooks useState, Redux, Firebase and Firestore, google sign-in, useSelector, upload images by API, route among others and deploy in netlify </p>
+
 https://jovial-tereshkova-ada93c.netlify.app/
 
 # Heroes SPA <br>
 
-<p>Uso de Router, history push / replace, useMemo, QueryString, Protecció de rutas, authReducer y deploy en netlify </p>
+<p>Use of Router, history push / replace, useMemo, QueryString, Route protection, authReducer and deploy in netlify </p>
+
 https://wonderful-hoover-24ce9b.netlify.app/
 
-# Bebidas app
+# Drinks apps
 
-<p>Proyecto para obtener bebidas por medio de una api, usando hooks useState, Context, material-ui, bootstrap</p>
+<p>Project to get drinks through an api, using hooks useState, Context, material-ui, bootstrap</p>
+
 https://gifted-albattani-80d16b.netlify.app/
 
-# Canciones App
+# Songs App
 
-<p>App para obtener información artista y letra canción consumiendo dos apis simultaneamente, uso de axios, hooks useState, useEffect, PropTypes, Bootstrap </p>
+<p>App to obtain artist and song lyrics information consuming two apis simultaneously, use of axios, hooks useState, useEffect, PropTypes, Bootstrap </p>
+
 https://nostalgic-einstein-ce1bfa.netlify.app/
 
-# Criptomonedas App
+# Cryptocurrencies App
 
-<p>App para obtener el precio de criptomonedas en diferetes divisas todo obtenido por medio de una API, construida en React con custom hooks, useState, useEffect, styled component
+<p>App to obtain the price of cryptocurrencies in different currencies all obtained through an API, built in React with custom hooks, useState, useEffect, styled component
+
 https://gracious-jennings-411e5c.netlify.app/
 
-# Clima App
+# Weather App
 
-<p>App para obtener clima de ciudades por medio de la API de https://openweathermap.org/ usando react con hooks useState</p>
+<p>App to obtain weather from cities through the API of https://openweathermap.org/ using react with hooks useState</p>
+
 https://inspiring-borg-ea8a0a.netlify.app/
 
-# Cotizador de seguros App <br>
+# Insurance Quote App <br>
 
-<p>Pequeña app para cotizar seguro de autos usando hooks, prop-types, Styled Components y deploy en netlify </p>
+<p>Small app to quote car insurance using hooks, prop-types, Styled Components and deploy in netlify </p>
+
 https://stupefied-wescoff-0a599f.netlify.app/
 
-# Control de presupuesto App <br>
+# Budget control App <br>
 
-<p>Uso de hooks useState y useEffect y deploy en netlify</p>
+<p>Use of hooks useState and useEffect and deploy in netlify</p>
+
 https://happy-beaver-685800.netlify.app/
 
-# Citas App <br>
+# Appointments App <br>
 
-<p>Uso de hooks useState, useEffect y localStorage y deploy en netlify</p>
+<p>Use of hooks useState, useEffect and localStorage and deploy in netlify</p>
+
 https://mystifying-pare-42efc4.netlify.app/
 
-# Proyecto GifExpertApp <br>
+# GIFExpertApp Project <br>
 
-<p>Uso de hooks, conexión a api proveedora de imagenes gif</p>
+<p>Use of hooks, connection to gif image provider api</p>
+
 https://danielgeek.github.io/react_proyectos/
 
-# Proyecto para obtener peliculas de una api de apple
+# Project to get movies from an apple api
 
-<p>Uso de react con class components, prop-types, react-router, bootstrap</p>
+<p>Using react with class components, prop-types, react-router, bootstrap</p>
+
 https://nostalgic-bartik-a577b7.netlify.app
 
-# Imagenes App
+# Images App
 
-<p>Buscador de imagenes por medio de la API de pixabay con react hooks useState, useEffect, bootstrap</p>
+<p>Image search through the pixabay API with react hooks useState, useEffect, bootstrap</p>
+
 https://boring-jennings-b0c2df.netlify.app/
 
 # Breaking bad App
 
-<p>Proyecto para obtener frases de breaking bad por medio de una API, y uso de hooks useState, useEffect y styled component para el css</p>
+<p>Project to obtain breaking bad phrases through an API, and use of useState, useEffect and styled component hooks for the css</p>
+
 https://upbeat-chandrasekhar-e83455.netlify.app/
 
-# Uso local de los proyectos
+# Local use of projects
 
-Ir al directorio
+go to directory
 `cd my-app`
-Instalar modulos node
+Install node modules
 `npm i`
-Levantar el proyecto
+lift the project
 `npm start`
