@@ -1,3 +1,8 @@
+# Pokémon App
+
+<p>pokemon app built in next and deployed in vercel</p>
+
+https://next-pokemon-static-vert.vercel.app/
 # Proyect slack clone
 https://react-cursos-cda62.web.app/
 
