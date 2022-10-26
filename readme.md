@@ -1,4 +1,9 @@
-# Pokémon App
+# Pokémon App 1
+<p>pokemon app built in react</p>
+
+https://silly-fenglisu-bebba7.netlify.app/
+
+# Pokémon App 2
 
 <p>pokemon app built in next and deployed in vercel</p>
 
