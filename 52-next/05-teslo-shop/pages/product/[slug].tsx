@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NextPage, GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from 'next/router';
 
 import { Box, Button, Chip, Grid, Typography } from "@mui/material";
 
@@ -15,6 +16,8 @@ interface Props {
 }
 
 const ProductPage:NextPage<Props> = ({ product }) => {
+
+  const router = useRouter();
 
   const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
     _id: product._id,
@@ -42,7 +45,11 @@ const ProductPage:NextPage<Props> = ({ product }) => {
   }
 
   const onAddProduct = () => {
+
+    if ( !tempCartProduct.size ) { return; }
+
     console.log({ tempCartProduct });
+    router.push('/cart');
   }
 
   return (
