@@ -20,6 +20,27 @@
       "description": "keyboard gaming",
       "price": 200,
       "inStock": true
+    },
+    {
+      "name": "server",
+      "description": "server wb",
+      "price": "1000",
+      "inStock": true,
+      "id": 4
+    },
+    {
+      "name": "mouse gaming",
+      "description": "razer mouse gaming",
+      "price": "300",
+      "inStock": true,
+      "id": 5
+    },
+    {
+      "name": "keyboard gaming",
+      "description": "razer keyboard gaming",
+      "price": "200",
+      "inStock": true,
+      "id": 6
     }
   ]
 }
