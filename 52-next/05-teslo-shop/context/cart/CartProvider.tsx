@@ -49,16 +49,20 @@ export const CartProvider:React.FC<Props> = ({ children }) => {
 
   // Accumulate
   const updatedProducts = state.cart.map( p => {
-      if ( p._id !== product._id ) return p;
-      if ( p.size !== product.size ) return p;
+          if ( p._id !== product._id ) return p;
+          if ( p.size !== product.size ) return p;
 
-      // update quantity
-      p.quantity += product.quantity;
-      return p;
-  });
+          // update quantity
+          p.quantity += product.quantity;
+          return p;
+      });
 
-  dispatch({ type: '[Cart] - Update products in cart', payload: updatedProducts });
+      dispatch({ type: '[Cart] - Update products in cart', payload: updatedProducts });
 
+ }
+
+ const updateCartQuantity = ( product: ICartProduct ) => {
+      dispatch({ type: '[Cart] - Change cart quantity', payload: product });
  }
 
  return (
@@ -67,6 +71,7 @@ export const CartProvider:React.FC<Props> = ({ children }) => {
 
        // Methods
        addProductToCart,
+       updateCartQuantity,
    }}>
      { children }
    </CartContext.Provider>
