@@ -20,16 +20,17 @@ export const CartProvider:React.FC<Props> = ({ children }) => {
 
  useEffect(() => {
   try {
-    const cookieProducts = Cookie.get('cart') ? JSON.parse( Cookie.get('cart') ! ) : []
-    dispatch({ type: '[Cart] - LoadCart from cookies | storage', payload: cookieProducts });
-  } catch(error) {
-    dispatch({ type: '[Cart] - LoadCart from cookies | storage', payload: [] });
+      const cookieProducts = Cookie.get('cart') ? JSON.parse( Cookie.get('cart')! ): []
+      dispatch({ type: '[Cart] - LoadCart from cookies | storage', payload: cookieProducts });
+  } catch (error) {
+      dispatch({ type: '[Cart] - LoadCart from cookies | storage', payload: [] });
   }
- }, [])
+}, []);
 
- useEffect(() => {
-   Cookie.set('cart', JSON.stringify( state.cart ))
- }, [state.cart])
+
+  useEffect(() => {
+      Cookie.set('cart', JSON.stringify( state.cart ));
+  }, [state.cart]);
  
 
  const addProductToCart = ( product: ICartProduct ) => {
@@ -64,6 +65,10 @@ export const CartProvider:React.FC<Props> = ({ children }) => {
  const updateCartQuantity = ( product: ICartProduct ) => {
       dispatch({ type: '[Cart] - Change cart quantity', payload: product });
  }
+ 
+ const removeCartProduct = ( product: ICartProduct ) => {
+      dispatch({ type: '[Cart] - Remove product in cart', payload: product });
+ }
 
  return (
    <CartContext.Provider value={{
@@ -71,6 +76,7 @@ export const CartProvider:React.FC<Props> = ({ children }) => {
 
        // Methods
        addProductToCart,
+       removeCartProduct,
        updateCartQuantity,
    }}>
      { children }
