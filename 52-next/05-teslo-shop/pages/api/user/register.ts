@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { db } from '../../../database'
 import { User } from '../../../models'
 import bcrypt from 'bcryptjs';
-import { jwt } from '../../../utils';
+import { jwt, validations } from '../../../utils';
 
 type Data = 
  | { message: string }
@@ -44,8 +44,11 @@ const registerUser = async(req: NextApiRequest, res: NextApiResponse<Data>) => {
     });
   }
 
-  // TODO: validate email
-  // if ( email )
+  if ( !validations.isValidEmail(email) ) {
+    return res.status(400).json({
+      message: 'The mail does not have mail format'
+    })
+  }
 
   await db.connect();
   const user = await User.findOne({ email });
