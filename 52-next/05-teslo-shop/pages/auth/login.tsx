@@ -2,6 +2,7 @@ import NextLink from 'next/link';
 import { Box, Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { AuthLayout } from '../../components/layouts';
 import { useForm } from 'react-hook-form';
+import { validations } from '../../utils';
 
 type FormData = {
     email: string,
@@ -18,7 +19,7 @@ const LoginPage = () => {
 
     return (
         <AuthLayout title={"Get into"}>
-            <form onSubmit={ handleSubmit(onLoginUser) }>
+            <form onSubmit={ handleSubmit(onLoginUser) } noValidate>
                 <Box sx={{ width: 350, padding:'10px 20px' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -31,7 +32,12 @@ const LoginPage = () => {
                                 label="Email" 
                                 variant="filled" 
                                 fullWidth
-                                { ...register('email') } 
+                                { ...register('email', {
+                                    required: 'This field is required',
+                                    validate: validations.isEmail
+                                })}
+                                error={ !!errors.email }
+                                helperText={ errors.email?.message }
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -40,7 +46,12 @@ const LoginPage = () => {
                                 type='password' 
                                 variant="filled" 
                                 fullWidth
-                                { ...register('password') } 
+                                { ...register('password', {
+                                    required: 'This field is required',
+                                    minLength: { value: 6, message: 'min 6 characters' }
+                                })}
+                                error={ !!errors.password }
+                                helperText={ errors.password?.message }
                             />
                         </Grid>
 
