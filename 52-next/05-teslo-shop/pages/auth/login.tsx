@@ -8,8 +8,8 @@ import { validations } from '../../utils';
 import tesloApi from '../../api/tesloApi';
 
 type FormData = {
-    email: string,
-    password: string,
+    email: string;
+    password: string;
 };
 
 const LoginPage = () => {
@@ -25,6 +25,7 @@ const LoginPage = () => {
             const { data } = await tesloApi.post('/user/login', { email, password });
             const { token, user } = data;
             console.log({ token, user });
+
         } catch (error) {
             console.log('Credentials error');
             setShowError(true);
