@@ -1,7 +1,19 @@
 import { GetServerSideProps } from 'next'
+import { Box, Button, FormControl, Grid, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { ShopLayout } from "../../components/layouts";
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
-import { jwt } from '../../utils';
+import { countries } from '../../utils';
+
+type FormData = {
+    firstName : string;
+    lastName  : string;
+    address   : string;
+    address2? : string;
+    zip       : string;
+    city      : string;
+    country   : string;
+    phone     : string;
+}
+
 
 const AddressPage = () => {
   return (
@@ -39,12 +51,17 @@ const AddressPage = () => {
             <Select
               variant='filled'
               label='Country'
-              value={1}
+              value={'VEN'}
             >
-              <MenuItem value={1}>Venezuela</MenuItem>
-              <MenuItem value={2}>Chile</MenuItem>
-              <MenuItem value={3}>Honduras</MenuItem>
-              <MenuItem value={4}>El Salvador</MenuItem>
+              {
+                countries.map( country => (
+                  <MenuItem
+                      key={ country.code } 
+                      value={ country.code }
+                    >{ country.name }
+                  </MenuItem>
+                ))
+              }
             </Select>
           </FormControl>
         </Grid>
