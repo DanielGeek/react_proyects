@@ -40,7 +40,7 @@ const LoginPage = () => {
     }
 
     return (
-        <AuthLayout title={"Get into"}>
+        <AuthLayout title={"Login"}>
             <form onSubmit={ handleSubmit(onLoginUser) } noValidate>
                 <Box sx={{ width: 350, padding:'10px 20px' }}>
                     <Grid container spacing={2}>
@@ -91,7 +91,7 @@ const LoginPage = () => {
                                 className='circular-btn' 
                                 size='large' 
                                 fullWidth>
-                                Get into
+                                Login
                             </Button>
                         </Grid>
 

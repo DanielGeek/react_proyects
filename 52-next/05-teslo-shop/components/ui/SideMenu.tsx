@@ -125,7 +125,7 @@ export const SideMenu = () => {
                             <ListItemIcon>
                                 <LoginOutlined/>
                             </ListItemIcon>
-                            <ListItemText primary={'Go out'} />
+                            <ListItemText primary={'Logout'} />
                         </ListItem>
                     )
                     : (
@@ -136,7 +136,7 @@ export const SideMenu = () => {
                             <ListItemIcon>
                                 <VpnKeyOutlined/>
                             </ListItemIcon>
-                            <ListItemText primary={'Get into'} />
+                            <ListItemText primary={'Login'} />
                         </ListItem>
                     )
                 }
