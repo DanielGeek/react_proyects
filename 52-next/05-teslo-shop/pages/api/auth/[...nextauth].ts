@@ -52,11 +52,11 @@ export const authOptions: NextAuthOptions = {
         switch ( account.type ) {
 
           case 'oauth':
-            // TODO: create user or verify if exist in my DB
+              token.user = await dbUsers.oAUthToDbUser( user?.email || '', user?.name || '' );
             break;
 
           case 'credentials':
-            token.user = user;
+              token.user = user;
             break;
         }
       }
@@ -75,4 +75,5 @@ export const authOptions: NextAuthOptions = {
 
   }
 }
+
 export default NextAuth(authOptions)
