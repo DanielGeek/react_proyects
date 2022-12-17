@@ -36,6 +36,12 @@ export const authOptions: NextAuthOptions = {
     // ...add more providers here
   ],
 
+  // Custom Pages
+  pages: {
+    signIn: '/auth/login',
+    newUser: '/auth/register'
+  },
+
   // Callbacks
   jwt: {
     // secret: process.env.JWT_SECRET_SEED, // deprecated
