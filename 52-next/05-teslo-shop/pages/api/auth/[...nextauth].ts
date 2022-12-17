@@ -47,6 +47,12 @@ export const authOptions: NextAuthOptions = {
     // secret: process.env.JWT_SECRET_SEED, // deprecated
   },
 
+  session: {
+    maxAge: 2592000, // 30d
+    strategy: 'jwt',
+    updateAge: 86400 // every day
+  },
+
   callbacks: {
 
     async jwt({ token, account, user }) {
