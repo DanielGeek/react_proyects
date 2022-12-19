@@ -1,5 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import Cookie from 'js-cookie';
+import axios from 'axios';
+
 import { ICartProduct, IOrder, ShippingAddress } from '../../interfaces';
 import { CartContext, cartReducer } from './';
 
@@ -131,7 +133,7 @@ export const CartProvider:React.FC<Props> = ({ children }) => {
         dispatch({ type: '[Cart] - Update Address', payload: address });
     }
 
-    const createOrder = async() => {
+    const createOrder = async():Promise<{ hasError: boolean; message: string; }> => {
 
         if ( !state.shippingAddress ) {
             throw new Error('There is no delivery address');
@@ -151,12 +153,25 @@ export const CartProvider:React.FC<Props> = ({ children }) => {
         }
 
         try {
-            const { data } = await tesloApi.post('/orders', body);
 
-            console.log({ data });
+            const { data } = await tesloApi.post<IOrder>('/orders', body);
+
+            return {
+                hasError: false,
+                message: data._id!
+            }
 
         } catch (error) {
-            console.log(error);
+            if ( axios.isAxiosError(error) ) {
+                return {
+                    hasError: true,
+                    message: error.response?.data.message
+                }
+            }
+            return {
+                hasError: true,
+                message: 'Unhandled error, talk to administrator'
+            }
         }
     }
 
