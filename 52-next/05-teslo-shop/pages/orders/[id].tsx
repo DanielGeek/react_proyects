@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import { getSession } from 'next-auth/react';
 
 import { Box, Card, CardContent, Chip, Divider, Grid, Link, Typography } from "@mui/material";
-import { CreditScoreOutlined } from '@mui/icons-material';
+import { CreditCardOffOutlined, CreditScoreOutlined } from '@mui/icons-material';
 
 import { ShopLayout } from "../../components/layouts";
 import { CartList, OrderSummary } from "../../components/cart";
@@ -18,59 +18,55 @@ const OrderPage: NextPage<Props> = ({ order }) => {
 
   console.log({ order });
 
-  return (
-    <ShopLayout title='Summary of the order 1312121212' pageDescription={'Summary of the order'}>
-      <Typography variant='h1' component='h1' >Order: 123ABC</Typography>
+  const { shippingAddress } = order;
 
-      {/* <Chip
-        sx={{ my: 2 }}
-        label="Pay pending"
-        variant="outlined"
-        color="error"
-        icon={ <CreditCardOffOutlined /> }
-      /> */}
-      <Chip
-        sx={{ my: 2 }}
-        label="Order was already paid"
-        variant="outlined"
-        color="success"
-        icon={ <CreditScoreOutlined /> }
-      />
+  return (
+    <ShopLayout title='Summary of the order' pageDescription={'Summary of the order'}>
+      <Typography variant='h1' component='h1' >Order: { order._id }</Typography>
+      {
+          order.isPaid
+          ? (
+              <Chip
+                sx={{ my: 2 }}
+                label="Order was already paid"
+                variant="outlined"
+                color="success"
+                icon={ <CreditScoreOutlined /> }
+              />
+          ):
+          (
+              <Chip
+                sx={{ my: 2 }}
+                label="Pay pending"
+                variant="outlined"
+                color="error"
+                icon={ <CreditCardOffOutlined /> }
+              />
+
+          )
+      }
 
       <Grid container>
         <Grid item xs={ 12 } sm={ 7 }>
-            <CartList />
+            <CartList products={ order.orderItems } />
         </Grid>
         <Grid item xs={ 12 } sm={ 5 }>
             <Card className='summary-card'>
               <CardContent>
-                <Typography variant='h2'>Summary (3 products)</Typography>
+                <Typography variant='h2'>Summary ({ order.numberOfItems } { order.numberOfItems > 1 ? 'products' : 'product' } )</Typography>
                 <Divider sx={{ my:1 }} />
 
                 <Box display='flex' justifyContent='space-between'>
                   <Typography variant='subtitle1'>Delivery address</Typography>
-                  <NextLink href='/checkout/address' passHref>
-                    <Link underline='always'>
-                      Edit
-                    </Link>
-                  </NextLink>
                 </Box>
 
-                <Typography>Daniel Ángel</Typography>
-                <Typography>123 Some place</Typography>
-                <Typography>Puerto Varas, CH</Typography>
-                <Typography>Chile</Typography>
-                <Typography>+56 123123123</Typography>
+                <Typography>{ shippingAddress.firstName } { shippingAddress.lastName }</Typography>
+                <Typography>{ shippingAddress.address } { shippingAddress.address2 ? `, ${ shippingAddress.address2 }`: '' }</Typography>
+                <Typography>{ shippingAddress.city }, { shippingAddress.zip }</Typography>
+                <Typography>{ shippingAddress.country }</Typography>
+                <Typography>{ shippingAddress.phone }</Typography>
 
                 <Divider sx={{ my: 1 }} />
-
-                <Box display='flex' justifyContent='end'>
-                  <NextLink href='/cart' passHref>
-                    <Link underline='always'>
-                      Edit
-                    </Link>
-                  </NextLink>
-                </Box>
 
                 <OrderSummary />
 
