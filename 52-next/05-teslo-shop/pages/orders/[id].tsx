@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
-import { Box, Card, CardContent, Chip, Divider, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, Chip, CircularProgress, Divider, Grid, Typography } from "@mui/material";
 import { CreditCardOffOutlined, CreditScoreOutlined } from '@mui/icons-material';
 
 import { ShopLayout } from "../../components/layouts";
@@ -30,12 +31,15 @@ const OrderPage: NextPage<Props> = ({ order }) => {
 
   const router = useRouter();
   const { shippingAddress } = order;
+  const [isPaying, setIsPaying] = useState(false);
 
   const onOrderCompleted = async( details: OrderResponseBody ) => {
 
     if ( details.status !== 'COMPLETED' ) {
         return alert('No hay pago en Paypal');
     }
+
+    setIsPaying(true);
 
     try {
       
@@ -47,6 +51,7 @@ const OrderPage: NextPage<Props> = ({ order }) => {
         router.reload();
 
     } catch (error) {
+        setIsPaying(false);
         console.log(error);
         alert('Error');
     }
@@ -111,6 +116,14 @@ const OrderPage: NextPage<Props> = ({ order }) => {
                 />
 
                 <Box sx={{ mt: 3 }} display="flex" flexDirection='column'>
+                  <Box display="flex" 
+                       justifyContent="center" 
+                       className='fadeIn'
+                       sx={{ display: isPaying ? 'flex': 'none' }}>
+                      <CircularProgress />
+                  </Box>
+
+                  <Box flexDirection='column' sx={{ display: isPaying ? 'none': 'flex', flex:1 }}>
                   {
                       order.isPaid
                       ? (
@@ -145,6 +158,7 @@ const OrderPage: NextPage<Props> = ({ order }) => {
                           />
                       )
                   }
+                  </Box>
                 </Box>
 
               </CardContent>
