@@ -1,40 +1,50 @@
-import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-// import * as jose from "jose";
+import { NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
+import type { NextRequest } from 'next/server';
 
-export async function middleware(req: NextRequest | any, ev: NextFetchEvent ) {
+export async function middleware(request: NextRequest) {
 
-  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    //console.log({session})
 
-  // console.log({ session });
+    if (!session) {
+        if (request.nextUrl.pathname.startsWith('/api/admin')) {
+            return NextResponse.redirect(new URL('/api/auth/unauthorized', request.url));
+        }
 
-  if ( !session ) {
-    const previousPage = req.nextUrl.pathname;
-    return NextResponse.redirect(
-      new URL(`/auth/login?p=${previousPage}`, req.url)
-    );
+        const requestedPage = request.nextUrl.pathname;
+        const url = request.nextUrl.clone();
+        url.pathname = `/auth/login`;
+        url.search = `p=${requestedPage}`;
+        return NextResponse.redirect(url);
+    }
 
-  }
+    const validRoles = ['admin', 'super-user', 'SEO'];
 
-  return NextResponse.next();
+    if (request.nextUrl.pathname.startsWith('/admin')) {
 
-  // if (req.nextUrl.pathname.startsWith("/checkout")) {
-  //   const token = req.cookies.get("token") || "";
-  //   const previousPage = req.nextUrl.pathname;
-  //   try {
-  //     await jose.jwtVerify(
-  //       token,
-  //       new TextEncoder().encode(process.env.JWT_SECRET_SEED)
-  //     );
-  //     return NextResponse.next();
-  //   } catch (error) {
-  //     return NextResponse.redirect(
-  //       new URL(`/auth/login?p=${previousPage}`, req.url)
-  //     );
-  //   }
-  // }
+        if (!validRoles.includes(session.user.role)) {
+            const url = request.nextUrl.clone()
+            url.pathname = '/'
+            return NextResponse.redirect(url)
+        }
+    }
+
+    if (request.nextUrl.pathname.startsWith('/api/admin')) {
+
+        if (!validRoles.includes(session.user.role)) {
+            return NextResponse.redirect(new URL('/api/auth/unauthorized', request.url));
+        }
+
+    }
+
+    return NextResponse.next();
 }
-// Only the paths declared in here will run the middleware
+
 export const config = {
-  matcher: ["/checkout/:path*"],
+    matcher: [
+        '/checkout/:path*',
+        '/admin/:path*',
+        '/api/admin/:path*',
+    ],
 };
