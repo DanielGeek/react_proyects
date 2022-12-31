@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import type { NextRequest } from 'next/server';
+import { IUser } from './interfaces';
 
 export async function middleware(request: NextRequest) {
 
@@ -23,7 +24,7 @@ export async function middleware(request: NextRequest) {
 
     if (request.nextUrl.pathname.startsWith('/admin')) {
 
-        if (!validRoles.includes(session.user.role)) {
+        if (!validRoles.includes((session.user as IUser).role)) {
             const url = request.nextUrl.clone()
             url.pathname = '/'
             return NextResponse.redirect(url)
@@ -32,7 +33,7 @@ export async function middleware(request: NextRequest) {
 
     if (request.nextUrl.pathname.startsWith('/api/admin')) {
 
-        if (!validRoles.includes(session.user.role)) {
+        if (!validRoles.includes((session.user as IUser).role)) {
             return NextResponse.redirect(new URL('/api/auth/unauthorized', request.url));
         }
 
