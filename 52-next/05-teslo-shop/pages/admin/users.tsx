@@ -2,20 +2,52 @@ import { PeopleOutline } from '@mui/icons-material'
 import { AdminLayout } from '../../components/layouts'
 
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { Grid } from '@mui/material';
+import { Grid, MenuItem, Select } from '@mui/material';
 import useSWR from 'swr';
 import { IUser } from '../../interfaces';
+import { tesloApi } from '../../api';
 
 const UsersPage = () => {
 
   const { data, error } = useSWR<IUser[]>('/api/admin/users');
 
-  if ( !data && !error ) return (<></>)
+  if ( !data && !error ) return (<></>);
+
+  const onRoleUpdated = async( userId: string, newRole: string ) => {
+
+      try {
+        
+          await tesloApi.put('/admin/users', { userId, role: newRole });
+
+      } catch (error) {
+          console.log(error);
+          alert('Failed to update user role');
+      }
+  }
 
   const columns: GridColDef[] = [
       { field: 'email', headerName: 'Email', width: 250 },
       { field: 'name', headerName: 'Full Name', width: 300 },
-      { field: 'role', headerName: 'Rol', width: 300 }
+      { 
+          field: 'role', 
+          headerName: 'Rol', 
+          width: 300,
+          renderCell: ({row}: GridRenderCellParams) => {
+            return (
+                <Select
+                    value={ row.role }
+                    label="Rol"
+                    onChange={ ({ target }) => onRoleUpdated( row.id, target.value ) }
+                    sx={{ width: '300px' }}
+                >
+                    <MenuItem value='admin'> Admin </MenuItem>
+                    <MenuItem value='client'> Client </MenuItem>
+                    <MenuItem value='super-user'> Super User </MenuItem>
+                    <MenuItem value='SEO'> SEO </MenuItem>
+                </Select>
+            )
+          }
+      }
   ];
 
   const rows = data!.map( user => ({
