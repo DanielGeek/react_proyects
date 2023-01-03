@@ -185,6 +185,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       product
     },
+    // updates every 24 hours
     revalidate: 60 * 60 * 24
   }
 }
