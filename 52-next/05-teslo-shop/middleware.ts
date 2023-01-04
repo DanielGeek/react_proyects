@@ -23,7 +23,6 @@ export async function middleware(request: NextRequest) {
     const validRoles = ['admin', 'super-user', 'SEO'];
 
     if (request.nextUrl.pathname.startsWith('/admin')) {
-
         if (!validRoles.includes((session.user as IUser).role)) {
             const url = request.nextUrl.clone()
             url.pathname = '/'
@@ -46,6 +45,6 @@ export const config = {
     matcher: [
         '/checkout/:path*',
         '/admin/:path*',
-        '/api/admin/:path*',
+        '/((?!api/admin/upload)api/admin/:path*)',
     ],
 };
