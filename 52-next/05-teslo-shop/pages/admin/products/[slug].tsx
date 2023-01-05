@@ -351,6 +351,7 @@ const ProductAdminPage:FC<Props> = ({ product }) => {
                                 label="You need at least 2 images"
                                 color='error'
                                 variant='outlined'
+                                sx={{ display: getValues('images').length < 2 ? 'flex' : 'none' }}
                             />
 
                             <Grid container spacing={2}>
