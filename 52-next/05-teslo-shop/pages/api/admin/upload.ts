@@ -38,7 +38,7 @@ const parseFiles = async(req: NextApiRequest) => {
 
         const form = new formidable.IncomingForm();
         form.parse( req, async( err, fields, files ) => {
-            console.log({ err, fields, files });
+            // console.log({ err, fields, files });
 
             if ( err ) {
                 return reject(err);
