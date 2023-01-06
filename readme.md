@@ -1,3 +1,7 @@
+# Next.js Teslo Shop App using Next.js | TypeScript and MondogDB
+# look the app deployed on heroku in this link
+<p>https://tesloshop-dangel.herokuapp.com</p>
+
 # Pokémon App 1
 <p>pokemon app built in react</p>
 
