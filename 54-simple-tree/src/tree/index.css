@@ -1,0 +1,22 @@
+.tree {
+    background-color: #efefef;
+    height: 100%;
+    padding: 10px;
+    font-family: monospace
+}
+
+.animal-group {
+    padding-left: 20px;
+}
+.mammals-carnivores {
+    padding-left: 40px;
+}
+.mammals-carnivores-2 {
+    padding-left: 60px;
+}
+.mammals-herbivorous {
+    padding-left: 80px;
+}
+.animal-input {
+    margin-left: 8px;
+}

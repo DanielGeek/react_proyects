@@ -1,0 +1,35 @@
+{
+    "name": "mammals",
+    "children": [
+        {
+            "name": "cheetah",
+            "type": "carnivores",
+            "children": []
+        },
+        {
+            "name": "bear",
+            "type": "carnivores",
+            "children": []
+        },
+        {
+            "name": "lion",
+            "type": "carnivores-2",
+            "children": []
+        },
+        {
+            "name": "dog",
+            "type": "carnivores-2",
+            "children": []
+        },
+        {
+            "name": "elephant",
+            "type": "herbivorous",
+            "children": []
+        },
+        {
+            "name": "ape",
+            "type": "carnivores",
+            "children": []
+        }
+    ]
+}
