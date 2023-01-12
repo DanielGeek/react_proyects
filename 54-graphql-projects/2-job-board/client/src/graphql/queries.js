@@ -40,7 +40,7 @@ export async function getCompany(id) {
         }
     `;
     const variables = { id };
-    const { company } = await request(GRAPHQL_URL, query, variables);
+    const { data: { company } } = await client.query({ query, variables });
     return company;
 }
 
@@ -61,7 +61,7 @@ export async function getJob(id) {
             }
     `;
     const variables = { id };
-    const { job } = await request(GRAPHQL_URL, query, variables);
+    const { data: { job } } = await client.query({ query, variables });
     return job;
 }
 
