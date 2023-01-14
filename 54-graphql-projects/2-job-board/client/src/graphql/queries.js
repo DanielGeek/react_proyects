@@ -6,17 +6,6 @@ const GRAPHQL_URL = 'http://localhost:9000/graphql';
 export const client = new ApolloClient({
     uri: GRAPHQL_URL,
     cache: new InMemoryCache(),
-    // defaultOptions: {
-    //     query: {
-    //         fetchPolicy: 'network-only',
-    //     },
-    //     mutate: {
-    //         fetchPolicy: 'network-only',
-    //     },
-    //     watchQuery: {
-    //         fetchPolicy: 'network-only',
-    //     },
-    // },
 });
 
 const JOB_DETAIL_FRAGMENT = gql`
@@ -30,6 +19,19 @@ const JOB_DETAIL_FRAGMENT = gql`
         description
     }    
 `
+export const COMPANY_QUERY = gql`
+    query CompanyQuery($id: ID!) {
+        company(id: $id) {
+            id
+            name
+            description
+            jobs {
+                id
+                title
+            }
+    }
+}
+`;
 
 export const JOB_QUERY = gql`
     query JobQuery($id: ID!) {
@@ -79,24 +81,4 @@ export async function createJob(input) {
         },
     });
     return job;
-}
-
-export async function getCompany(id) {
-
-    const query = gql`
-        query CompanyQuery($id: ID!) {
-            company(id: $id) {
-                id
-                name
-                description
-                jobs {
-                    id
-                    title
-                }
-            }
-        }
-    `;
-    const variables = { id };
-    const { data: { company } } = await client.query({ query, variables });
-    return company;
 }
