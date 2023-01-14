@@ -14,7 +14,7 @@ export const resolvers = {
     },
 
     Mutation: {
-        createJob: (_root, { input }, { user }) => {
+        createJob: async(_root, { input }, { user }) => {
             rejectIf(!user);
             return Job.create({ ...input, companyId: user.companyId });
         },
