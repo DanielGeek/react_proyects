@@ -44,7 +44,7 @@ const wsServer = new WebSocketServer({ server: httpServer, path: '/graphql' });
 
 const typeDefs = await readFile('./schema.graphql', 'utf8');
 const schema = makeExecutableSchema({ typeDefs, resolvers });
-useWsServer({ schema}, wsServer);
+useWsServer({ schema }, wsServer);
 
 const apolloServer = new ApolloServer({ schema, context: getContext });
 await apolloServer.start();
