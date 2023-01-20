@@ -23,17 +23,20 @@ function TodoList() {
     <div className="todo-container">
       <form className="todo-form" onSubmit={handleSubmit}>
         <input
+            data-testid="todo-input"
             className="todo-input"
             type="text"
             value={newTodo}
             onChange={handleChange}
         />
-        <button className="todo-button" type="submit">Add Todo</button>
+        <button data-testid="todo-button" className="todo-button" type="submit">Add Todo</button>
       </form>
       <ul className="todo-list">
         {todos.map((todo, index) => (
           <li className="todo-item" key={index}>
-            {todo}
+            <div data-testid="todo-list">
+              {todo}
+            </div>
             <button className="remove-button" onClick={() => dispatch(removeTodo(index))}>
               Remove
             </button>
