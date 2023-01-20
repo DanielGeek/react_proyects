@@ -1,0 +1,47 @@
+.todo-container {
+    margin: 50px;
+    padding: 50px;
+}
+
+.todo-form {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.todo-input {
+	flex-grow: 1;
+	padding: 0.5rem;
+	margin-right: 1rem;
+}
+
+button[type='submit'] {
+	padding: 0.5rem 1rem;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+li {
+	display: flex;
+	align-items: center;
+	padding: 0.5rem;
+	border-bottom: 1px solid #ccc;
+}
+
+li button {
+	background-color: #f44336;
+	color: white;
+	padding: 0.25rem 0.5rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 1rem;
+}
