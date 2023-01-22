@@ -1,6 +1,7 @@
+# fizzbuzz
 # Built with Seahorse v0.2.4
 #
-# On-chain, persistent!
+# On-chain, persistent FizzBuzz!
 
 from seahorse.prelude import *
 
@@ -122,6 +123,15 @@ def dislike_post(like: Like, post: Post, disliker: Signer):
   assert like.post_owner == post.owner, 'Incorrect post owner'
   assert like.post_id == post.id, 'Incorrect post id'
 
+  # Close the like account by transfering lamports to the owner
+  like.transfer_lamports(disliker, rent_exempt_lamports(80))
+
+  post.likes -= 1
+  print('Post id ', post.id, 'now has ', post.likes, 'likes')
+
+  # Emit like/dislike post event
+  like_dislike_post_event = LikeDislikePostEvent(post.owner, post.id, post.likes)
+  like_dislike_post_event.emit()
 
 ### Events ###
 # NOTE: Not able to pass String values in events yet
