@@ -1,4 +1,5 @@
 import { data } from '../static/data'
+import { useGlobalState } from '../hooks';
 import Layout from "../components/Layout";
 import Stories from '../components/stories/Stories';
 import HomeRightBar from '../components/HomeRightBar';

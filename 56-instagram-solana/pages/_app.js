@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { useEffect, useMemo, useState } from "react";
 import { RPC_ENDPOINT } from "../utils";
+import { GlobalState } from '../state/global';
 
 //Wallet Imports
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
@@ -9,7 +10,6 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 
 import "@solana/wallet-adapter-react-ui/styles.css";
-
 
 function MyApp({ Component, pageProps }) {
   const [mounted, setMounted] = useState(false);
@@ -35,7 +35,9 @@ function MyApp({ Component, pageProps }) {
         <WalletModalProvider>
           {
             mounted && (
-              <Component {...pageProps} />
+              <GlobalState>
+                <Component {...pageProps} />
+              </GlobalState>
             )
           }
         </WalletModalProvider>
