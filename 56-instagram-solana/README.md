@@ -3,3 +3,4 @@
 ## Tools links
 
 `https://www.quicknode.com/`
+`https://beta.solpg.io/`
