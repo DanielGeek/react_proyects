@@ -15,9 +15,7 @@ const style = {
 
 const PostHeader = ({ username, owner, postId }) => {
 
-    const staticDeletePost = (owner, postId) => {
-        console.log(`deleting post from: ${owner} with Id: ${postId}`)
-    }
+    const { deletePost } = useGlobalState();
 
     return (
         <div className={style.wrapper}>
@@ -33,7 +31,7 @@ const PostHeader = ({ username, owner, postId }) => {
             <DisplayName className={style.usernameContainer} username={truncate(username)} />
 
             <button className={style.moreIcon}>
-                <AiOutlineClose onClick={() => staticDeletePost(owner, postId)} />
+                <AiOutlineClose onClick={() => deletePost(owner, postId)} />
             </button>
         </div>
     )

@@ -57,13 +57,6 @@ export default function Home() {
     },
   ]
 
-  const staticCreatePost = () => {
-    console.log(`Creating Post!!`)
-  }
-
-
-
-
   return (
     <Layout
       setCreatePostModalOpen={setCreatePostModalOpen}
@@ -90,7 +83,7 @@ export default function Home() {
             ))
             : "Loading..."}
         </>
-        <CreatePostModal createPost={staticCreatePost} createPostModalOpen={createPostModalOpen} setCreatePostModalOpen={setCreatePostModalOpen} />
+        <CreatePostModal createPostModalOpen={createPostModalOpen} setCreatePostModalOpen={setCreatePostModalOpen} />
         <EditPostModal editPostModalOpen={editPostModalOpen} setEditPostModalOpen={setEditPostModalOpen} currentEditPostID={currentEditPostID} />
       </div>
       <HomeRightBar data={data.suggestions} />

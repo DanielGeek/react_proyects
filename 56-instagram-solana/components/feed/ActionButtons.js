@@ -13,24 +13,12 @@ const style = {
 }
 
 const ActionButtons = ({ owner, postId, toggleEditPostModal, }) => {
-    //   const { tipOwner } = useAppContext()
-
-
-    const staticLikePost = (owner, postId, wallet = "1111111111") => {
-        console.log(`Liking post from: ${owner} with Id: ${postId} and userKey: ${wallet}`)
-    }
-
-    const staticDislikePost = (owner, postId, wallet = "1111111111") => {
-        console.log(`UNLIKING post from: ${owner} with Id: ${postId} and userKey: ${wallet}`)
-    }
-
-
-
+    const { likePost, dislikePost, wallet } = useGlobalState();
 
     return (
         <div className={style.wrapper}>
-            <AiOutlineHeart className={style.icon} size={24} onClick={() => staticLikePost(owner, postId, wallet?.publicKey)} />
-            <RiDislikeFill className={style.icon} size={24} onClick={() => staticDislikePost(owner, postId, wallet?.publicKey)} />
+            <AiOutlineHeart className={style.icon} size={24} onClick={() => likePost(owner, postId, wallet?.publicKey)} />
+            <RiDislikeFill className={style.icon} size={24} onClick={() => dislikePost(owner, postId, wallet?.publicKey)} />
             <FaEdit className={style.icon} size={22} onClick={() => toggleEditPostModal(true, postId, owner)} />
             < div className='flex-1' />
 
