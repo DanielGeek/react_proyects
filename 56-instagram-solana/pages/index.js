@@ -20,6 +20,8 @@ export default function Home() {
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false)
   const [currentEditPostID, setCurrentEditPostID] = useState(null)
 
+  const { posts } = useGlobalState()
+
   // Function to target which post is being edited
   const toggleEditPostModal = (value, postId, owner) => {
     setCurrentEditPostID(postId)
@@ -75,8 +77,8 @@ export default function Home() {
 
         <>
           {/* Render posts */}
-          {staticPosts
-            ? staticPosts.map((post, i) => (
+          {posts
+            ? posts.map((post, i) => (
               <FeedItem
                 data={post}
                 key={i}

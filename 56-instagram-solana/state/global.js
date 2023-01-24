@@ -63,7 +63,21 @@ export const GlobalState = ({ children }) => {
       fetchUserAccount();
     }, [isConnected])
 
-    // Program eventos
+    const fetchPosts = useCallback(async () => {
+      if(!program) return;
+
+      const posts = await program.account.post.all()
+      setPosts(posts.map((post) => post.account));
+    }, [program])
+
+    useEffect(() => {
+      if(!posts) {
+        fetchPosts();
+      }
+    }, [posts, fetchPosts])
+    
+
+    // Program events
     useEffect(() => {
       if(!program) return;
 
@@ -83,6 +97,9 @@ export const GlobalState = ({ children }) => {
           }
         }
       )
+
+      // Delete Post Event
+      const deletePostEventListener = program.addEventListener()
 
       return () => {
         program.removeEventListener(newPostEventListener);
@@ -138,6 +155,8 @@ export const GlobalState = ({ children }) => {
                 isConnected,
                 hasUserAccount: userAccount ? true : false,
                 createUser,
+                createPost,
+                posts,
             }}
         >
             {children}
