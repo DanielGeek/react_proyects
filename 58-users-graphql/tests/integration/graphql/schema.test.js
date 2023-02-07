@@ -5,6 +5,7 @@ const schema = require('../../../schema/schema');
 jest.mock('axios');
 
 describe('GraphQL Schema', () => {
+
 	it('should retrieve a user and company by id', async () => {
 		axios.get.mockResolvedValueOnce({
 			data: {
@@ -46,8 +47,8 @@ describe('GraphQL Schema', () => {
 
 		const result = await graphql(schema, query, null, null, variables);
         
-		expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/users/23');
-        expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/companies/1');
+		expect(axios.get).toHaveBeenCalledWith(`${process.env.API_URL}/users/23`);
+        expect(axios.get).toHaveBeenCalledWith(`${process.env.API_URL}/companies/1`);
 		expect(result).toHaveProperty('data.user.id', '23');
 		expect(result).toHaveProperty('data.user.firstName', 'Bill');
 		expect(result).toHaveProperty('data.user.age', 20);
@@ -56,6 +57,7 @@ describe('GraphQL Schema', () => {
         expect(result).toHaveProperty('data.user.company.description', 'iphone');
 
 	});
+
     it('should retrieve company by id', async () => {
 		axios.get.mockResolvedValueOnce({
 			data: {
@@ -81,10 +83,55 @@ describe('GraphQL Schema', () => {
 
 		const result = await graphql(schema, query, null, null, variables);
         
-        expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/companies/1');
+        expect(axios.get).toHaveBeenCalledWith(`${process.env.API_URL}/companies/1`);
         expect(result).toHaveProperty('data.company.id', '1');
         expect(result).toHaveProperty('data.company.name', 'Apple');
         expect(result).toHaveProperty('data.company.description', 'iphone');
+
+	});
+
+    it('should retrieve company by id and the users', async () => {
+		axios.get.mockResolvedValueOnce({
+			data: {
+				id: '1',
+				name: 'Apple',
+				description: 'iphone',
+			},
+		});
+
+        const users = [
+            { id: '23', firstName: 'Bill', age: 20 },
+        ];
+        axios.get.mockResolvedValue({ data: users });
+
+		const query = `
+        query ($id: String) {
+            company(id: $id) {
+                id
+                name
+                description,
+                users {
+                    id
+                    firstName
+                    age
+                }
+            }
+        }
+        `;
+
+		const variables = {
+			id: '1',
+		};
+
+		const result = await graphql(schema, query, null, null, variables);
+        
+        expect(axios.get).toHaveBeenCalledWith(`${process.env.API_URL}/companies/1/users`);
+        expect(result).toHaveProperty('data.company.id', '1');
+        expect(result).toHaveProperty('data.company.name', 'Apple');
+        expect(result).toHaveProperty('data.company.description', 'iphone');
+        expect(result).toHaveProperty('data.company.users[0].id', '23');
+        expect(result).toHaveProperty('data.company.users[0].firstName', 'Bill');
+        expect(result).toHaveProperty('data.company.users[0].age', 20);
 
 	});
 });
