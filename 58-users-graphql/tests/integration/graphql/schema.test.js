@@ -52,6 +52,39 @@ describe('GraphQL Schema', () => {
 		expect(result).toHaveProperty('data.user.firstName', 'Bill');
 		expect(result).toHaveProperty('data.user.age', 20);
         expect(result).toHaveProperty('data.user.company.id', '1');
+        expect(result).toHaveProperty('data.user.company.name', 'Apple');
+        expect(result).toHaveProperty('data.user.company.description', 'iphone');
+
+	});
+    it('should retrieve company by id', async () => {
+		axios.get.mockResolvedValueOnce({
+			data: {
+				id: '1',
+				name: 'Apple',
+				description: 'iphone',
+			},
+		});
+
+		const query = `
+        query ($id: String) {
+            company(id: $id) {
+                id
+                name
+                description,
+            }
+        }
+        `;
+
+		const variables = {
+			id: '1',
+		};
+
+		const result = await graphql(schema, query, null, null, variables);
+        
+        expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/companies/1');
+        expect(result).toHaveProperty('data.company.id', '1');
+        expect(result).toHaveProperty('data.company.name', 'Apple');
+        expect(result).toHaveProperty('data.company.description', 'iphone');
 
 	});
 });
