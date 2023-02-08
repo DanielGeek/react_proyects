@@ -4,6 +4,16 @@ const schema = require('../../../schema/schema');
 
 jest.mock('axios');
 
+const addUser = ({ firstName, age }) => {
+    return axios.post(`${process.env.API_URL}/users`, { firstName, age })
+        .then(resp => resp.data);
+};
+
+const deleteUser = ({ id }) => {
+    return axios.delete(`${process.env.API_URL}/users/${id}`)
+        .then(resp => resp.data);
+};
+
 describe('GraphQL Schema', () => {
 
 	it('should retrieve a user and company by id', async () => {
@@ -134,4 +144,29 @@ describe('GraphQL Schema', () => {
         expect(result).toHaveProperty('data.company.users[0].age', 20);
 
 	});
+
+    it('addUser', async () => {
+        const firstName = 'Ezequiel';
+        const age = 32;
+        const spy = jest.spyOn(axios, 'post').mockImplementation(() => Promise.resolve({ data: { firstName, age } }));
+
+        const result = await addUser({ firstName, age });
+
+        expect(spy).toHaveBeenCalledWith(`${process.env.API_URL}/users`, { firstName, age });
+        expect(result).toEqual({ firstName, age });
+
+        spy.mockRestore();
+    });
+
+    it('deleteUser', async () => {
+        const id = '32';
+        const spy = jest.spyOn(axios, 'delete').mockImplementation(() => Promise.resolve({ data: { id } }));
+
+        const result = await deleteUser({ id });
+
+        expect(spy).toHaveBeenCalledWith(`${process.env.API_URL}/users/${id}`);
+        expect(result).toEqual({ id });
+
+        spy.mockRestore();
+    });
 });
