@@ -14,6 +14,11 @@ const deleteUser = ({ id }) => {
         .then(resp => resp.data);
 };
 
+const editUser = ({ id, firstName, age }) => {
+    return axios.patch(`${process.env.API_URL}/users/${id}`, { firstName, age })
+        .then(resp => resp.data);
+};
+
 describe('GraphQL Schema', () => {
 
 	it('should retrieve a user and company by id', async () => {
@@ -166,6 +171,20 @@ describe('GraphQL Schema', () => {
 
         expect(spy).toHaveBeenCalledWith(`${process.env.API_URL}/users/${id}`);
         expect(result).toEqual({ id });
+
+        spy.mockRestore();
+    });
+
+    it('editUser', async () => {
+        const id = '23';
+        const firstName = 'Exequies';
+        const age = 32;
+        const spy = jest.spyOn(axios, 'patch').mockImplementation(() => Promise.resolve({ data: { id, firstName, age } }));
+
+        const result = await editUser({ id, firstName, age });
+
+        expect(spy).toHaveBeenCalledWith(`${process.env.API_URL}/users/${id}`, { firstName, age });
+        expect(result).toEqual({ id, firstName, age });
 
         spy.mockRestore();
     });
