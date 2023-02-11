@@ -2,3 +2,7 @@
 
 `npm i`
 `npm start`
+
+## run tests
+
+`npm run test`

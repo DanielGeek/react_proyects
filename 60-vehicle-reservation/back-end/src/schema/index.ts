@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server-express';
+import { makeExecutableSchema } from 'graphql-tools';
 
 // Define the GraphQL schema
 const typeDefs = gql`
@@ -39,5 +40,6 @@ const typeDefs = gql`
 		to: String
 	}
 `;
+const schema = makeExecutableSchema({ typeDefs });
 
-export default typeDefs;
+export default schema;
