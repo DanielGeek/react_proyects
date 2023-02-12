@@ -1,4 +1,7 @@
 module.exports = {
-    testEnvironment: 'node'
+    testEnvironment: 'node',
+    verbose: true,
+    testTimeout: 30000,
+    detectOpenHandles: true,
   };
   

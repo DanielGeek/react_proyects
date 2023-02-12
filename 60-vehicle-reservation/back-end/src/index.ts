@@ -5,8 +5,8 @@ import typeDefs from './schema';
 import resolvers from './resolvers';
 const { dbConnection } = require('./database/config');
 
+const app = express();
 const startServer = async () => {
-  const app = express();
 
   // Create the Apollo server
   const server = new ApolloServer({
@@ -28,4 +28,4 @@ const startServer = async () => {
 
 startServer();
 
-module.exports = startServer;
+export default app;
