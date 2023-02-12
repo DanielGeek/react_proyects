@@ -1,9 +1,13 @@
-import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
+import fetch from 'cross-fetch';
+import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client';
 
 const GRAPHQL_URL = 'http://localhost:4000/graphql';
 
 export const client = new ApolloClient({
-    uri: GRAPHQL_URL,
+    link: new HttpLink({
+        uri: GRAPHQL_URL,
+        fetch
+    }),
     cache: new InMemoryCache(),
 });
 

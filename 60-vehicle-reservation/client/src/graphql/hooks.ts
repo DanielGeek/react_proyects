@@ -8,7 +8,7 @@ export const useCreateReservation = () => {
 		CREATE_RESERVATION_MUTATION,
 		{
 			update(cache, { data: { createReservation } }) {
-				const { reservations } = cache.readQuery({ query: RESERVATIONS_QUERY });
+				const { reservations } = cache.readQuery({ query: RESERVATIONS_QUERY }) as ReservationsData;
 				cache.writeQuery({
 					query: RESERVATIONS_QUERY,
 					data: { reservations: reservations.concat([createReservation]) },
@@ -35,9 +35,12 @@ export const useCreateReservation = () => {
 };
 
 export const useReservations = () => {
-	const { data, loading, error } = useQuery<ReservationsData>(RESERVATIONS_QUERY, {
-		fetchPolicy: 'network-only',
-	});
+	const { data, loading, error } = useQuery<ReservationsData>(
+		RESERVATIONS_QUERY,
+		{
+			fetchPolicy: 'network-only',
+		}
+	);
 
 	return {
 		reservations: data?.reservations || [],

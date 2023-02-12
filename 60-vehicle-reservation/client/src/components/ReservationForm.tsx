@@ -87,7 +87,7 @@ const ReservationForm = () => {
           fullWidth
         />
 
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary" role="button" aria-label="save-reservation">
           Save Reservation
         </Button>
 
