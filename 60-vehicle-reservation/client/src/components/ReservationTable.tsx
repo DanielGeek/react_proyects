@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function ReservationList() {
+export default function ReservationTable() {
 	const { reservations, loading, error } = useReservations();
 	const classes = useStyles();
 
