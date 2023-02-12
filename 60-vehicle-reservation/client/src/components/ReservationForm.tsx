@@ -55,9 +55,11 @@ const ReservationForm = () => {
 
   return (
     <>
-      <form className={classes.root} onSubmit={handleSubmit}>
+      <form role="form" className={classes.root} onSubmit={handleSubmit}>
         <br /><br /><br />
         <TextField
+          data-testid="user-id"
+          aria-label="User Id"
           label="User Id"
           name="userId"
           value={reservation.userId}
@@ -65,6 +67,8 @@ const ReservationForm = () => {
         />
         
         <TextField
+          data-testid="vehicle-id"
+          aria-label="Vehicle Id"
           label="Vehicle Id"
           name="vehicleId"
           value={reservation.vehicleId}
@@ -72,6 +76,8 @@ const ReservationForm = () => {
         />
 
         <DatePicker
+          data-testid="from"
+          aria-label="From"
           label="From"
           value={reservation.from}
           onChange={(date) => handleDateChange("from", date)}
@@ -80,6 +86,8 @@ const ReservationForm = () => {
         />
 
         <DatePicker
+          data-testid="to"
+          aria-label="To"
           label="To"
           value={reservation.to}
           onChange={(date) => handleDateChange("to", date)}
@@ -87,7 +95,7 @@ const ReservationForm = () => {
           fullWidth
         />
 
-        <Button type="submit" variant="contained" color="primary" role="button" aria-label="save-reservation">
+        <Button data-testid="save-reservation" type="submit" variant="contained" color="primary" role="button" aria-label="save-reservation" name="save-reservation">
           Save Reservation
         </Button>
 
