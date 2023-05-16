@@ -1,11 +1,11 @@
 
-export const FirstApp = () => {
+export const FirstApp = ({ title, subTitle }) => {
 
     return (
         <>
-            <h1>Daniel</h1>
+            <h1>{ title }</h1>
             {/* <code>{JSON.stringify( newMessage )}</code> */}
-            <p>Spy a subtitle</p>
+            <p>{ subTitle }</p>
         </>
     )
 }
