@@ -1,6 +1,16 @@
-test('This test should not fail', () => {
+describe('Tests in <DemoComponent />', () => {
 
-    if ( 0 === 1 ) {
-        throw new Error('Can not divide between zero');
-    }
-});
+    test('This test should not fail', () => {
+    
+        // 1. initialization
+        const message1 = 'Hello World';
+    
+        // 2. stimulus
+        const message2 = message1.trim();
+    
+        // 3. observe expected behavior
+        expect( message1 ).toBe( message2 );
+    
+    });
+
+})
