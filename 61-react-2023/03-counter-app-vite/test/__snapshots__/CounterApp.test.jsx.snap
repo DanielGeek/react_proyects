@@ -7,7 +7,7 @@ exports[`Testing in <CounterApp /> Must match snapshot 1`] = `
   </h1>
   <h2>
      
-    100
+    10
      
   </h2>
   <button>
@@ -16,7 +16,9 @@ exports[`Testing in <CounterApp /> Must match snapshot 1`] = `
   <button>
      -1 
   </button>
-  <button>
+  <button
+    aria-label="btn-reset"
+  >
      Reset 
   </button>
 </div>
