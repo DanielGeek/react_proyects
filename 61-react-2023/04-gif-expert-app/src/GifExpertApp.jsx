@@ -13,8 +13,10 @@ export const GifExpertApp = () => {
     return (
         <>
             <h1>GifExpertApp</h1>
-            <AddCategory />
-            <button onClick={ onAddCategory }>Add</button>
+            
+            <AddCategory setCategories={ setCategories } />
+
+            {/* <button onClick={ onAddCategory }>Add</button> */}
             <ol>
                 { categories.map( category => {
                     return <li key={ category }>{ category }</li>
