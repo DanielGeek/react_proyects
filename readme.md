@@ -94,6 +94,10 @@ https://mystifying-pare-42efc4.netlify.app/
 
 <p>Use of hooks, connection to gif image provider api</p>
 
+V2-2023
+https://gif-expert-dangel.netlify.app/
+
+V1
 https://danielgeek.github.io/react_proyectos/
 
 # Project to get movies from an apple api
