@@ -1,0 +1,11 @@
+.blog-post {
+    &__title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    &__content {
+        font-size: 1.25rem;
+        color: #333;
+    }
+}

@@ -1,0 +1,60 @@
+{
+  "posts": [
+    {
+      "id": "4",
+      "title": "post 1 admin",
+      "content": "post 1 admin content",
+      "userId": "1"
+    },
+    {
+      "title": "post 2!",
+      "content": "post 2!",
+      "userId": "1",
+      "id": "5"
+    },
+    {
+      "id": "6",
+      "title": "post3",
+      "content": "post3",
+      "userId": "1"
+    },
+    {
+      "id": "8",
+      "title": "New post 123",
+      "content": "new post content 123",
+      "userId": "1"
+    },
+    {
+      "id": "9",
+      "title": "post 1",
+      "content": "post 1",
+      "userId": "2"
+    },
+    {
+      "id": "11",
+      "title": "post abc",
+      "content": "post abc",
+      "userId": "1"
+    },
+    {
+      "id": "12",
+      "title": "post 2",
+      "content": "post 2",
+      "userId": "2"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "user123",
+      "role": "editor"
+    }
+  ]
+}
