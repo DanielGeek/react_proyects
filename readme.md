@@ -1,3 +1,11 @@
+
+
+# Staking dApp project with Next and Solidity
+<p>https://github.com/DanielGeek/blockchain_projects/tree/main/62-staking-dapp</p>
+
+# Blockchain / Rect / Next Projects
+<p>https://github.com/DanielGeek/blockchain_projects</p>
+
 # Next.js Teslo Shop App using Next.js | TypeScript and MondogDB
 # look the app deployed on heroku in this link
 <p>https://tesloshop-dangel.herokuapp.com</p>
