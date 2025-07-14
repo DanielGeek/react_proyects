@@ -1,136 +1,89 @@
+# ⚛️ DanielGeek's React & Next.js Projects
 
+Welcome to my personal collection of React and Next.js applications. This repository includes a wide variety of frontend and full-stack projects built with modern technologies like React, Next.js, TypeScript, Redux, Firebase, GraphQL, and even blockchain integrations.
 
-# Staking dApp project with Next and Solidity
-<p>https://github.com/DanielGeek/blockchain_projects/tree/main/62-staking-dapp</p>
+The goal of this repository is to showcase real-world use cases, reusable patterns, and hands-on experience in building scalable, testable, and user-friendly applications.
 
-# Blockchain / Rect / Next Projects
-<p>https://github.com/DanielGeek/blockchain_projects</p>
+---
 
-# Next.js Teslo Shop App using Next.js | TypeScript and MondogDB
-# look the app deployed on heroku in this link
-<p>https://tesloshop-dangel.herokuapp.com</p>
+## 🔧 Tech Stack Highlights
 
-# Pokémon App 1
-<p>pokemon app built in react</p>
+- **React.js / Next.js**: SSR, static generation, custom hooks, component-driven architecture.
+- **Redux / Context API**: State management strategies at scale.
+- **GraphQL**: Apollo Client, mutations, and query integration.
+- **TypeScript**: Strong typing and component safety.
+- **Firebase / MongoDB**: Auth, real-time databases, and backend integration.
+- **Jest / Testing Library**: Frontend testing.
+- **Styled Components / Tailwind / Bootstrap**: Modern UI design.
+- **Blockchain**: Frontend interfaces for smart contracts with Next.js.
 
-https://silly-fenglisu-bebba7.netlify.app/
+---
 
-# Pokémon App 2
+## 🚀 Featured Deployments
 
-<p>pokemon app built in next and deployed in vercel</p>
+| Project | Live Demo | Tech |
+|--------|-----------|------|
+| Pokémon App (React) | [Netlify](https://silly-fenglisu-bebba7.netlify.app/) | React, Hooks |
+| Pokémon App (Next.js) | [Vercel](https://next-pokemon-static-vert.vercel.app/) | Next.js, SSG |
+| Teslo Shop | [Heroku](https://tesloshop-dangel.herokuapp.com/) | Next.js, MongoDB |
+| MERN Calendar App | [Heroku](https://mern-calendar-dangel.herokuapp.com) | React, Mongo, Express |
+| RPS Game | [Heroku](https://rpsgamer.herokuapp.com/) | React, Redux, Mongo |
+| Journal App | [Netlify](https://jovial-tereshkova-ada93c.netlify.app/) | React, Firebase |
+| Heroes SPA | [Netlify](https://wonderful-hoover-24ce9b.netlify.app/) | React, Auth, Routing |
+| Drinks App | [Netlify](https://gifted-albattani-80d16b.netlify.app/) | React, Context |
+| Songs App | [Netlify](https://nostalgic-einstein-ce1bfa.netlify.app/) | Axios, Hooks |
+| Crypto App | [Netlify](https://gracious-jennings-411e5c.netlify.app/) | React, Styled Components |
+| Weather App | [Netlify](https://inspiring-borg-ea8a0a.netlify.app/) | React, API |
+| Insurance Quote | [Netlify](https://stupefied-wescoff-0a599f.netlify.app/) | Hooks, Styled Components |
+| Budget App | [Netlify](https://happy-beaver-685800.netlify.app/) | Hooks |
+| Appointments App | [Netlify](https://mystifying-pare-42efc4.netlify.app/) | Hooks, LocalStorage |
+| GIFExpert App V2 | [Netlify](https://gif-expert-dangel.netlify.app/) | Hooks, API |
+| GIFExpert App V1 | [GitHub Pages](https://danielgeek.github.io/react_proyectos/) | Hooks, API |
+| Movies App | [Netlify](https://nostalgic-bartik-a577b7.netlify.app/) | React, Class Components |
+| Images App | [Netlify](https://boring-jennings-b0c2df.netlify.app/) | React, Pixabay API |
+| Breaking Bad App | [Netlify](https://upbeat-chandrasekhar-e83455.netlify.app/) | API, Styled Components |
 
-https://next-pokemon-static-vert.vercel.app/
-# Proyect slack clone
-https://react-cursos-cda62.web.app/
+---
 
-# Proyect MERN Calendar App
+## 📁 Notable Project Categories
 
-<p>App to save events in the calendar, with the MERN stack, use of json web token, hooks useReduce, Router and deploy in heroku </p>
+### 🧪 Testing
 
-https://mern-calendar-dangel.herokuapp.com
+- `32-color-button-tests` – Testing basics with React Testing Library.
+- `32-react-testing-library-examples` – UI tests with forms.
+- `dab-product-card` – Unit tests for product UI.
+- `32-jest-examples`, `testing-store-app` – Jest + CI integration.
 
-# RPS-Juego
+### 🧰 State Management & Redux
 
-<p>Implementation using React JS of the traditional rock-paper-scissors game with the MERN stack.</p>
+- `35-react-redux`, `46-toolkit-redux`, `40-redux-ts` – Examples using Redux Toolkit and TS.
+- `24-MERN_Task`, `39-auth-company-test` – Task manager and auth flow with Redux.
 
-<p>Use of hooks useState, UseSelector, dispatch, redux, enzyme, react-router, the front is created with react, the back in node with express and the db is with mongodb
-In addition, localStorage was used to maintain the user data and each round<p>
+### 📅 Real-world Apps
 
-# How does it work?
+- `09-calendar-app`, `34-calendar-appv2`, `49-calendar-backend-2022` – Full MERN stack calendar.
+- `27-trello-clone`, `50-slack-clone`, `51-tik-tok-clone` – UI clones with Firebase and styled-components.
 
-<p>You start on a screen where it asks for your name, when you start the game you will have available 3 cards Stone, Paper and Scissors, to play you just have to click on one of the cards, then the second player which is simulated by a computer will your move and will show the result, on the right side each round will come out, if one of the 2 players wins 3 times he will be the winner and the game will ask you to start again.</p>
+### ⚡️ Advanced Topics
 
-<p>There is a link to the winners saved in the mongo database that are shown in the /winners route</p>
+- `54-graphql-projects`, `58-users-graphql`, `59-Lyrical-GraphQL` – GraphQL client & backend.
+- `60-vehicle-reservation`, `62-blog-challenge` – App challenges with testing & UI.
+- `52-next`, `26-react-typescript`, `33-my-storybook` – Advanced setups, Storybook integration.
 
-https://rpsgamer.herokuapp.com/
+### 🧠 Blockchain Frontends
 
-# Journal App <br>
+Projects consuming smart contracts and blockchain APIs:
 
-<p>Use of SASS, react hooks useState, Redux, Firebase and Firestore, google sign-in, useSelector, upload images by API, route among others and deploy in netlify </p>
+- [Staking dApp with Next & Solidity](https://github.com/DanielGeek/blockchain_projects/tree/main/62-staking-dapp)
+- [Blockchain / React Projects](https://github.com/DanielGeek/blockchain_projects)
 
-https://jovial-tereshkova-ada93c.netlify.app/
+---
 
-# Heroes SPA <br>
+## 🧪 Local Setup
 
-<p>Use of Router, history push / replace, useMemo, QueryString, Route protection, authReducer and deploy in netlify </p>
-
-https://wonderful-hoover-24ce9b.netlify.app/
-
-# Drinks apps
-
-<p>Project to get drinks through an api, using hooks useState, Context, material-ui, bootstrap</p>
-
-https://gifted-albattani-80d16b.netlify.app/
-
-# Songs App
-
-<p>App to obtain artist and song lyrics information consuming two apis simultaneously, use of axios, hooks useState, useEffect, PropTypes, Bootstrap </p>
-
-https://nostalgic-einstein-ce1bfa.netlify.app/
-
-# Cryptocurrencies App
-
-<p>App to obtain the price of cryptocurrencies in different currencies all obtained through an API, built in React with custom hooks, useState, useEffect, styled component
-
-https://gracious-jennings-411e5c.netlify.app/
-
-# Weather App
-
-<p>App to obtain weather from cities through the API of https://openweathermap.org/ using react with hooks useState</p>
-
-https://inspiring-borg-ea8a0a.netlify.app/
-
-# Insurance Quote App <br>
-
-<p>Small app to quote car insurance using hooks, prop-types, Styled Components and deploy in netlify </p>
-
-https://stupefied-wescoff-0a599f.netlify.app/
-
-# Budget control App <br>
-
-<p>Use of hooks useState and useEffect and deploy in netlify</p>
-
-https://happy-beaver-685800.netlify.app/
-
-# Appointments App <br>
-
-<p>Use of hooks useState, useEffect and localStorage and deploy in netlify</p>
-
-https://mystifying-pare-42efc4.netlify.app/
-
-# GIFExpertApp Project <br>
-
-<p>Use of hooks, connection to gif image provider api</p>
-
-V2-2023
-https://gif-expert-dangel.netlify.app/
-
-V1
-https://danielgeek.github.io/react_proyectos/
-
-# Project to get movies from an apple api
-
-<p>Using react with class components, prop-types, react-router, bootstrap</p>
-
-https://nostalgic-bartik-a577b7.netlify.app
-
-# Images App
-
-<p>Image search through the pixabay API with react hooks useState, useEffect, bootstrap</p>
-
-https://boring-jennings-b0c2df.netlify.app/
-
-# Breaking bad App
-
-<p>Project to obtain breaking bad phrases through an API, and use of useState, useEffect and styled component hooks for the css</p>
-
-https://upbeat-chandrasekhar-e83455.netlify.app/
-
-# Local use of projects
-
-go to directory
-`cd my-app`
-Install node modules
-`npm i`
-lift the project
-`npm start`
+```bash
+git clone https://github.com/DanielGeek/react_proyects.git
+cd [project-folder]
+npm install
+npm start
+```
