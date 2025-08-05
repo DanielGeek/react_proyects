@@ -2,6 +2,7 @@ import { Eraser, Sparkles } from "lucide-react"
 import React, { useState } from 'react'
 
 const RemoveBackground = () => {
+
   const [input, setInput] = useState('')
 
   const onSubmitHandler = (e) => {
