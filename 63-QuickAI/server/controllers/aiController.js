@@ -3,6 +3,8 @@ import sql from "../configs/db.js";
 import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import FormData from 'form-data';
+import fs from 'fs';
+import pdf from 'pdf-parse/lib/pdf-parse';
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -229,6 +231,72 @@ export const removeImageObject = async (req, res) => {
     await sql`
       INSERT INTO creations (user_id, prompt, content, type)
       VALUES (${userId}, ${`Remove ${object} from image`}, ${imageUrl}, 'image')`;
+
+    res.json({ success: true, content: secure_url });
+
+  } catch (error) {
+    let apiErrorMessage = error.message;
+
+    if (error.response) {
+      try {
+        const rawData = error.response.data;
+        if (rawData instanceof Buffer) {
+          apiErrorMessage = rawData.toString('utf8');
+        } else if (typeof rawData === 'object') {
+          apiErrorMessage = JSON.stringify(rawData);
+        } else {
+          apiErrorMessage = String(rawData);
+        }
+      } catch (parseErr) {
+        console.error("Error parsing API error:", parseErr);
+      }
+    }
+
+    console.error("API Error:", apiErrorMessage);
+
+    res
+      .status(error.response?.status || 500)
+      .json({
+        success: false,
+        error: apiErrorMessage
+      });
+  }
+};
+
+export const resumeReview = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const resume = req.file;
+    const plan = req.plan;
+
+    if (plan !== 'premium') {
+      return res.json({ success: false, error: "This feature is only available for premium subscriptions" });
+    }
+
+    if (resume.size > 5 * 1024 * 1024) {
+      return res.json({ success: false, error: "Resume file size exceeds allowed size (5MB)." });
+    }
+
+    const dataBuffer = fs.readFileSync(resume.path);
+    const pdfData = await pdf(dataBuffer);
+
+    const prompt = `Review the following resumen and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Resumen Content:\n\n${pdfData.text}`
+
+    const response = await AI.chat.completions.create({
+      model: "gemini-2.0-flash",
+      messages: [{
+        role: "user",
+        content: prompt,
+      }],
+      temperature: 0.7,
+      max_tokens: 1000,
+    });
+
+    const content = response.choices[0].message.content;
+
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type)
+      VALUES (${userId}, 'Review the uploaded resumen', ${content}, 'resume-review')`;
 
     res.json({ success: true, content: secure_url });
 
