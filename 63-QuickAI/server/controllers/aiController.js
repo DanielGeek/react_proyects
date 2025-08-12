@@ -1,5 +1,8 @@
 import OpenAI from "openai";
 import sql from "../configs/db.js";
+import axios from "axios";
+import { v2 as cloudinary } from "cloudinary";
+import FormData from 'form-data';
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -65,7 +68,7 @@ export const generateBlogTitle = async (req, res) => {
         content: prompt,
       }],
       temperature: 0.7,
-      max_tokens: length,
+      max_tokens: 100,
     });
 
     const content = response.choices[0].message.content;
@@ -87,3 +90,63 @@ export const generateBlogTitle = async (req, res) => {
     res.json({ success: false, error: error.message });
   }
 }
+
+export const generateImage = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const { prompt, publish } = req.body;
+    const plan = req.plan;
+
+    if (plan !== 'premium') {
+      return res.json({ success: false, error: "This feature is only available for premium subscriptions" });
+    }
+
+    const formData = new FormData();
+    formData.append('prompt', prompt);
+
+    const { data } = await axios.post(
+      'https://clipdrop-api.co/text-to-image/v1',
+      formData, {
+      headers: { 'x-api-key': process.env.CLIPDROP_API_KEY, },
+      responseType: 'arraybuffer',
+    }
+    );
+
+    const base64Image = `data:image/png;base64,${Buffer.from(data, 'binary').toString('base64')}`;
+    const { secure_url } = await cloudinary.uploader.upload(base64Image);
+
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type, publish)
+      VALUES (${userId}, ${prompt}, ${secure_url}, 'image', ${publish ?? false})
+    `;
+
+    res.json({ success: true, content: secure_url });
+
+  } catch (error) {
+    let apiErrorMessage = error.message;
+
+    if (error.response) {
+      try {
+        const rawData = error.response.data;
+        if (rawData instanceof Buffer) {
+          apiErrorMessage = rawData.toString('utf8');
+        } else if (typeof rawData === 'object') {
+          apiErrorMessage = JSON.stringify(rawData);
+        } else {
+          apiErrorMessage = String(rawData);
+        }
+      } catch (parseErr) {
+        console.error("Error parsing API error:", parseErr);
+      }
+    }
+
+    console.error("API Error:", apiErrorMessage);
+
+    res
+      .status(error.response?.status || 500)
+      .json({
+        success: false,
+        error: apiErrorMessage
+      });
+  }
+};
