@@ -150,3 +150,113 @@ export const generateImage = async (req, res) => {
       });
   }
 };
+
+export const removeImageBackground = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const { image } = req.file;
+    const plan = req.plan;
+
+    if (plan !== 'premium') {
+      return res.json({ success: false, error: "This feature is only available for premium subscriptions" });
+    }
+
+    const formData = new FormData();
+    formData.append('prompt', prompt);
+
+    const { secure_url } = await cloudinary.uploader.upload(image.path, {
+      transformation: [
+        {
+          effect: 'background_removal',
+          background_removal: 'remove_the_background'
+        }
+      ]
+    });
+
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type)
+      VALUES (${userId}, 'Remove background from image', ${secure_url}, 'image')`;
+
+    res.json({ success: true, content: secure_url });
+
+  } catch (error) {
+    let apiErrorMessage = error.message;
+
+    if (error.response) {
+      try {
+        const rawData = error.response.data;
+        if (rawData instanceof Buffer) {
+          apiErrorMessage = rawData.toString('utf8');
+        } else if (typeof rawData === 'object') {
+          apiErrorMessage = JSON.stringify(rawData);
+        } else {
+          apiErrorMessage = String(rawData);
+        }
+      } catch (parseErr) {
+        console.error("Error parsing API error:", parseErr);
+      }
+    }
+
+    console.error("API Error:", apiErrorMessage);
+
+    res
+      .status(error.response?.status || 500)
+      .json({
+        success: false,
+        error: apiErrorMessage
+      });
+  }
+};
+
+export const removeImageObject = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const { object } = req.body;
+    const { image } = req.file;
+    const plan = req.plan;
+
+    if (plan !== 'premium') {
+      return res.json({ success: false, error: "This feature is only available for premium subscriptions" });
+    }
+
+    const { public_id } = await cloudinary.uploader.upload(image.path);
+
+    const imageUrl = cloudinary.url(public_id, {
+      transformation: [{ effect: `gen_remove:${object}` }],
+      resource_type: 'image'
+    });
+
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type)
+      VALUES (${userId}, ${`Remove ${object} from image`}, ${imageUrl}, 'image')`;
+
+    res.json({ success: true, content: secure_url });
+
+  } catch (error) {
+    let apiErrorMessage = error.message;
+
+    if (error.response) {
+      try {
+        const rawData = error.response.data;
+        if (rawData instanceof Buffer) {
+          apiErrorMessage = rawData.toString('utf8');
+        } else if (typeof rawData === 'object') {
+          apiErrorMessage = JSON.stringify(rawData);
+        } else {
+          apiErrorMessage = String(rawData);
+        }
+      } catch (parseErr) {
+        console.error("Error parsing API error:", parseErr);
+      }
+    }
+
+    console.error("API Error:", apiErrorMessage);
+
+    res
+      .status(error.response?.status || 500)
+      .json({
+        success: false,
+        error: apiErrorMessage
+      });
+  }
+};
