@@ -4,7 +4,7 @@ import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import FormData from 'form-data';
 import fs from 'fs';
-import pdf from 'pdf-parse/lib/pdf-parse';
+import pdf from 'pdf-parse/lib/pdf-parse.js';
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -281,7 +281,7 @@ export const resumeReview = async (req, res) => {
     const pdfData = await pdf(dataBuffer);
 
     const prompt = `Review the following resumen and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Resumen Content:\n\n${pdfData.text}`
-
+  
     const response = await AI.chat.completions.create({
       model: "gemini-2.0-flash",
       messages: [{
@@ -298,7 +298,7 @@ export const resumeReview = async (req, res) => {
       INSERT INTO creations (user_id, prompt, content, type)
       VALUES (${userId}, 'Review the uploaded resume', ${content}, 'resume-review')`;
 
-    res.json({ success: true, content: secure_url });
+    res.json({ success: true, content });
 
   } catch (error) {
     let apiErrorMessage = error.message;
