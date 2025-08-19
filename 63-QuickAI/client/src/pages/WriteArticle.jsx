@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from '@clerk/clerk-react'
 import { toast } from 'react-hot-toast'
+import Markdown from 'react-markdown'
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -11,7 +12,7 @@ const WriteArticle = () => {
   const articleLength = [
     { length: 800, text: 'Short (500-800 words)' },
     { length: 1200, text: 'Medium (800-1200 words)' },
-    { length: 800, text: 'Long (1200+ words)' },
+    { length: 1600, text: 'Long (1200+ words)' },
   ]
 
   const [selectedLength, setSelectedLength] = useState(articleLength[0])
@@ -35,7 +36,7 @@ const WriteArticle = () => {
           Authorization: `Bearer ${await getToken()}`
         }
       });
-      console.log({data});
+
       if(data.success) {
         setContent(data.data);
       } else {
@@ -84,12 +85,12 @@ const WriteArticle = () => {
             loading ? <span className="w-4 h-4 my-1 rounded-full border-2 border-t-transparent animate-spin"></span>
             : <Edit className="w-5" />
           }
-
           Generate article
         </button>
       </form>
       {/* Right col */}
       <div className="w-full max-w-lg p-4 bg-white rounded-lg flex flex-col border border-gray-200 min-h-96 max-h-[600px]">
+
         <div className="flex items-center gap-3">
           <Edit className="w-5 h-5 text-[#4A7AFF]" />
           <h1 className="text-xl font-semibold">Generated article</h1>
@@ -103,10 +104,13 @@ const WriteArticle = () => {
             </div>
           </div>
         ) : (
-          <div className="met-3 h-full overflow-y-scroll text-sm text-slate-600">
-            <div>{content}</div>
+          <div className="mt-3 h-full overflow-y-scroll text-sm text-slate-600">
+            <div className="reset-tw">
+              <Markdown>{content}</Markdown>
+            </div>
           </div>
         )}
+
       </div>
     </div>
   )
