@@ -215,11 +215,28 @@ export const removeImageObject = async (req, res) => {
   try {
     const { userId } = req.auth();
     const { object } = req.body;
-    const { image } = req.file;
+    const image = req.file;
     const plan = req.plan;
 
     if (plan !== 'premium') {
-      return res.json({ success: false, error: "This feature is only available for premium subscriptions" });
+      return res.status(403).json({
+        success: false,
+        error: "This feature is only available for premium subscriptions"
+      });
+    }
+
+    if (!image) {
+      return res.status(400).json({
+        success: false,
+        error: "No image file provided"
+      });
+    }
+
+    if (!object) {
+      return res.status(400).json({
+        success: false,
+        error: "No object specified for removal"
+      });
     }
 
     const { public_id } = await cloudinary.uploader.upload(image.path);
@@ -229,13 +246,22 @@ export const removeImageObject = async (req, res) => {
       resource_type: 'image'
     });
 
+    if (!imageUrl) {
+      throw new Error('Failed to process image for object removal');
+    }
+
     await sql`
       INSERT INTO creations (user_id, prompt, content, type)
-      VALUES (${userId}, ${`Remove ${object} from image`}, ${imageUrl}, 'image')`;
+      VALUES (${userId}, ${`Remove ${object} from image`}, ${imageUrl}, 'image_object_removed')`;
 
-    res.json({ success: true, content: secure_url });
+    res.json({
+      success: true,
+      content: imageUrl
+    });
 
   } catch (error) {
+    console.error('API Error:', error.message);
+
     let apiErrorMessage = error.message;
 
     if (error.response) {
@@ -253,14 +279,10 @@ export const removeImageObject = async (req, res) => {
       }
     }
 
-    console.error("API Error:", apiErrorMessage);
-
-    res
-      .status(error.response?.status || 500)
-      .json({
-        success: false,
-        error: apiErrorMessage
-      });
+    res.status(error.response?.status || 500).json({
+      success: false,
+      error: apiErrorMessage
+    });
   }
 };
 
