@@ -282,7 +282,7 @@ export const resumeReview = async (req, res) => {
     const pdfData = await pdf(dataBuffer);
 
     const prompt = `Review the following resumen and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Resumen Content:\n\n${pdfData.text}`
-  
+
     const response = await AI.chat.completions.create({
       model: "gemini-2.0-flash",
       messages: [{
