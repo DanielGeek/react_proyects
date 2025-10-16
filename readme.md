@@ -24,6 +24,7 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 | Project | Live Demo | Tech |
 |--------|-----------|------|
 | QuickAI (AI SaaS App) | [Client](https://quick-ai-five-swart.vercel.app/) / [Server](https://quick-ai-server-ten-rosy.vercel.app/) | React, Node.js, Express, OpenAI, Tailwind, Clerk, Vercel |
+| QuickGPT (AI Chat App) | [Local](./64-QuickGPT) | React 19, Vite, TailwindCSS 4, Context API, React Router |
 | Pokémon App (React) | [Netlify](https://silly-fenglisu-bebba7.netlify.app/) | React, Hooks |
 | Pokémon App (Next.js) | [Vercel](https://next-pokemon-static-vert.vercel.app/) | Next.js, SSG |
 | Teslo Shop | [Heroku](https://tesloshop-dangel.herokuapp.com/) | Next.js, MongoDB |
@@ -47,6 +48,10 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 ---
 
 ## 📁 Notable Project Categories
+
+### 🤖 AI Applications
+
+- `64-QuickGPT` – AI-powered chat application with text and image generation capabilities. Features multi-chat management, dark/light theme, credits system, and community gallery. Built with React 19, Vite 7, TailwindCSS 4, and Context API.
 
 ### 🧪 Testing
 
