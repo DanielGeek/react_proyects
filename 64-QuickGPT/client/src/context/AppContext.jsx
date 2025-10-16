@@ -52,6 +52,7 @@ export const AppContextProvider = ({ children }) => {
         selectedChat,
         setSelectedChat,
         theme,
+        setTheme,
     }
 
     return (
