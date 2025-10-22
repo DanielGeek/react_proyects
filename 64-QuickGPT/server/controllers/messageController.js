@@ -8,6 +8,12 @@ import imageKit from "../configs/imageKit.js";
 export const textMessageController = async (req, res) => {
     try {
         const userId = req.user._id;
+
+        // Check credits
+        if (req.user.credits < 1) {
+            return res.status(400).json({ success: false, message: "You don't have enough credits to use this feature" });
+        }
+
         const { chatId, prompt } = req.body;
 
         const chat = await Chat.findOne({ userId, _id: chatId });
@@ -69,12 +75,27 @@ export const imageMessageController = async (req, res) => {
         const base64Image = `data:image/png;base64,${Buffer.from(aiImageResponse.data, "binary").toString("base64")}`;
 
         // Upload to ImageKit Media Library
-        const uploadResponse = await imageKit.upload({
+        const uploadResponse = await imageKit.files.upload({
             file: base64Image,
             fileName: `${Date.now()}.png`,
             folder: "quickgpt"
         });
-    } catch (error) {
 
+        const reply = {
+            role: 'assistant',
+            content: uploadResponse.url,
+            timestamp: Date.now(),
+            isImage: true,
+            isPublished
+        }
+
+        res.status(200).json({ success: true, reply });
+
+        chat.messages.push(reply);
+        await chat.save();
+
+        await User.updateOne({ _id: userId }, { $inc: { credits: -2 } });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
     }
 }
