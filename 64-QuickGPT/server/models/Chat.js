@@ -9,7 +9,8 @@ const ChatSchema = new mongoose.Schema({
         role: { type: String, required: true },
         content: { type: String, required: true },
         timestamp: { type: Number, required: true }
-    }]
+    }],
+    name: { type: String, required: true }
 }, { timestamps: true });
 
 const Chat = mongoose.model('Chat', ChatSchema);
