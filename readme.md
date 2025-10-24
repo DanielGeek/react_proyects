@@ -23,7 +23,7 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 
 | Project | Live Demo | Tech |
 |--------|-----------|------|
-| QuickGPT (AI SaaS Chat App) | [Live Client](quick-gpt-nine-tau.vercel.app) | / [Server](https://quick-gpt-server-seven-nu.vercel.app/) | React 19, Vite, TailwindCSS 4, Context API, React Router, Stripe, OpenAI, ImageKit |
+| QuickGPT (AI SaaS Chat App) | [Live Client](https://quick-gpt-nine-tau.vercel.app/) | / [Server](https://quick-gpt-server-seven-nu.vercel.app/) | React 19, Vite, TailwindCSS 4, Context API, React Router, Stripe, OpenAI, ImageKit |
 | QuickAI (AI SaaS App) | [Client](https://quick-ai-five-swart.vercel.app/) / [Server](https://quick-ai-server-ten-rosy.vercel.app/) | React, Node.js, Express, OpenAI, Tailwind, Clerk, Vercel |
 | Pokémon App (React) | [Netlify](https://silly-fenglisu-bebba7.netlify.app/) | React, Hooks |
 | Pokémon App (Next.js) | [Vercel](https://next-pokemon-static-vert.vercel.app/) | Next.js, SSG |
