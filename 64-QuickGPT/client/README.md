@@ -11,6 +11,10 @@ QuickGPT is a modern, full-stack AI-powered chat application that combines conve
 
 The application features a credit-based system where users can purchase subscription plans to access AI services, manage multiple chat sessions simultaneously, and share their AI-generated images with a community gallery.
 
+## 🌐 Live Client
+
+**Production URL**: quick-gpt-nine-tau.vercel.app
+
 ## ✨ Key Features
 
 ### 🤖 AI Capabilities
