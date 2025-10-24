@@ -44,7 +44,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"daniel@gmail.com\",\n    \"password\": \"123456\"\n}",
+					"raw": "{\n    \"email\": \"daniel2@gmail.com\",\n    \"password\": \"1234562\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -223,7 +223,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjNmNGVjOTYzZmM1YjkxNDVkYjIxNSIsImlhdCI6MTc2MDgxODgwOCwiZXhwIjoxNzYzNDEwODA4fQ.vEuGlGqZ3z_DVEGUTy43GFaY24QV45H6t-KI5oCrgp0",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Zjk5OWYwZjUwNDlmYzFjMzY2M2QzOSIsImlhdCI6MTc2MTE4ODQ3NiwiZXhwIjoxNzYzNzgwNDc2fQ.-c4wpi7iWY911uFkPrEoUaY_ymEhf4Q2hTKIB9e0KyA",
 						"type": "text"
 					}
 				],
@@ -305,12 +305,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjNmNGVjOTYzZmM1YjkxNDVkYjIxNSIsImlhdCI6MTc2MDgxODgwOCwiZXhwIjoxNzYzNDEwODA4fQ.vEuGlGqZ3z_DVEGUTy43GFaY24QV45H6t-KI5oCrgp0",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Zjk5OWYwZjUwNDlmYzFjMzY2M2QzOSIsImlhdCI6MTc2MTE4ODQ3NiwiZXhwIjoxNzYzNzgwNDc2fQ.-c4wpi7iWY911uFkPrEoUaY_ymEhf4Q2hTKIB9e0KyA",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/message/text",
+					"raw": "http://localhost:3000/api/chat/get",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -318,8 +318,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"message",
-						"text"
+						"chat",
+						"get"
 					]
 				}
 			},
