@@ -49,6 +49,10 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 
 ## 📁 Notable Project Categories
 
+### 📚 Learning & Fundamentals
+
+- `66-reinforcement` – TypeScript fundamentals reinforcement project. Covers ES6+ concepts including const/let, template strings, object/array destructuring, promises, async/await, fetch API, and TypeScript types. Built with Vite and TypeScript.
+
 ### 🤖 AI Applications
 
 - `64-QuickGPT` – AI-powered chat application with text and image generation capabilities. Features multi-chat management, dark/light theme, credits system, and community gallery. Built with React 19, Vite 7, TailwindCSS 4, and Context API.
