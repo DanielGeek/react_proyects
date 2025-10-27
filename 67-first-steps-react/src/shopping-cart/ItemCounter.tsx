@@ -1,13 +1,21 @@
+import { useState } from "react";
 
 interface Props {
     name: string;
-    quantity: number;
+    quantity?: number;
 }
 
-export const ItemCounter = ({ name, quantity }: Props) => {
+export const ItemCounter = ({ name, quantity = 1 }: Props) => {
+    const [count, setCount] = useState(quantity);
 
-    const handleClick = () => {
-        console.log(`Click on ${name}`);
+    const handleAdd = () => {
+        setCount(count + 1);
+    }
+
+    const handleSubtract = () => {
+        if (count === 1) return;
+
+        setCount(count - 1);
     }
 
     return (
@@ -23,10 +31,12 @@ export const ItemCounter = ({ name, quantity }: Props) => {
                 }}
             >{name}</span>
             <button
-                onClick={handleClick}
+                onClick={handleAdd}
             >+1</button>
-            <span>{quantity}</span>
-            <button>-1</button>
+            <span>{count}</span>
+            <button
+                onClick={handleSubtract}
+            >-1</button>
         </section>
     )
 }
