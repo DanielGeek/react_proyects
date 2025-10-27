@@ -5,9 +5,9 @@ export function FirstStepsApp() {
         <>
             <h1>Shopping Cart</h1>
 
-            <ItemCounter />
-            <ItemCounter />
-            <ItemCounter />
+            <ItemCounter name="Nintendo Switch 2" quantity={1} />
+            <ItemCounter name="Pro Controller" quantity={2} />
+            <ItemCounter name="Super Smash" quantity={3} />
         </>
     )
 }
