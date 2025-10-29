@@ -24,12 +24,12 @@ export const ItemCounter = ({ name, quantity = 1 }: Props) => {
     return (
         <section
             className={styles.itemRow}
-            // style={{
-            //     display: 'flex',
-            //     alignItems: 'center',
-            //     gap: 10,
-            //     marginTop: 10,
-            // }}
+        // style={{
+        //     display: 'flex',
+        //     alignItems: 'center',
+        //     gap: 10,
+        //     marginTop: 10,
+        // }}
         >
             <span
                 className={styles['item-text']}
