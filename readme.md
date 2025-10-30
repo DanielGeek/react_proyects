@@ -13,7 +13,7 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 - **GraphQL**: Apollo Client, mutations, and query integration.
 - **TypeScript**: Strong typing and component safety.
 - **Firebase / MongoDB**: Auth, real-time databases, and backend integration.
-- **Jest / Testing Library**: Frontend testing.
+- **Jest / Vitest / Testing Library**: Frontend testing with modern frameworks.
 - **Styled Components / Tailwind / Bootstrap**: Modern UI design.
 - **Blockchain**: Frontend interfaces for smart contracts with Next.js.
 
@@ -50,6 +50,8 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 ## 📁 Notable Project Categories
 
 ### 📚 Learning & Fundamentals
+
+- `67-first-steps-react` – React fundamentals learning project featuring a shopping cart application. Demonstrates component composition, state management with hooks (`useState`), TypeScript integration, CSS modules, and comprehensive testing with Vitest. Includes interactive item counters with add/remove functionality, conditional styling, and full test coverage with React Testing Library. Built with React 19, Vite 7, and TypeScript 5.9.
 
 - `66-reinforcement` – TypeScript fundamentals reinforcement project. Covers ES6+ concepts including const/let, template strings, object/array destructuring, promises, async/await, fetch API, and TypeScript types. Built with Vite and TypeScript.
 
