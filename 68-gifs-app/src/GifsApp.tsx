@@ -1,29 +1,19 @@
+import { PreviousSearches } from "./gifs/components/PreviousSearches"
 import { mockGifs } from "./mock-data/gifs.mock"
+import { CustomHeader } from "./shared/components/CustomHeader"
+import { SearchBar } from "./shared/components/SearchBar"
 
 export const GifsApp = () => {
     return (
         <>
             {/* Header */}
-            <div className="content-center">
-                <h1>Gifs search</h1>
-                <p>search and share the perfect gif</p>
-            </div>
+            <CustomHeader title="Gifs search" description="search and share the perfect gif" />
 
             {/* Search */}
-            <div className="search-container">
-                <input type="text" placeholder="Search gifs" />
-                <button>Search</button>
-            </div>
+            <SearchBar placeholder="Search gifs" />
 
             {/* Previous searches */}
-            <div className="previous-searches">
-                <h2>Previous searches</h2>
-                <ul className="previous-searches-list">
-                    <li>Goku</li>
-                    <li>Saitama</li>
-                    <li>Elden Ring</li>
-                </ul>
-            </div>
+            <PreviousSearches />
 
             {/* Gifs */}
             <div className="gifs-container">
