@@ -1,73 +1,94 @@
-# React + TypeScript + Vite
+# Gifs Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application for searching and browsing GIFs using the GIPHY API. Built with TypeScript, Vite, and React 19.
 
-Currently, two official plugins are available:
+![GIFs App Screenshot](https://media3.giphy.com/media/v1.Y2lkPTdkMWQ5NWE0d205eXBxdTZhOWJxa2o3dzV4c2NuOTF6Y3dmOTRpdG8ybW53Mmp2ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/84CRvhy2DJlwA/giphy.gif)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- 🔍 Search for GIFs using the GIPHY API
+- 📋 View search history with quick access to previous searches
+- 🖼️ Responsive grid layout for optimal viewing on all devices
+- ⚡ Fast and efficient rendering with React 19
+- 🎨 Clean and modern user interface
+- 📱 Mobile-friendly design
+- 🚀 Built with Vite for fast development and production builds
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## 🛠️ Technologies Used
 
-## Expanding the ESLint configuration
+- **Frontend Framework**: React 19
+- **Language**: TypeScript
+- **Bundler**: Vite
+- **HTTP Client**: Axios
+- **Styling**: CSS Modules
+- **Linting**: ESLint with TypeScript support
+- **State Management**: React Hooks (useState)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js (v16 or higher)
+- npm or yarn
+- GIPHY API key (get one from [GIPHY Developers](https://developers.giphy.com/))
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/68-gifs-app.git
+   cd 68-gifs-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Create a `.env` file in the root directory and add your GIPHY API key:
+   ```env
+   VITE_GIPHY_API_KEY=your_api_key_here
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## 🎯 Project Structure
+
+```
+src/
+├── gifs/
+│   ├── actions/           # Action creators and async logic
+│   ├── api/               # API client configuration
+│   ├── components/        # Reusable UI components
+│   └── interfaces/        # TypeScript type definitions
+├── shared/                # Shared components and utilities
+├── App.tsx               # Main application component
+└── main.tsx              # Application entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📝 Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Enter a search term in the search bar and press Enter or click the search button
+2. View the GIFs that match your search query
+3. Click on any GIF to view it in a larger size
+4. Access your previous searches below the search bar
+5. Click on any previous search term to quickly search again
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [GIPHY API](https://developers.giphy.com/) for providing the GIF data
+- [Vite](https://vitejs.dev/) for the amazing build tooling
+- [React](https://react.dev/) for the UI library
