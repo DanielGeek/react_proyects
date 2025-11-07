@@ -24,6 +24,7 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 
 | Project | Live Demo | Tech |
 |--------|-----------|------|
+| 69-Nodebase (Workflow Automation) | [GitHub](https://github.com/DanielGeek/react_proyects/tree/main/69-nodebase) | Next.js 15, React 19, TypeScript, tRPC, Prisma, PostgreSQL, TailwindCSS, React Flow |
 | Gifs Search App | [GitHub](https://github.com/DanielGeek/react_proyects/tree/main/68-gifs-app) | React 19, TypeScript, Vite, GIPHY API |
 | QuickGPT (AI SaaS Chat App) | [Live Client](https://quick-gpt-nine-tau.vercel.app/) / [Server](https://quick-gpt-server-seven-nu.vercel.app/) | React 19, Vite, TailwindCSS 4, Context API, React Router, Stripe, OpenAI, ImageKit |
 | QuickAI (AI SaaS App) | [Client](https://quick-ai-five-swart.vercel.app/) / [Server](https://quick-ai-server-ten-rosy.vercel.app/) | React, Node.js, Express, OpenAI, Tailwind, Clerk, Vercel |
