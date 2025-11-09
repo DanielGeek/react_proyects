@@ -25,7 +25,7 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 | Project | Live Demo | Tech |
 |--------|-----------|------|
 | 69-Nodebase (Workflow Automation) | [GitHub](https://github.com/DanielGeek/react_proyects/tree/main/69-nodebase) | Next.js 15, React 19, TypeScript, tRPC, Prisma, PostgreSQL, TailwindCSS, React Flow |
-| Gifs Search App | [GitHub](https://github.com/DanielGeek/react_proyects/tree/main/68-gifs-app) | React 19, TypeScript, Vite, GIPHY API |
+| Gifs Search App | [Live Demo](https://aquamarine-gumdrop-5ce3eb.netlify.app/) • [GitHub](https://github.com/DanielGeek/react_proyects/tree/main/68-gifs-app) | React 19, TypeScript, Vite, GIPHY API, Custom Hooks |
 | QuickGPT (AI SaaS Chat App) | [Live Client](https://quick-gpt-nine-tau.vercel.app/) / [Server](https://quick-gpt-server-seven-nu.vercel.app/) | React 19, Vite, TailwindCSS 4, Context API, React Router, Stripe, OpenAI, ImageKit |
 | QuickAI (AI SaaS App) | [Client](https://quick-ai-five-swart.vercel.app/) / [Server](https://quick-ai-server-ten-rosy.vercel.app/) | React, Node.js, Express, OpenAI, Tailwind, Clerk, Vercel |
 | Pokémon App (React) | [Netlify](https://silly-fenglisu-bebba7.netlify.app/) | React, Hooks |
@@ -51,6 +51,23 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 ---
 
 ## 📁 Notable Project Categories
+
+### 📚 Learning & Fundamentals
+
+- `68-gifs-app` – A modern GIF search application built with React 19 and TypeScript. Features include real-time search with debouncing, persistent search history, responsive grid layout, and integration with the GIPHY API. The project showcases custom hooks for state management, TypeScript interfaces, and a clean component architecture. Built with Vite for optimal development experience and production performance.
+
+  **Key Features**:
+  - Real-time search with debouncing
+  - Persistent search history with localStorage
+  - Responsive grid layout
+  - Type-safe with TypeScript
+  - Custom hooks for state management
+  - Modern UI with smooth animations
+  - Environment-based configuration
+  - Optimized performance with code splitting
+
+  **Live Demo**: [aquamarine-gumdrop-5ce3eb.netlify.app](https://aquamarine-gumdrop-5ce3eb.netlify.app/)
+  **Source Code**: [GitHub](https://github.com/DanielGeek/react_proyects/tree/main/68-gifs-app)
 
 ### 📚 Learning & Fundamentals
 
