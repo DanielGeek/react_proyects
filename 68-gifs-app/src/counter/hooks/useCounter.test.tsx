@@ -4,6 +4,13 @@ import { act, renderHook } from "@testing-library/react";
 
 
 describe('useCounter', () => {
+    // let result;
+
+    // beforeEach(() => {
+    //     const { result: hookValue } = renderHook(() => useCounter());
+    //     result = hookValue;
+    // });
+
     test('should initialize with default value of 10', () => {
         const { result } = renderHook(() => useCounter());
 
@@ -26,5 +33,35 @@ describe('useCounter', () => {
         });
 
         expect(result.current.counter).toBe(11);
+    });
+
+    test('should decrement counter when handleSubtract is called', () => {
+        const { result } = renderHook(() => useCounter());
+
+        act(() => {
+            result.current.handleSubtract();
+        });
+
+        expect(result.current.counter).toBe(9);
+    });
+
+    test('should reset to initialValue the counter when handleReset is called', () => {
+        const { result } = renderHook(() => useCounter());
+
+        act(() => {
+            result.current.handleSubtract();
+            result.current.handleSubtract();
+            result.current.handleSubtract();
+            result.current.handleSubtract();
+            result.current.handleSubtract();
+        });
+
+        expect(result.current.counter).toBe(5);
+
+        act(() => {
+            result.current.handleReset();
+        });
+
+        expect(result.current.counter).toBe(10);
     });
 });
