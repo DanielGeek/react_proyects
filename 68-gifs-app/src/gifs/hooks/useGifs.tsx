@@ -38,10 +38,10 @@ export const useGifs = () => {
     return {
         // Properties
         gifs,
+        previousTerms,
 
         // Methods
         handleSearch,
         handleTermClicked,
-        previousTerms,
     }
 }
