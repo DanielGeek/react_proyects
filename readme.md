@@ -1,22 +1,58 @@
 # ⚛️ DanielGeek's React & Next.js Projects
 
-Welcome to my personal collection of React and Next.js applications. This repository includes a wide variety of frontend and full-stack projects built with modern technologies like React, Next.js, TypeScript, Redux, Firebase, GraphQL, and even blockchain integrations.
+Welcome to my collection of modern web applications built with React, Next.js, and related technologies. This repository showcases a wide range of projects, from fundamental learning exercises to production-ready applications, featuring:
 
-The goal of this repository is to showcase real-world use cases, reusable patterns, and hands-on experience in building scalable, testable, and user-friendly applications.
+- **Modern React** (Hooks, Context API, Custom Hooks)
+- **TypeScript** for type safety
+- **State Management** (Redux, Context API, Zustand)
+- **Full-stack** applications with various backends
+- **Testing** (Jest, Vitest, React Testing Library)
+- **UI/UX** with modern CSS solutions
+- **API Integrations** (REST, GraphQL, WebSockets)
+- **Blockchain** and Web3 applications
+
+Each project is self-contained with its own documentation and setup instructions.
 
 ---
 
-## 🔧 Tech Stack Highlights
+## � Tech Stack Highlights
 
-- **React.js / Next.js**: SSR, static generation, custom hooks, component-driven architecture.
-- **Redux / Context API**: State management strategies at scale.
-- **GraphQL**: Apollo Client, mutations, and query integration.
-- **TypeScript**: Strong typing and component safety.
-- **Firebase / MongoDB**: Auth, real-time databases, and backend integration.
-- **Jest / Vitest / Testing Library**: Frontend testing with modern frameworks.
-- **Styled Components / Tailwind / Bootstrap**: Modern UI design.
-- **Blockchain**: Frontend interfaces for smart contracts with Next.js.
-- **GIPHY API**: Integration with external APIs for dynamic content loading.
+### Core Technologies
+- **React 18/19**: Concurrent features, hooks, and modern patterns
+- **Next.js 13/14**: App Router, Server Components, and API routes
+- **TypeScript 5+**: Type safety and developer experience
+- **Vite 4+**: Next-generation frontend tooling
+
+### State Management
+- **Context API**: Built-in React state management
+- **Redux Toolkit**: Predictable state container
+- **Zustand**: Lightweight state management
+- **React Query**: Server state management
+
+### Styling
+- **Tailwind CSS**: Utility-first CSS framework
+- **CSS Modules**: Scoped CSS for components
+- **Styled Components**: CSS-in-JS solution
+- **Shadcn/UI**: Beautifully designed components
+
+### Testing
+- **Vitest**: Blazing fast test runner
+- **Jest**: Comprehensive testing framework
+- **React Testing Library**: Component testing
+- **Cypress**: E2E testing
+
+### Backend & APIs
+- **Node.js & Express**: API development
+- **MongoDB & Mongoose**: NoSQL database
+- **Firebase**: Authentication & real-time database
+- **GraphQL**: Efficient data querying
+- **tRPC**: End-to-end typesafe APIs
+
+### Deployment & DevOps
+- **Vercel**: Frontend hosting
+- **Netlify**: Static site hosting
+- **GitHub Actions**: CI/CD pipelines
+- **Docker**: Containerization
 
 ---
 
@@ -50,24 +86,31 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 
 ---
 
-## 📁 Notable Project Categories
+## � Featured Projects
 
-### 📚 Learning & Fundamentals
+### 🌟 Latest Additions
 
-- `68-gifs-app` – A modern GIF search application built with React 19 and TypeScript. Features include real-time search with debouncing, persistent search history, responsive grid layout, and integration with the GIPHY API. The project showcases custom hooks for state management, TypeScript interfaces, and a clean component architecture. Built with Vite for optimal development experience and production performance.
+#### `68-gifs-app` - Modern GIF Search Application
+A feature-rich GIF search application built with React 19 and TypeScript, showcasing modern web development practices.
 
-  **Key Features**:
-  - Real-time search with debouncing
-  - Persistent search history with localStorage
-  - Responsive grid layout
-  - Type-safe with TypeScript
-  - Custom hooks for state management
-  - Modern UI with smooth animations
-  - Environment-based configuration
-  - Optimized performance with code splitting
+**Tech Stack**: React 19, TypeScript 5.9, Vite 7, GIPHY API, CSS Modules
 
-  **Live Demo**: [aquamarine-gumdrop-5ce3eb.netlify.app](https://aquamarine-gumdrop-5ce3eb.netlify.app/)
-  **Source Code**: [GitHub](https://github.com/DanielGeek/react_proyects/tree/main/68-gifs-app)
+**Key Features**:
+- ⚡ Real-time search with debouncing
+- 💾 Persistent search history with localStorage
+- 🎨 Responsive grid layout with smooth animations
+- 🔍 Type-safe implementation with TypeScript
+- 🧩 Custom hooks for state management
+- 🚀 Optimized performance with code splitting
+- 🧪 100% test coverage with Vitest
+
+**Live Demo**: [View Live](https://aquamarine-gumdrop-5ce3eb.netlify.app/)
+**Source Code**: [View on GitHub](https://github.com/DanielGeek/react_proyects/tree/main/68-gifs-app)
+
+#### `69-nodebase` - Workflow Automation
+A full-stack workflow automation tool built with Next.js 15 and modern web technologies.
+
+**Tech Stack**: Next.js 15, React 19, TypeScript, tRPC, Prisma, PostgreSQL, TailwindCSS, React Flow
 
 ### 📚 Learning & Fundamentals
 
@@ -75,16 +118,55 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 
 - `66-reinforcement` – TypeScript fundamentals reinforcement project. Covers ES6+ concepts including const/let, template strings, object/array destructuring, promises, async/await, fetch API, and TypeScript types. Built with Vite and TypeScript.
 
-### 🤖 AI Applications
+### 🤖 AI & Machine Learning
 
-- `64-QuickGPT` – AI-powered chat application with text and image generation capabilities. Features multi-chat management, dark/light theme, credits system, and community gallery. Built with React 19, Vite 7, TailwindCSS 4, and Context API.
+- `64-QuickGPT` – AI-powered chat application with advanced features.
+  - **Features**:
+    - Multi-chat management
+    - Dark/light theme support
+    - Credits system
+    - Community gallery
+    - Image generation
+  - **Tech Stack**: React 19, Vite 7, TailwindCSS 4, Context API, OpenAI API
+  - **Live Demo**: [QuickGPT Client](https://quick-gpt-nine-tau.vercel.app/)
+  - **Server**: [QuickGPT Server](https://quick-gpt-server-seven-nu.vercel.app/)
 
-### 🧪 Testing
+- `QuickAI` – AI-powered SaaS application
+  - **Features**:
+    - User authentication
+    - AI model integration
+    - Subscription management
+    - Responsive design
+  - **Tech Stack**: React, Node.js, Express, OpenAI, Clerk, Vercel
+  - **Live Demo**: [QuickAI Client](https://quick-ai-five-swart.vercel.app/)
+  - **Server**: [QuickAI Server](https://quick-ai-server-ten-rosy.vercel.app/)
+
+### 🧪 Testing & Quality
 
 - `32-color-button-tests` – Testing basics with React Testing Library.
-- `32-react-testing-library-examples` – UI tests with forms.
-- `dab-product-card` – Unit tests for product UI.
-- `32-jest-examples`, `testing-store-app` – Jest + CI integration.
+  - Covers component rendering, user interactions, and assertions
+  - Demonstrates best practices for testing React components
+
+- `32-react-testing-library-examples` – Comprehensive form testing examples.
+  - Form validation testing
+  - User interaction simulation
+  - Async operation testing
+
+- `dab-product-card` – Component testing in isolation.
+  - Unit tests for product UI components
+  - Snapshot testing
+  - Prop validation
+
+- `32-jest-examples` – Advanced Jest features.
+  - Mocking modules
+  - Testing async code
+  - Snapshot testing
+  - Code coverage reports
+
+- `testing-store-app` – E2E testing example.
+  - Integration testing
+  - CI/CD pipeline integration
+  - Test automation
 
 ### 🧰 State Management & Redux
 
@@ -102,20 +184,97 @@ The goal of this repository is to showcase real-world use cases, reusable patter
 - `60-vehicle-reservation`, `62-blog-challenge` – App challenges with testing & UI.
 - `52-next`, `26-react-typescript`, `33-my-storybook` – Advanced setups, Storybook integration.
 
-### 🧠 Blockchain Frontends
+### ⛓️ Blockchain & Web3
 
-Projects consuming smart contracts and blockchain APIs:
+#### Staking dApp
+- **Description**: A decentralized application for staking tokens and earning rewards
+- **Features**:
+  - Connect Web3 wallet (MetaMask)
+  - Stake and unstake tokens
+  - View staking rewards
+  - Transaction history
+- **Tech Stack**: Next.js, Solidity, Hardhat, Ethers.js, Web3.js
+- **Source Code**: [Staking dApp](https://github.com/DanielGeek/blockchain_projects/tree/main/62-staking-dapp)
 
-- [Staking dApp with Next & Solidity](https://github.com/DanielGeek/blockchain_projects/tree/main/62-staking-dapp)
-- [Blockchain / React Projects](https://github.com/DanielGeek/blockchain_projects)
+#### Blockchain Projects Collection
+- **Description**: A collection of blockchain and Web3 projects
+- **Projects Include**:
+  - NFT Marketplace
+  - Token Swap
+  - DAO Governance
+  - DeFi Protocols
+- **Tech Stack**: React, Solidity, Hardhat, IPFS, The Graph
+- **Repository**: [Blockchain Projects](https://github.com/DanielGeek/blockchain_projects)
+
+#### Smart Contract Development
+- **Smart Contract Auditing**
+- **Gas Optimization**
+- **Security Best Practices**
+- **Integration with Frontend**
 
 ---
 
-## 🧪 Local Setup
+## 🚀 Getting Started
 
-```bash
-git clone https://github.com/DanielGeek/react_proyects.git
-cd [project-folder]
-npm install
-npm start
-```
+### Prerequisites
+
+- Node.js 18+ (LTS recommended)
+- npm 9+ or yarn 1.22+
+- Git
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/DanielGeek/react_proyects.git
+   cd react_proyects
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd [project-folder]
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
+4. Set up environment variables (if required):
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm test` - Run tests
+- `npm run lint` - Lint code
+- `npm run format` - Format code
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read the [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📬 Contact
+
+- GitHub: [@DanielGeek](https://github.com/DanielGeek)
+- Twitter: [@YourTwitter](https://twitter.com/YourTwitter)
+- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+- Email: your.email@example.com
