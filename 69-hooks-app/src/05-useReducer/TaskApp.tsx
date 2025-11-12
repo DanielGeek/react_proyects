@@ -18,23 +18,35 @@ export const TasksApp = () => {
     const [inputValue, setInputValue] = useState('');
 
     const addTodo = () => {
-        console.log('Add task', inputValue);
+        if (inputValue.length === 0) return;
 
+        const newTodo: Todo = {
+            id: Date.now(),
+            text: inputValue.trim(),
+            completed: false,
+        };
+
+        setTodos([...todos, newTodo]);
+        setInputValue('');
     };
 
     const toggleTodo = (id: number) => {
-        console.log('Change to false', id);
-
+        const updatedTodos = todos.map((todo) =>
+            todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        );
+        setTodos(updatedTodos);
     };
 
     const deleteTodo = (id: number) => {
-        console.log('Delete task', id);
-
+        const updatedTodos = todos.filter((todo) => todo.id !== id);
+        setTodos(updatedTodos);
     };
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
-        console.log('Press enter');
-
+        console.log({ key: e.key });
+        if (e.key === 'Enter') {
+            addTodo();
+        }
     };
 
     const completedCount = todos.filter((todo) => todo.completed).length;
@@ -119,8 +131,8 @@ export const TasksApp = () => {
                                     <div
                                         key={todo.id}
                                         className={`flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 ${todo.completed
-                                                ? 'bg-slate-50 border-slate-200'
-                                                : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                                            ? 'bg-slate-50 border-slate-200'
+                                            : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm'
                                             }`}
                                     >
                                         <Checkbox
@@ -130,8 +142,8 @@ export const TasksApp = () => {
                                         />
                                         <span
                                             className={`flex-1 transition-all duration-200 ${todo.completed
-                                                    ? 'text-slate-500 line-through'
-                                                    : 'text-slate-800'
+                                                ? 'text-slate-500 line-through'
+                                                : 'text-slate-800'
                                                 }`}
                                         >
                                             {todo.text}
