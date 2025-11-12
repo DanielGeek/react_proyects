@@ -90,6 +90,23 @@ Each project is self-contained with its own documentation and setup instructions
 
 ### 🌟 Latest Additions
 
+#### `69-hooks-app` - React Hooks Examples Collection
+A comprehensive collection of React Hooks examples demonstrating modern React patterns and best practices.
+
+**Tech Stack**: React 19, TypeScript 5.9, Vite 7, Tailwind CSS 4
+
+**Key Features**:
+- 🚦 Interactive Traffic Light with `useState`
+- ⏱️ Automatic Traffic Light with `useEffect`
+- 🎣 Custom Hooks for API data fetching
+- 🔍 Form focus management with `useRef`
+- 🎨 Modern UI with Tailwind CSS
+- 🏗️ Type-safe implementation with TypeScript
+
+**Source Code**: [View on GitHub](https://github.com/DanielGeek/react_proyects/tree/main/69-hooks-app)
+
+---
+
 #### `68-gifs-app` - Modern GIF Search Application
 A feature-rich GIF search application built with React 19 and TypeScript, showcasing modern web development practices.
 
